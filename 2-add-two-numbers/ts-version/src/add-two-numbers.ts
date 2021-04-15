@@ -1,40 +1,9 @@
-export class LinkedList {
-  first: ListNode
-  last: ListNode
-  size: number = 0
+import { ListNode } from "./ListNode"
+import { LinkedList } from './LinkedList';
 
-  addLast(item: number): void {
-    const node = new ListNode(item)
+export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+  let sum: LinkedList
+  while (l1 && l2) {
 
-    if (this.isEmpty()) {
-      this.first = this.last = node
-    } else {
-      this.last.next = node
-      this.last = node
-    }
-
-    this.size++
-  }
-
-  arrayToList(arr: number[]): void {
-    for (const item of arr) {
-      this.addLast(item)
-    }
-  }
-
-  private isEmpty(): boolean {
-    return this.size === 0
   }
 }
-
-export class ListNode {
-  val: number
-  next: ListNode | null
-
-  constructor(val: number) {
-    this.val = val
-  }
-}
-
-// export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-// }
