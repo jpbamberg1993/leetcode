@@ -1,25 +1,29 @@
 export class LinkedList {
   first: ListNode
   last: ListNode
-  size: number
+  size: number = 0
 
   addLast(item: number): void {
     const node = new ListNode(item)
 
-    if (size === 0) {
-      first = last = node
+    if (this.isEmpty()) {
+      this.first = this.last = node
     } else {
-      last.next = node
-      last = node
+      this.last.next = node
+      this.last = node
     }
 
-    size++
+    this.size++
   }
 
-  arrayToList(arr: int[]): void {
+  arrayToList(arr: number[]): void {
     for (const item of arr) {
-      addLast(item)
+      this.addLast(item)
     }
+  }
+
+  private isEmpty(): boolean {
+    return this.size === 0
   }
 }
 
@@ -32,6 +36,5 @@ export class ListNode {
   }
 }
 
-export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-
-}
+// export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+// }
