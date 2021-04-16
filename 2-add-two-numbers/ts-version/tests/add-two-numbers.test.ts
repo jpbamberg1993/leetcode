@@ -10,7 +10,7 @@ describe('addTwoNumbers', function() {
 
     const result = addTwoNumbers(linkedList1.first, linkedList2.first)
 
-    expect(result).toBe(expectedResult)
+    expect(result).toStrictEqual(expectedResult)
   })
 
   it('adds linked lists with only 1 value each', function() {
