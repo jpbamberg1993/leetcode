@@ -12,5 +12,14 @@ export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): LinkedL
     l1 = l1.next
     l2 = l2.next
   }
+  let notNullNode: ListNode = l1 || l2
+  while (notNullNode) {
+    const result = carry + notNullNode.val
+    const added = result % 10
+    sum.addLast(added)
+    carry = result >= 10 ? 1 : 0
+    notNullNode = notNullNode.next
+  }
+  if (carry === 1) sum.addLast(1)
   return sum
 }
