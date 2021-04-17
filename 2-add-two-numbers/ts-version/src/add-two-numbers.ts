@@ -1,30 +1,24 @@
 import { ListNode } from "./ListNode"
-import { LinkedList } from './LinkedList';
 
-// For the leetcode solution change LinkedList to LinkedNode and return the first node
-// It is too difficult to test passing the first LinkedNode here
-export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): LinkedList | null {
-  let sum = new LinkedList()
+export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+  const dummyHead = new ListNode(0)
+  let p1 = l1, p2 = l2, currentNode = dummyHead
   let carry = 0
 
-  while (l1 && l2) {
-    const result: number = l1.val + l2.val + carry
-    const added: number = result % 10
-    sum.addLast(added)
+  while (p1 || p2) {
+    const x = p1 ? p1.val : 0 
+    const y = p2 ? p2.val : 0
+    const result = x + y + carry
+    currentNode.next = new ListNode(result % 10)
+    currentNode = currentNode.next
     carry = result >= 10 ? 1 : 0
-    l1 = l1.next
-    l2 = l2.next
+    if (p1) p1 = p1.next
+    if (p2) p2 = p2.next
   }
 
-  let notNullNode: ListNode = l1 || l2
-  while (notNullNode) {
-    const result: number = carry + notNullNode.val
-    const added: number = result % 10
-    sum.addLast(added)
-    carry = result >= 10 ? 1 : 0
-    notNullNode = notNullNode.next
+  if (carry > 0) {
+    currentNode.next = new ListNode(carry)
   }
 
-  if (carry === 1) sum.addLast(1)
-  return sum
+  return dummyHead.next
 }
