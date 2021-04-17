@@ -8,8 +8,8 @@ export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): LinkedL
   let carry = 0
 
   while (l1 && l2) {
-    const result: number = l1.val + l2.val
-    const added: number = carry + (result % 10)
+    const result: number = l1.val + l2.val + carry
+    const added: number = result % 10
     sum.addLast(added)
     carry = result >= 10 ? 1 : 0
     l1 = l1.next

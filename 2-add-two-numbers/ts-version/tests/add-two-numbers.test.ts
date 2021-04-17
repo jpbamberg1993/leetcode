@@ -31,6 +31,16 @@ describe('addTwoNumbers', function() {
 
     expect(result).toStrictEqual(expectedResult)
   })
+
+  it('result of addition is nine and carry has a value of one', function() {
+    const linkedList1 = generateLinkedList([3, 7])
+    const linkedList2 = generateLinkedList([9, 2])
+    const expectedResult = generateLinkedList([2, 0, 1])
+
+    const result = addTwoNumbers(linkedList1.first, linkedList2.first)
+
+    expect(result).toStrictEqual(expectedResult)  
+  })
 })
 
 function generateLinkedList(arr: number[]): LinkedList {
