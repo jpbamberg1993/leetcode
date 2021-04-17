@@ -1,6 +1,5 @@
 import { addTwoNumbers } from '../src/add-two-numbers';
 import { LinkedList } from "../src/LinkedList";
-import { ListNode } from "../src/ListNode";
 
 describe('addTwoNumbers', function() {
   it('add two numbers as linked lists', function() {
