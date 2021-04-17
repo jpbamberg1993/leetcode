@@ -1,0 +1,19 @@
+{
+  "name": "ts-version",
+  "version": "1.0.0",
+  "description": "A TypeScript solution to Leetcode's challenge \"3. Longest Substring Without Repeating Characters\".",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "TypeScript",
+    "Jest",
+    "Node.js"
+  ],
+  "author": "J. Paul Bamberg II",
+  "license": "ISC"
+}
