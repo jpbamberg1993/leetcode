@@ -29,7 +29,7 @@ namespace LongestSubstring
                 endIndex += 1;
             }
 
-            return longestSubString;
+            return Math.Max(longestSubString, endIndex - startIndex);
         }
     }
 }

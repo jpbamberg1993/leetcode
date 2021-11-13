@@ -43,5 +43,15 @@ namespace LongestSubstring.Tests
             
             Assert.AreEqual(0, result);
         }
+
+        [Test]
+        public void LengthOfLongestSubstring_InputSpace_ReturnOne()
+        {
+            const string s = " ";
+
+            var result = LongestSubstringService.LengthOfLongestSubstring(s);
+            
+            Assert.AreEqual(1, result);
+        }
     }
 }
