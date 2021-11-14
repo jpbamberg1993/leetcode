@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace LongestSubstring
 {
@@ -6,30 +7,24 @@ namespace LongestSubstring
     {
         public static int LengthOfLongestSubstring(string s)
         {
-            var chars = new int[128];
-            
-            var left = 0;
-            var right = 0;
+            var charactersIndex = new Dictionary<int, int>();
 
-            var res = 0;
-            while (right < s.Length)
+            var response = 0;
+            var leftIndex = 0;
+            for (var rightIndex = 0; rightIndex < s.Length; rightIndex++)
             {
-                var r = s[right];
-                chars[r] += 1;
-
-                while (chars[r] > 1)
+                var rightCharacter = s[rightIndex];
+                if (charactersIndex.ContainsKey(rightCharacter))
                 {
-                    var l = s[left];
-                    chars[l]--;
-                    left++;
+                    var charactersRightIndex = charactersIndex[rightCharacter];
+                    leftIndex = Math.Max(charactersRightIndex, leftIndex);
                 }
 
-                res = Math.Max(res, right - left + 1);
-                
-                right++;
+                response = Math.Max(response, rightIndex - leftIndex + 1);
+                charactersIndex[rightCharacter] = rightIndex + 1;
             }
 
-            return res;
+            return response;
         }
     }
 }
