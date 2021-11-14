@@ -6,30 +6,30 @@ namespace LongestSubstring
     {
         public static int LengthOfLongestSubstring(string s)
         {
-            var longestSubString = 0;
-            var startIndex = 0;
-            var endIndex = 0;
+            var chars = new int[128];
+            var sArr = s.ToCharArray();
+            
+            var left = 0;
+            var right = 0;
 
-            while (endIndex < s.Length)
+            var res = 0;
+            while (right < s.Length)
             {
-                if (startIndex == endIndex)
+                chars[sArr[right]] += 1;
+
+                while (chars[sArr[right]] > 1)
                 {
-                    endIndex += 1;
-                    continue;
+                    var l = sArr[left];
+                    chars[l]--;
+                    left++;
                 }
 
-                var indexOfPreviousChar = s.IndexOf(s[endIndex], startIndex, endIndex - startIndex);
-                if (indexOfPreviousChar != -1)
-                {
-                    var diff = endIndex - startIndex;
-                    longestSubString = Math.Max(diff, longestSubString);
-                    startIndex = indexOfPreviousChar  + 1;
-                }
-
-                endIndex += 1;
+                res = Math.Max(res, right - left + 1);
+                
+                right++;
             }
 
-            return Math.Max(longestSubString, endIndex - startIndex);
+            return res;
         }
     }
 }
