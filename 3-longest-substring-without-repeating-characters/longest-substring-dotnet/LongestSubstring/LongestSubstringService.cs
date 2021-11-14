@@ -7,7 +7,6 @@ namespace LongestSubstring
         public static int LengthOfLongestSubstring(string s)
         {
             var chars = new int[128];
-            var sArr = s.ToCharArray();
             
             var left = 0;
             var right = 0;
@@ -15,11 +14,12 @@ namespace LongestSubstring
             var res = 0;
             while (right < s.Length)
             {
-                chars[sArr[right]] += 1;
+                var r = s[right];
+                chars[r] += 1;
 
-                while (chars[sArr[right]] > 1)
+                while (chars[r] > 1)
                 {
-                    var l = sArr[left];
+                    var l = s[left];
                     chars[l]--;
                     left++;
                 }
