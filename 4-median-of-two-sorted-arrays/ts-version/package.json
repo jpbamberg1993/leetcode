@@ -4,8 +4,7 @@
   "description": "A TypeScript solution for the leet code question 4. Median of Two Sorted Arrays.",
   "main": "index.js",
   "directories": {
-    "test": "tests",
-    "nothing": ""
+    "test": "tests"
   },
   "scripts": {
     "test": "jest"
