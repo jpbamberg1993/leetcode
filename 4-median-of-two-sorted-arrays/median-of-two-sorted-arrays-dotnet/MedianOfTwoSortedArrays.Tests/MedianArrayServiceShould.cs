@@ -22,7 +22,7 @@ public class MedianArrayServiceShould
         var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
 
         const double expectedMedian = 2.0000;
-        
+
         Assert.AreEqual(expectedMedian, median);
     }
 
@@ -30,7 +30,7 @@ public class MedianArrayServiceShould
     public void FindMedianSortedArrays_InputEvenNumbers_ReturnTwoPointFive()
     {
         var nums1 = new[] {1, 2};
-        var nums2 = new[] {3,4};
+        var nums2 = new[] {3, 4};
 
         var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
 
@@ -61,6 +61,32 @@ public class MedianArrayServiceShould
         var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
 
         const double expectedMedian = 2.0000;
+
+        Assert.AreEqual(expectedMedian, median);
+    }
+
+    [Test]
+    public void FindMedianSortedArrays_InputArraysOfEightAndFive_ReturnFour()
+    {
+        var nums1 = new[] {1, 2, 3, 4, 5, 6, 7, 8};
+        var nums2 = new[] {1, 2, 3, 4, 5};
+
+        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+
+        const double expectedMedian = 4.0000;
+
+        Assert.AreEqual(expectedMedian, median);
+    }
+
+    [Test]
+    public void FindMedianSortedArrays_InputArraysOfEightAndFour_ReturnFour()
+    {
+        var nums1 = new[] {1, 2, 3, 4, 5, 6, 7, 8};
+        var nums2 = new[] {1, 2, 3, 4, 5};
+
+        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+
+        const double expectedMedian = 4.0000;
 
         Assert.AreEqual(expectedMedian, median);
     }

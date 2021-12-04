@@ -4,24 +4,46 @@ public class MedianArrayService
 {
     public double FindMedianSortedArrays(int[] nums1, int[] nums2)
     {
-        var nums = nums1.Concat(nums2).ToArray();
-        Array.Sort(nums);
+        var a = nums1;
+        var b = nums2;
+        var length = a.Length + b.Length;
+        var half = length / 2;
 
-        var numsLength = nums.Length;
-        var lengthIsEven = numsLength % 2 == 0;
-
-        if (lengthIsEven)
+        if (b.Length < a.Length)
         {
-            var firstIndex = numsLength / 2 - 1;
-            var firstNum = nums[firstIndex];
-            var secondNum = nums[firstIndex + 1];
-            
-            var result = (firstNum + secondNum) / 2.0;
-            return result;
+            (a, b) = (b, a);
         }
 
-        var middleIndex = (int)Math.Ceiling(numsLength / 2.0) - 1;
+        var l = 0;
+        var r = a.Length - 1;
+        while (true)
+        {
+            var i = (int) Math.Floor(l + (r - l) / 2.0);
+            var j = half - i - 2;
 
-        return nums[middleIndex];
+            var aLeft = i >= 0 ? a[i] : int.MinValue;
+            var aRight = i + 1 < a.Length ? a[i + 1] : int.MaxValue;
+            var bLeft = j >= 0 ? b[j] : int.MinValue;
+            var bRight = j + 1 < b.Length ?b[j + 1] : int.MaxValue;
+
+            if (aLeft <= bRight && bLeft <= aRight)
+            {
+                if (length % 2 == 0)
+                {
+                    return (Math.Max(aLeft, bLeft) + Math.Min(aRight, bRight)) / 2.0;
+                }
+
+                return Math.Min(aRight, bRight);
+            }
+
+            if (aLeft > bRight)
+            {
+                r = i - 1;
+            }
+            else
+            {
+                l = i + 1;
+            }
+        }
     }
 }
