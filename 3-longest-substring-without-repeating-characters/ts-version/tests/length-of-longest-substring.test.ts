@@ -2,7 +2,7 @@ import { lengthOfLongestSubstring } from '../src/length-of-longest-substring'
 
 describe('lengthOfLongestSubstring', function() {
   it('returns longest substring', function() {
-    const s = 'abcabcbb'
+    const s: string = 'abcabcbb'
 
     const result = lengthOfLongestSubstring(s)
 
