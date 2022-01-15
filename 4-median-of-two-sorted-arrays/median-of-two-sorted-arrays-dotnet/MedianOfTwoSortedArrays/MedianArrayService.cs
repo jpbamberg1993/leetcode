@@ -18,7 +18,7 @@ public class MedianArrayService
         var r = a.Length - 1;
         while (true)
         {
-            var i = (int) Math.Floor(l + (r - l) / 2.0);
+            var i = (int) Math.Floor((r + l) / 2.0);
             var j = half - i - 2;
 
             var aLeft = i >= 0 ? a[i] : int.MinValue;
