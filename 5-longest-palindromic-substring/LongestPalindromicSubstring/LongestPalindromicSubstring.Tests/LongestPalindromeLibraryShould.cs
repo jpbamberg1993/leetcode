@@ -1,0 +1,26 @@
+using NUnit.Framework;
+
+namespace LongestPalindromicSubstring.Tests;
+
+public class LongestPalindromeLibraryShould
+{
+    [Test]
+    public void LongestPalindrome_Input_babad_Return_bab()
+    {
+        const string s = "babad";
+
+        var result = LongestPalindromeLibrary.LongestPalindrome(s);
+        
+        Assert.That(result, Is.EqualTo("bab"));
+    }
+    
+    [Test]
+    public void LongestPalindrome_Input_cbbd_Return_bb()
+    {
+        const string s = "cbbd";
+
+        var result = LongestPalindromeLibrary.LongestPalindrome(s);
+        
+        Assert.That(result, Is.EqualTo("bb"));
+    }
+}
