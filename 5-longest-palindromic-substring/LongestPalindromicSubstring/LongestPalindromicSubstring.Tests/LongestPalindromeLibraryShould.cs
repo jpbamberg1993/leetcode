@@ -23,4 +23,14 @@ public class LongestPalindromeLibraryShould
         
         Assert.That(result, Is.EqualTo("bb"));
     }
+
+    [Test]
+    public void LongestPalindrome_Input_a_Expect_a()
+    {
+        const string s = "a";
+
+        var result = LongestPalindromeLibrary.LongestPalindrome(s);
+        
+        Assert.That(result, Is.EqualTo("a"));
+    }
 }
