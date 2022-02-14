@@ -33,4 +33,14 @@ public class LongestPalindromeLibraryShould
         
         Assert.That(result, Is.EqualTo("a"));
     }
+
+    [Test]
+    public void LongestPalindrome_Input_ccc_Expect_ccc()
+    {
+        const string s = "ccc";
+
+        var result = LongestPalindromeLibrary.LongestPalindrome(s);
+        
+        Assert.That(result, Is.EqualTo("ccc"));
+    }
 }

@@ -4,20 +4,62 @@ public static class LongestPalindromeLibrary
 {
     public static string LongestPalindrome(string s)
     {
-        var longestPalindrome = "";
-        
-        for (int i = 0; i < s.Length; i++)
+        if (s.Length <= 1)
         {
-            for (int j = i; j < s.Length; j++)
+            return s;
+        }
+
+        var startingIndex = 0;
+        var longestLength = 1;
+        var sLength = s.Length;
+        var palindromeDictionary = new bool[sLength,sLength];
+
+        for (var i = 0; i < sLength; i++)
+        {
+            palindromeDictionary[i, i] = true;
+        }
+
+        for (var i = 0; i < sLength - 1; ++i)
+        {
+            if (s[i] == s[i + 1])
             {
-                var subString = s.Substring(i, j - i + 1).ToCharArray();
-                if (subString.SequenceEqual(subString.Reverse()) && subString.Length > longestPalindrome.Length)
+                if (longestLength < 2)
                 {
-                    longestPalindrome = new string(subString);
+                    longestLength = 2;
+                    startingIndex = i;
                 }
+
+                palindromeDictionary[i, i + 1] = true;
+            }
+            else
+            {
+                palindromeDictionary[i, i + 1] = false;
             }
         }
 
-        return longestPalindrome;
+        for (var k = 3; k < sLength + 1; ++k)
+        {
+            for (var i = 0; i < sLength - k + 1; ++i)
+            {
+                var j = i + k - 1;
+
+                if (palindromeDictionary[i + 1, j - 1] && s[i] == s[j])
+                {
+                    if (k > longestLength)
+                    {
+                        longestLength = k;
+                        startingIndex = i;
+                    }
+
+                    palindromeDictionary[i, j] = true;
+                }
+                else
+                {
+                    palindromeDictionary[i, j] = false;
+                }
+            }
+        }
+        
+        return s.Substring(startingIndex, longestLength);
     }
 }
