@@ -20,11 +20,23 @@ export function longestPalindrome(s: string): string {
             longestSubStringStartingIndex = i
             longestSubStringLength = 2
         } else {
-            palindromeDictionary[i][i + 1] = true
+            palindromeDictionary[i][i + 1] = false
         }
     }
 
-    return s.substring(
-        longestSubStringStartingIndex,
-        longestSubStringStartingIndex + longestSubStringLength)
+    for (let k = 3; k <= sLength; k++) {
+        for (let i = 0; i <= sLength - k; i++) {
+            if (palindromeDictionary[i + 1][i + k - 2] && s.charAt(i) == s.charAt(i + k - 1)) {
+                palindromeDictionary[i][i + k - 1] = true
+                if (k > longestSubStringLength) {
+                    longestSubStringLength = k
+                    longestSubStringStartingIndex = i
+                }
+            } else {
+                palindromeDictionary[i][i + k - 1] = false
+            }
+        }
+    }
+
+    return s.substring(longestSubStringStartingIndex, longestSubStringStartingIndex + longestSubStringLength)
 }
