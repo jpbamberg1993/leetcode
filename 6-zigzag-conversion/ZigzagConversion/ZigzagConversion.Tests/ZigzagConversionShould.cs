@@ -25,4 +25,26 @@ public class ZigzagConversionShould
 
         Assert.That(result, Is.EqualTo("PINALSIGYAHRPI"));
     }
+
+    [Test]
+    public void Convert_Input_AB_1_Return_AB()
+    {
+        const string s = "AB";
+        const int numRows = 1;
+
+        var result = ZigzagConversion.Convert(s, numRows);
+        
+        Assert.That(result, Is.EqualTo("AB"));
+    }
+    
+    [Test]
+    public void Convert_Input_AB_3_Return_AB()
+    {
+        const string s = "AB";
+        const int numRows = 3;
+
+        var result = ZigzagConversion.Convert(s, numRows);
+        
+        Assert.That(result, Is.EqualTo("AB"));
+    }
 }

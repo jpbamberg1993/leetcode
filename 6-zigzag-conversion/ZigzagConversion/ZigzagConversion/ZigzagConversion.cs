@@ -4,14 +4,14 @@ public static class ZigzagConversion
 {
     public static string Convert(string s, int numRows)
     {
-        if (s.Length <= 1)
+        if (s.Length <= 1 || numRows == 1)
         {
             return s;
         }
         
         var zigzagDict = new List<char>[numRows].Select(c => new List<char>()).ToArray();
 
-        for (var i = 0; i < numRows; i++)
+        for (var i = 0; i < Math.Min(numRows, s.Length); i++)
         {
             zigzagDict[i].Add(s[i]);
         }
