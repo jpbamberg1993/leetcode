@@ -47,4 +47,15 @@ public class ZigzagConversionShould
         
         Assert.That(result, Is.EqualTo("AB"));
     }
+
+    [Test]
+    public void Convert_Input_A_2_Return_A()
+    {
+        const string s = "A";
+        const int numRows = 2;
+
+        var result = ZigzagConversion.Convert(s, numRows);
+        
+        Assert.That(result, Is.EqualTo("A"));
+    }
 }
