@@ -1,50 +1,39 @@
-﻿namespace ZigzagConversion;
+﻿using System.Text;
+
+namespace ZigzagConversion;
 
 public static class ZigzagConversion
 {
     public static string Convert(string s, int numRows)
     {
-        if (s.Length <= 1 || numRows == 1)
+        if (numRows == 1)
         {
             return s;
         }
+
+        var rowsCount = Math.Min(s.Length, numRows);
         
-        var zigzagDict = new List<char>[numRows].Select(c => new List<char>()).ToArray();
+        var zigzagDict = new StringBuilder[rowsCount]
+            .Select(c => new StringBuilder())
+            .ToArray();
+        
+        var goingDown = false;
+        var currentRow = 0;
 
-        for (var i = 0; i < Math.Min(numRows, s.Length); i++)
+        foreach (var ch in s)
         {
-            zigzagDict[i].Add(s[i]);
+            zigzagDict[currentRow].Append(ch);
+            if (currentRow == 0 || (currentRow + 1) % rowsCount == 0) goingDown = !goingDown;
+            currentRow += goingDown ? 1 : -1;
         }
 
-        var goingDown = true;
-        var currentRow = numRows - 1;
+        var dictString = zigzagDict[0];
 
-        for (var i = numRows; i < s.Length; i++)
+        for (var index = 1; index < zigzagDict.Length; index++)
         {
-            if (currentRow == 0 || (currentRow + 1) % numRows == 0)
-            {
-                goingDown = !goingDown;
-            }
-
-            if (goingDown)
-            {
-                currentRow++;
-            }
-            else
-            {
-                currentRow--;
-            }
-            
-            zigzagDict[currentRow].Add(s[i]);
+            dictString.Append(zigzagDict[index]);
         }
 
-        var dictString = "";
-
-        foreach (var listOfChars in zigzagDict)
-        {
-            dictString += string.Join("", listOfChars);
-        }
-
-        return dictString;
+        return dictString.ToString();
     }
 }
