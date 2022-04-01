@@ -32,4 +32,18 @@ public class ReverseIntegerShould
         var result = _reverseInteger.Reverse(120);
         Assert.AreEqual(21, result);
     }
+
+    [Test]
+    public void Reverse_Input_0_Return_0()
+    {
+        var result = _reverseInteger.Reverse(0);
+        Assert.AreEqual(0, result);
+    }
+
+    [Test]
+    public void Reverse_Input_1534236469_Return_9646324351()
+    {
+        var result = _reverseInteger.Reverse(1534236469);
+        Assert.AreEqual(1534236469, result);
+    }
 }
