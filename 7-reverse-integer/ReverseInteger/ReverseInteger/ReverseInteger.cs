@@ -1,39 +1,19 @@
-﻿using System.Globalization;
-
-namespace ReverseInteger;
+﻿namespace ReverseInteger;
 
 public class ReverseInteger
 {
     public int Reverse(int x)
     {
-        if (x == 0)
+        var reversedNumber = 0;
+        while (x != 0)
         {
-            return 0;
+            var remainder = x % 10;
+            x /= 10;
+            if (reversedNumber > int.MaxValue / 10 || (reversedNumber == Int32.MaxValue / 10 && remainder > 7)) return 0;
+            if (reversedNumber < int.MinValue / 10 || (reversedNumber == Int32.MinValue / 10 && remainder > 8)) return 0;
+            reversedNumber = (reversedNumber * 10) + remainder;
         }
         
-        var isNegative = false;
-        if (x < 0)
-        {
-            isNegative = true;
-            x = Math.Abs(x);
-        }
-        
-        var xStack = NumbersIn(x);
-
-        var result = string.Join("", xStack);
-        result = isNegative ? $"-{result}" : result;
-        
-        return Convert.ToInt32(result);
-    }
-
-    private Stack<int> NumbersIn(int value)
-    {
-        if (value == 0) return new Stack<int>();
-
-        var numbers = NumbersIn(value / 10);
-
-        numbers.Push(value % 10);
-
-        return numbers;
+        return reversedNumber;
     }
 }
