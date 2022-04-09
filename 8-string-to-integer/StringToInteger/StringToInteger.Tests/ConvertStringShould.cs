@@ -5,8 +5,26 @@ namespace StringToInteger.Tests;
 public class ConvertStringShould
 {
     [Fact]
-    public void Test1()
+    public void MyAtoi_Input_s42_returns_42()
     {
-
+        const string s = "42";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(42, result);
+    }
+    
+    [Fact]
+    public void MyAtoi_Input_space_neg42_Return_neg42()
+    {
+        const string s = "    -42";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(-42, result);
+    }
+    
+    [Fact]
+    public void MyAtoi_Input_4193_with_words_Return_4193()
+    {
+        const string s = "4193 with words";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(4193, result);
     }
 }
