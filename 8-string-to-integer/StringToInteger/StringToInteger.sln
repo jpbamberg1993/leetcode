@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringToInteger", "StringToInteger\StringToInteger.csproj", "{221C2D90-9FAB-4897-BF61-2BA3A2C0637B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringToInteger.Tests", "StringToInteger.Tests\StringToInteger.Tests.csproj", "{88CD245A-0144-4895-B36D-D78D3D12C744}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{221C2D90-9FAB-4897-BF61-2BA3A2C0637B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{221C2D90-9FAB-4897-BF61-2BA3A2C0637B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{221C2D90-9FAB-4897-BF61-2BA3A2C0637B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{221C2D90-9FAB-4897-BF61-2BA3A2C0637B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88CD245A-0144-4895-B36D-D78D3D12C744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CD245A-0144-4895-B36D-D78D3D12C744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CD245A-0144-4895-B36D-D78D3D12C744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CD245A-0144-4895-B36D-D78D3D12C744}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
