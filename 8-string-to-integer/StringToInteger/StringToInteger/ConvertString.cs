@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace StringToInteger;
+﻿namespace StringToInteger;
 
 public static class ConvertString
 {
@@ -14,7 +12,12 @@ public static class ConvertString
         {
             if (d is '-' or '+') continue;
 
-            if (!char.IsDigit(d)) break;
+            if (!char.IsDigit(d))
+            {
+                if (returnString == String.Empty)
+                    return 0;
+                break;
+            }
 
             returnString += d;
         }

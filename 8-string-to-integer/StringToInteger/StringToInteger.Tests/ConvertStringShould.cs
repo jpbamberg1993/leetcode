@@ -33,6 +33,6 @@ public class ConvertStringShould
     {
         const string s = "words and 987";
         var result = ConvertString.MyAtoi(s);
-        Assert.Equal(987, result);
+        Assert.Equal(0, result);
     }
 }
