@@ -27,4 +27,12 @@ public class ConvertStringShould
         var result = ConvertString.MyAtoi(s);
         Assert.Equal(4193, result);
     }
+
+    [Fact]
+    public void MyAtoi_Input_words_and_987_Return_987()
+    {
+        const string s = "words and 987";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(987, result);
+    }
 }
