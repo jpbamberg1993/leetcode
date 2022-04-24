@@ -4,31 +4,40 @@ public static class ConvertString
 {
     public static int MyAtoi(string s)
     {
-        var trimmedString = s.Trim();
-        var returnString = string.Empty;
-        var isNegative = trimmedString[0] == '-';
+        var sign = 1;
+        var result = 0;
+        var index = 0;
+        var n = s.Length;
 
-        foreach (var d in trimmedString)
+        while (index < n && s[index] == ' ')
         {
-            if (d is '-' or '+') continue;
+            index++;
+        }
 
-            if (!char.IsDigit(d))
+        if (index < n && s[index] == '+')
+        {
+            sign = 1;
+            index++;
+        }
+        else if (index < n && s[index] == '-')
+        {
+            sign = -1;
+            index++;
+        }
+
+        while (index < n && char.IsDigit(s[index]))
+        {
+            var currentDigit = s[index] - '0';
+
+            if (result > int.MaxValue / 10 || (result == int.MaxValue / 10 && currentDigit > int.MaxValue % 10))
             {
-                if (returnString == String.Empty)
-                    return 0;
-                break;
+                return sign == 1 ? int.MaxValue : int.MinValue;
             }
 
-            returnString += d;
+            result = result * 10 + currentDigit;
+            index++;
         }
 
-        var tryParse = int.TryParse(returnString, out var returnValue);
-
-        if (!tryParse)
-        {
-            return isNegative ? int.MinValue : int.MaxValue;
-        }
-
-        return isNegative ? returnValue * -1 : returnValue;
+        return sign * result;
     }
 }
