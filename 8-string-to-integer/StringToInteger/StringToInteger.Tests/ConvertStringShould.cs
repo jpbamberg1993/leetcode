@@ -35,4 +35,12 @@ public class ConvertStringShould
         var result = ConvertString.MyAtoi(s);
         Assert.Equal(0, result);
     }
+
+    [Fact]
+    public void MyAtoi_Input_PlusMinus_12_Return_0()
+    {
+        const string s = "+-12";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(0, result);
+    }
 }
