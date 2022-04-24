@@ -84,6 +84,7 @@ public class StateMachine
         else
         {
             _result = _result * 10 + digit;
+            _currentState = State.q2;
         }
     }
     
