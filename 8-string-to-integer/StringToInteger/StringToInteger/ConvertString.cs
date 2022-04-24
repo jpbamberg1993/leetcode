@@ -26,7 +26,7 @@ public static class ConvertString
 
         if (!tryParse)
         {
-            throw new Exception($"unable to parse return string {returnString}");
+            return isNegative ? int.MinValue : int.MaxValue;
         }
 
         return isNegative ? returnValue * -1 : returnValue;
