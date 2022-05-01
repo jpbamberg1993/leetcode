@@ -18,4 +18,16 @@ describe('myAtoi', function(): void {
     const result: number = myAtoi(s)
     expect(result).toEqual(4193)
   })
+
+  it('is passed "-91283472332" and returns -2147483647', function() {
+    const s: string = "-91283472332"
+    const result: number = myAtoi(s)
+    expect(result).toEqual(-2147483648)
+  })
+
+  it('is passed "2147483648" and returns 2147483647', function() {
+    const s: string = "2147483648"
+    const result: number = myAtoi(s)
+    expect(result).toEqual(2147483647)
+  })
 })

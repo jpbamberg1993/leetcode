@@ -1,3 +1,6 @@
+const MAX_INT_VALUE = 2147483647
+const MIN_INT_VALUE = -2147483648
+
 export function myAtoi(s: string): number {
   let currentIndex: number = 0
   let sign: number = 1
@@ -18,10 +21,9 @@ export function myAtoi(s: string): number {
     const currentNumber: number = parseInt(s.charAt(currentIndex))
 
     if (
-      result > Number.MAX_SAFE_INTEGER / 10 ||
-      (result === Number.MAX_SAFE_INTEGER && currentNumber > Number.MAX_SAFE_INTEGER % 10)) {
-      result = Number.MAX_SAFE_INTEGER
-      break
+      result > Math.floor(MAX_INT_VALUE / 10) ||
+      (result === Math.floor(MAX_INT_VALUE / 10) && currentNumber > MAX_INT_VALUE % 10)) {
+      return sign > 0 ? MAX_INT_VALUE : MIN_INT_VALUE
     }
 
     result = result * 10 + currentNumber
