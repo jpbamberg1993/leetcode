@@ -1,3 +1,3 @@
-function myAtoi(s: string): number {
-  
+export function myAtoi(s: string): number {
+  return 0
 }
