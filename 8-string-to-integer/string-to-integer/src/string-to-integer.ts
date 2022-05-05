@@ -58,7 +58,7 @@ class StateMachine {
     }
 
     if (StateMachine.charIsDigit(ch)) {
-      this.addDigitToResult(ch)
+      this.qTwoTransition(ch)
       this.state = State.Q2
       return
     }
@@ -74,18 +74,21 @@ class StateMachine {
     }
   }
 
-  private qTwoTransition(ch: string) {
+  private qTwoTransition(ch: string): void {
     if (StateMachine.charIsDigit(ch)) {
-      this.addDigitToResult(ch)
+      const digit = parseInt(ch)
+      if (this.result > MAX_INT_VALUE / 10 ||
+        (this.result === Math.floor(MAX_INT_VALUE / 10) && digit > MAX_INT_VALUE % 10)) {
+        this.result = this.sign === 1 ? MAX_INT_VALUE : MIN_INT_VALUE
+        this.sign = 1
+        this.state = State.QD
+        return
+      }
+      this.result = (this.result * 10) + digit
       this.state = State.Q2
     } else {
       this.state = State.QD
     }
-  }
-
-  private addDigitToResult(ch: string): void {
-    const digit = parseInt(ch)
-    this.result = (this.result * 10) + digit
   }
 
   private static isSign(ch: string): boolean {
