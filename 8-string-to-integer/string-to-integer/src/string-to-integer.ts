@@ -2,37 +2,101 @@ const MAX_INT_VALUE = 2147483647
 const MIN_INT_VALUE = -2147483648
 
 export function myAtoi(s: string): number {
-  let currentIndex: number = 0
-  let sign: number = 1
-  let result: number = 0
+  const stateMachine = new StateMachine()
 
-  while (currentIndex < s.length && s.charAt(currentIndex) === ' ') {
-    currentIndex++
+  for (let i = 0; i < s.length && stateMachine.getState() !== State.QD; i++) {
+    stateMachine.transition(s.charAt(i))
   }
 
-  if (currentIndex < s.length && s.charAt(currentIndex) === '-') {
-    sign = -1
-    currentIndex++
-  } else if (currentIndex < s.length && s.charAt(currentIndex) === '+') {
-    currentIndex++
-  }
-
-  while (currentIndex < s.length && charIsDigit(s.charAt(currentIndex))) {
-    const currentNumber: number = parseInt(s.charAt(currentIndex))
-
-    if (
-      result > Math.floor(MAX_INT_VALUE / 10) ||
-      (result === Math.floor(MAX_INT_VALUE / 10) && currentNumber > MAX_INT_VALUE % 10)) {
-      return sign > 0 ? MAX_INT_VALUE : MIN_INT_VALUE
-    }
-
-    result = result * 10 + currentNumber
-    currentIndex++
-  }
-
-  return result * sign
+  return stateMachine.getResult()
 }
 
-function charIsDigit(s: string): boolean {
-  return s >= '0' && s <= '9'
+enum State { Q0, Q1, Q2, QD}
+
+class StateMachine {
+  private state: State
+  private result: number
+  private sign: number
+
+  constructor() {
+    this.state = State.Q0
+    this.result = 0
+    this.sign = 1
+  }
+
+  public transition(ch: string): void {
+    if (this.state === State.Q0) {
+      this.qZeroTransition(ch)
+    } else if (this.state === State.Q1) {
+      this.qOneTransition(ch)
+    } else if (this.state === State.Q2) {
+      this.qTwoTransition(ch)
+    } else {
+      this.state = State.QD
+    }
+  }
+
+  public getState(): number {
+    return this.state
+  }
+
+  public getResult(): number {
+    return this.result * this.sign
+  }
+
+  private qZeroTransition(ch: string): void {
+    if (StateMachine.isEmptyCharacter(ch)) {
+      return
+    }
+
+    if (StateMachine.isSign(ch)) {
+      this.state = State.Q1
+      if (ch === '-') {
+        this.sign = -1
+      }
+      return
+    }
+
+    if (StateMachine.charIsDigit(ch)) {
+      this.addDigitToResult(ch)
+      this.state = State.Q2
+      return
+    }
+
+    this.state = State.QD
+  }
+
+  private qOneTransition(ch: string): void {
+    if (StateMachine.charIsDigit(ch)) {
+      this.qTwoTransition(ch)
+    } else {
+      this.state = State.QD
+    }
+  }
+
+  private qTwoTransition(ch: string) {
+    if (StateMachine.charIsDigit(ch)) {
+      this.addDigitToResult(ch)
+      this.state = State.Q2
+    } else {
+      this.state = State.QD
+    }
+  }
+
+  private addDigitToResult(ch: string): void {
+    const digit = parseInt(ch)
+    this.result = (this.result * 10) + digit
+  }
+
+  private static isSign(ch: string): boolean {
+    return ch === '+' || ch === '-'
+  }
+
+  private static isEmptyCharacter(ch: string): boolean {
+    return ch === ' '
+  }
+
+  private static charIsDigit(s: string): boolean {
+    return s >= '0' && s <= '9'
+  }
 }
