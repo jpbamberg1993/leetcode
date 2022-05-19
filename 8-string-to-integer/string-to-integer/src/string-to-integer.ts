@@ -1,6 +1,3 @@
-const MAX_INT_VALUE = 2147483647
-const MIN_INT_VALUE = -2147483648
-
 export function myAtoi(s: string): number {
   const stateMachine = new StateMachine()
 
@@ -14,26 +11,20 @@ export function myAtoi(s: string): number {
 enum State { Q0, Q1, Q2, QD}
 
 class StateMachine {
+  private readonly INT_MAX: number
+  private readonly INT_MIN: number
+
   private state: State
   private result: number
   private sign: number
 
   constructor() {
+    this.INT_MAX = Math.pow(2, 31) - 1
+    this.INT_MIN = -Math.pow(2, 31)
+
     this.state = State.Q0
     this.result = 0
     this.sign = 1
-  }
-
-  public transition(ch: string): void {
-    if (this.state === State.Q0) {
-      this.qZeroTransition(ch)
-    } else if (this.state === State.Q1) {
-      this.qOneTransition(ch)
-    } else if (this.state === State.Q2) {
-      this.qTwoTransition(ch)
-    } else {
-      this.state = State.QD
-    }
   }
 
   public getState(): number {
@@ -44,59 +35,62 @@ class StateMachine {
     return this.result * this.sign
   }
 
-  private qZeroTransition(ch: string): void {
-    if (StateMachine.isEmptyCharacter(ch)) {
-      return
-    }
-
-    if (StateMachine.isSign(ch)) {
-      this.state = State.Q1
-      if (ch === '-') {
-        this.sign = -1
+  public transition(ch: string): void {
+    if (this.state === State.Q0) {
+      if (ch === ' ') {
+        return
+      } else if (ch === '+' || ch === '-') {
+        this.toStateQ1(ch)
+      } else if (StateMachine.charIsDigit(ch)) {
+        const digit = parseInt(ch)
+        this.toStateQ2(digit)
+      } else {
+        this.toStateQd()
       }
-      return
+    } else if (this.state === State.Q1 || this.state === State.Q2) {
+      if (StateMachine.charIsDigit(ch)) {
+        const digit = parseInt(ch)
+        this.appendDigit(digit)
+      } else {
+        this.state = State.QD
+      }
     }
+  }
 
-    if (StateMachine.charIsDigit(ch)) {
-      this.qTwoTransition(ch)
-      this.state = State.Q2
-      return
-    }
+  private toStateQ1(ch: string): void {
+    this.sign = ch === '-' ? -1 : 1
+    this.state = State.Q1
+  }
 
+  private toStateQ2(ch: number): void {
+    this.state = State.Q2
+    this.appendDigit(ch)
+  }
+
+  private toStateQd() {
     this.state = State.QD
   }
 
-  private qOneTransition(ch: string): void {
-    if (StateMachine.charIsDigit(ch)) {
-      this.qTwoTransition(ch)
-    } else {
-      this.state = State.QD
-    }
-  }
-
-  private qTwoTransition(ch: string): void {
-    if (StateMachine.charIsDigit(ch)) {
-      const digit = parseInt(ch)
-      if (this.result > MAX_INT_VALUE / 10 ||
-        (this.result === Math.floor(MAX_INT_VALUE / 10) && digit > MAX_INT_VALUE % 10)) {
-        this.result = this.sign === 1 ? MAX_INT_VALUE : MIN_INT_VALUE
+  private appendDigit(digit: number): void {
+    if (this.willOverflowInt(digit)) {
+      if (this.sign === 1) {
+        this.result = this.INT_MAX
+      } else {
+        this.result = this.INT_MIN
         this.sign = 1
-        this.state = State.QD
-        return
       }
-      this.result = (this.result * 10) + digit
-      this.state = State.Q2
-    } else {
       this.state = State.QD
+    } else {
+      this.result = (this.result * 10) + digit
     }
   }
 
-  private static isSign(ch: string): boolean {
-    return ch === '+' || ch === '-'
-  }
+  private willOverflowInt(digit: number): boolean {
+    if (this.result > this.INT_MAX / 10) {
+      return true
+    }
 
-  private static isEmptyCharacter(ch: string): boolean {
-    return ch === ' '
+    return this.result === Math.floor(this.INT_MAX / 10) && digit > this.INT_MAX % 10;
   }
 
   private static charIsDigit(s: string): boolean {
