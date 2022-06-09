@@ -4,20 +4,18 @@ public class PalindromeLibrary
 {
     public bool IsPalindrome(int x)
     {
-        var splitInt = x.ToString().Select(d => Convert.ToInt32(d) - 48).ToArray();
-        var stack = new Stack<int>();
-        foreach (var digit in splitInt)
+        if (x < 0 || (x % 10 == 0 && x != 0))
         {
-            stack.Push(digit);
+            return false;
         }
 
-        foreach (var digit in splitInt)
+        var reversedNumber = 0;
+        while (x > reversedNumber)
         {
-            if (digit != stack.Pop())
-            {
-                return false;
-            }
+            reversedNumber = reversedNumber * 10 + x % 10;
+            x /= 10;
         }
-        return true;
+
+        return x == reversedNumber || x == reversedNumber / 10;
     }
 }
