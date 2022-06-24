@@ -24,4 +24,18 @@ public class RegularExpressionMatchingLibShould
         var result = RegularExpressionMatchingLib.IsMatch("ab", ".*");
         Assert.True(result);
     }
+
+    [Fact]
+    public void IsMatch_Input_aab_c_star_a_star_b_Returns_true()
+    {
+        var result = RegularExpressionMatchingLib.IsMatch("aab", "c*a*b");
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void IsMatch_Input_c_star_And_c_c_Returns_true()
+    {
+        var result = RegularExpressionMatchingLib.IsMatch("ccccccccc", "c*");
+        Assert.True(result);
+    }
 }

@@ -4,38 +4,16 @@ public static class RegularExpressionMatchingLib
 {
     public static bool IsMatch(string s, string p)
     {
-        if (s == p) return true;
+        if (p.Length == 0) return s.Length == 0;
 
-        if (p.Contains('*'))
+        var firstMatch = !string.IsNullOrWhiteSpace(s) && (p[0] == s[0] || p[0] == '.');
+
+        if (p.Length >= 2 && p[1] == '*')
         {
-            var indexOfCharBeforeStar = p.IndexOf('*') - 1;
-            var charAtIndex = p[indexOfCharBeforeStar];
-
-            var currentIndex = indexOfCharBeforeStar + 1;
-            while (currentIndex < s.Length)
-            {
-                if (currentIndex > s.Length - 1)
-                {
-                    p += charAtIndex;
-                }
-                else
-                {
-                    p = p.Remove(currentIndex, 1).Insert(currentIndex, charAtIndex.ToString());
-                }
-                currentIndex++;
-            }
+            return (IsMatch(s, p.Substring(2)) ||
+                    (firstMatch && IsMatch(s.Substring(1), p)));
         }
 
-        if (p.Length != s.Length) return false;
-        
-        for (var i = 0; i < s.Length; i++)
-        {
-            if (s[i] != p[i] && p[i] != '.')
-            {
-                return false;
-            }
-        }
-        
-        return true;
+        return firstMatch && IsMatch(s.Substring(1), p.Substring(1));
     }
 }
