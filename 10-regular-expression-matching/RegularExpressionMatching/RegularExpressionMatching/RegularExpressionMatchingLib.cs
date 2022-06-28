@@ -10,8 +10,7 @@ public static class RegularExpressionMatchingLib
 
         if (p.Length >= 2 && p[1] == '*')
         {
-            return (IsMatch(s, p.Substring(2)) ||
-                    (firstMatch && IsMatch(s.Substring(1), p)));
+            return IsMatch(s, p.Substring(2)) || (firstMatch && IsMatch(s.Substring(1), p));
         }
 
         return firstMatch && IsMatch(s.Substring(1), p.Substring(1));
