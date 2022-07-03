@@ -1,18 +1,30 @@
 ﻿namespace RegularExpressionMatching;
 
-public static class RegularExpressionMatchingLib
+public class RegularExpressionMatchingLib
 {
-    public static bool IsMatch(string s, string p)
+    public bool IsMatch(string s, string p)
     {
-        if (p.Length == 0) return s.Length == 0;
+        return IsMatch(0, 0, s, p);
+    }
 
-        var firstMatch = !string.IsNullOrWhiteSpace(s) && (p[0] == s[0] || p[0] == '.');
-
-        if (p.Length >= 2 && p[1] == '*')
+    private bool IsMatch(int i, int j, string s, string p)
+    {
+        if (j == p.Length)
         {
-            return IsMatch(s, p.Substring(2)) || (firstMatch && IsMatch(s.Substring(1), p));
+            return i == s.Length;
         }
-
-        return firstMatch && IsMatch(s.Substring(1), p.Substring(1));
+        else
+        {
+            var firstMatch = i < s.Length && (p[j] == s[i] || p[j] == '.');
+            
+            if (j + 1 < p.Length && p[j + 1] == '*')
+            {
+                return (IsMatch(i, j + 2, s, p) || (firstMatch && IsMatch(i + 1, j, s, p)));
+            }
+            else
+            {
+                return firstMatch && IsMatch(i + 1, j + 1, s, p);
+            }
+        }
     }
 }
