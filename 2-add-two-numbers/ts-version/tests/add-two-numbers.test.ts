@@ -1,5 +1,5 @@
 import { addTwoNumbers } from '../src/add-two-numbers';
-import { ListNode } from '../src/ListNode';
+import { ListNode } from '../src/list-node';
 
 describe('addTwoNumbers', function() {
   it('add two numbers as linked lists', function() {
