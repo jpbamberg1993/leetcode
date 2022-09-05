@@ -37,7 +37,7 @@ describe('findMedianSortedArrays', function () {
         expect<number>(result).toEqual(0);
     })
 
-    it('is passed two arrays with one number each and returns the average of the two', function(){
+    it('is passed two arrays with one number each and returns the average of the two', function () {
         const nums1: number[] = [100001];
         const nums2: number[] = [100000];
 
