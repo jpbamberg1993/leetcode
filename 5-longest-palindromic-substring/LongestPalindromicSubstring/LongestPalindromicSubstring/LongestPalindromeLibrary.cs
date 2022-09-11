@@ -11,7 +11,7 @@ public static class LongestPalindromeLibrary
             var lengthOne = GetLength(s, i, i);
             var lengthTwo = GetLength(s, i, i + 1);
             var length = Math.Max(lengthOne, lengthTwo);
-            if (length > end - start)
+            if (length > end - start + 1)
             {
                 start = i - ((length - 1) / 2);
                 end = i + (length / 2);
