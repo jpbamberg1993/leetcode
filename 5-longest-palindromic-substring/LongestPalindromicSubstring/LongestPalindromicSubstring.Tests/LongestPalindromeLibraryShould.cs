@@ -11,7 +11,7 @@ public class LongestPalindromeLibraryShould
 
         var result = LongestPalindromeLibrary.LongestPalindrome(s);
         
-        Assert.That(result, Is.EqualTo("bab"));
+        Assert.That(result, Is.AnyOf("bab", "aba"));
     }
     
     [Test]
