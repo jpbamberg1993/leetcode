@@ -1,5 +1,4 @@
 import {longestPalindrome} from '../src/longest-palindrome'
-import exp = require('constants')
 
 describe('longestPalindrome', function () {
     it('is passed "babad" and returns "bab"', function () {
