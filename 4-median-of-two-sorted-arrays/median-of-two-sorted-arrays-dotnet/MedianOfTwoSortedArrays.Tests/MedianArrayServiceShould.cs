@@ -1,4 +1,5 @@
 ﻿using System;
+using MedianOfTwoSortedArrays;
 using NUnit.Framework;
 
 namespace MedianOfTwoSortedArrays.Tests;
