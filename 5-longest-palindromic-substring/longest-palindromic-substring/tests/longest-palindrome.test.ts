@@ -4,7 +4,7 @@ describe('longestPalindrome', function () {
     it('is passed "babad" and returns "bab"', function () {
         const result = longestPalindrome('babad')
 
-        expect(result).toEqual('bab')
+        expect(result === "bab" || result === "aba").toBeTruthy()
     })
 
     it('is passed "cbbd" and returns "bb"', function () {
