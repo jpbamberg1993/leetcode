@@ -7,50 +7,23 @@ public static class ZigzagConversion
     public static string Convert(string s, int numRows)
     {
         if (numRows <= 1) return s;
-        
-        var stringBuilders = new StringBuilder[numRows];
-        for (var i = 0; i < stringBuilders.Length; i++)
-        {
-            stringBuilders[i]= new StringBuilder();
-        }
 
-        var goingUp = false;
+        var rows = new StringBuilder[Math.Min(numRows, s.Length)];
+        for (var i = 0; i < rows.Length; i++)
+            rows[i] = new StringBuilder();
+
         var currentRow = 0;
-        for (var i = 0; i < s.Length; i++)
+        var goingDown = false;
+
+        foreach (var letter in s)
         {
-            var letter = s[i];
-            stringBuilders[currentRow].Append(letter);
-
-            if (currentRow == 0 && goingUp)
-            {
-                currentRow++;
-                goingUp = false;
-                continue;
-            }
-
-            if (currentRow == numRows - 1 && !goingUp)
-            {
-                currentRow--;
-                goingUp = true;
-                continue;
-            }
-
-            if (goingUp)
-            {
-                currentRow--;
-            }
-            else
-            {
-                currentRow++;
-            }
+            rows[currentRow].Append(letter);
+            if (currentRow == 0 || currentRow == numRows - 1) goingDown = !goingDown;
+            currentRow += goingDown ? 1 : -1;
         }
 
         var result = new StringBuilder();
-        foreach (var stringBuilder in stringBuilders)
-        {
-            result.Append(stringBuilder);
-        }
-
+        foreach (var stringBuilder in rows) result.Append(stringBuilder);
         return result.ToString();
     }
 }
