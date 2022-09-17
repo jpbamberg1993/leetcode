@@ -41,7 +41,7 @@ public class ReverseIntegerShould
     }
 
     [Test]
-    public void Reverse_Input_1534j36469_Return_0()
+    public void Reverse_Input_1534236469_Return_0()
     {
         var result = _reverseInteger.Reverse(1534236469);
         Assert.AreEqual(0, result);
