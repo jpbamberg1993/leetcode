@@ -11,7 +11,7 @@ public class ConvertStringShould
         var result = ConvertString.MyAtoi(s);
         Assert.Equal(42, result);
     }
-    
+
     [Fact]
     public void MyAtoi_Input_space_neg42_Return_neg42()
     {
@@ -19,7 +19,7 @@ public class ConvertStringShould
         var result = ConvertString.MyAtoi(s);
         Assert.Equal(-42, result);
     }
-    
+
     [Fact]
     public void MyAtoi_Input_4193_with_words_Return_4193()
     {
@@ -50,5 +50,13 @@ public class ConvertStringShould
         const string s = "-2147483648";
         var result = ConvertString.MyAtoi(s);
         Assert.Equal(int.MinValue, result);
+    }
+
+    [Fact]
+    public void MyAtoi_Input_Neg91283472332_Return_Neg1089159116()
+    {
+        const string s = "-91283472332";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(-2147483648, result);
     }
 }
