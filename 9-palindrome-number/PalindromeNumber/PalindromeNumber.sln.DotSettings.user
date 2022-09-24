@@ -1,11 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4efd78b3_002D735c_002D4bc8_002Dbcc7_002D9a9a63901654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PalindromeLibraryShould #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::9E248215-A8D9-4EA2-AB1B-123520A70518::net6.0::PalindromeNumber.Tests.PalindromeLibraryShould&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4efd78b3_002D735c_002D4bc8_002Dbcc7_002D9a9a63901654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="PalindromeLibraryShould #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::9E248215-A8D9-4EA2-AB1B-123520A70518::net6.0::PalindromeNumber.Tests.PalindromeLibraryShould&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d8ad748_002D30a9_002D4892_002D8d35_002D49947fa21799/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="PalindromeLibraryShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::9E248215-A8D9-4EA2-AB1B-123520A70518::net6.0::PalindromeNumber.Tests.PalindromeLibraryShould&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d8ad748_002D30a9_002D4892_002D8d35_002D49947fa21799/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PalindromeLibraryShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::9E248215-A8D9-4EA2-AB1B-123520A70518::net6.0::PalindromeNumber.Tests.PalindromeLibraryShould&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

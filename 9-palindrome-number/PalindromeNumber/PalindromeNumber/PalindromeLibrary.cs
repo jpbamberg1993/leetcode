@@ -1,21 +1,23 @@
-﻿namespace PalindromeNumber;
+namespace PalindromeNumber;
 
 public class PalindromeLibrary
 {
     public bool IsPalindrome(int x)
     {
-        if (x < 0 || (x % 10 == 0 && x != 0))
-        {
-            return false;
-        }
+        if (x < 0) return false;
 
-        var reversedNumber = 0;
-        while (x > reversedNumber)
+        if (x == 0) return true;
+
+        var original = x;
+        var reversed = 0;
+
+        while (x != 0)
         {
-            reversedNumber = reversedNumber * 10 + x % 10;
+            var pop = x % 10;
+            reversed = reversed * 10 + pop;
             x /= 10;
         }
 
-        return x == reversedNumber || x == reversedNumber / 10;
-    }
+        return reversed == original;
+    } 
 }
