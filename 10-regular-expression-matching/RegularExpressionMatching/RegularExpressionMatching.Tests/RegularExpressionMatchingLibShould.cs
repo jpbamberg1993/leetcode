@@ -47,6 +47,20 @@ public class RegularExpressionMatchingLibShould : IDisposable
         Assert.True(result);
     }
 
+    [Fact]
+    public void IsMatch_Input_aab_astarastarc_Returns_false()
+    {
+        var result = _regularExpressionMatching.IsMatch("aab", "a*a*c");
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void IsMatch_Input_aaaaaaaaaaaaab_astarastarastarastarastarastarastarastarastarastarc_Returns_false()
+    {
+        var result = _regularExpressionMatching.IsMatch("aaaaaaaaaaaaab", "a*a*a*a*a*a*a*a*a*a*c");
+        Assert.False(result);
+    }
+
     public void Dispose()
     {
         _regularExpressionMatching = null;
