@@ -61,6 +61,13 @@ public class RegularExpressionMatchingLibShould : IDisposable
         Assert.False(result);
     }
 
+    [Fact]
+    public void IsMatch_Input_dotstarc_Returns_false()
+    {
+        var result = _regularExpressionMatching.IsMatch("ab", ".*c");
+        Assert.False(result);
+    }
+
     public void Dispose()
     {
         _regularExpressionMatching = null;
