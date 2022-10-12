@@ -6,19 +6,19 @@ export function isMatch(s: string, p: string): boolean {
 }
 
 function isMatchExpression(s: string, p: string, i: number, j: number) {
-    if (_result[i][j] !== Result.Undefined) {
-        return this._result[i][j] === Result.True;
-    }
-
     if (j >= p.length) {
         return i >= s.length;
     }
 
-    let result: boolean;
-    const firstMatch = i < s.length && (s.charAt(i) === p.charAt(j) || p.charAt(j) === '.');
+    if (_result[i][j] !== Result.Undefined) {
+        return _result[i][j] === Result.True;
+    }
+
+    const firstMatch = i < s.length && (s[i] === p[j] || p[j] === '.');
+    let result = false;
 
     if (j + 1 < p.length && p[j + 1] === '*') {
-        result = (isMatchExpression(s, p, i, j + 2) || (firstMatch && isMatchExpression(s, p, i + 1, j)));
+        result = isMatchExpression(s, p, i, j + 2) || (firstMatch && isMatchExpression(s, p, i + 1, j));
     } else {
         result = firstMatch && isMatchExpression(s, p, i + 1, j + 1);
     }
