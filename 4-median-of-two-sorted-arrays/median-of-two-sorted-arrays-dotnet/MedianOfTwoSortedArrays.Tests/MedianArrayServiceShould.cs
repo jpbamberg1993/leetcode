@@ -1,12 +1,11 @@
 ﻿using System;
-using MedianOfTwoSortedArrays;
 using NUnit.Framework;
 
 namespace MedianOfTwoSortedArrays.Tests;
 
 public class MedianArrayServiceShould
 {
-    private MedianArrayService _medianArrayService;
+    private MedianArrayService? _medianArrayService;
 
     [SetUp]
     public void SetUp()
@@ -20,7 +19,7 @@ public class MedianArrayServiceShould
         var nums1 = new[] {1, 3};
         var nums2 = new[] {2};
 
-        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+        var median = _medianArrayService!.FindMedian(nums1, nums2);
 
         const double expectedMedian = 2.0000;
 
@@ -33,7 +32,7 @@ public class MedianArrayServiceShould
         var nums1 = new[] {1, 2};
         var nums2 = new[] {3, 4};
 
-        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+        var median = _medianArrayService!.FindMedian(nums1, nums2);
 
         const double expectedMedian = 2.5000;
 
@@ -46,7 +45,7 @@ public class MedianArrayServiceShould
         var nums1 = new[] {0, 0};
         var nums2 = new[] {0, 0};
 
-        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+        var median = _medianArrayService!.FindMedian(nums1, nums2);
 
         const double expectedMedian = 0.0000;
 
@@ -59,7 +58,7 @@ public class MedianArrayServiceShould
         var nums1 = new[] {2};
         var nums2 = Array.Empty<int>();
 
-        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+        var median = _medianArrayService!.FindMedian(nums1, nums2);
 
         const double expectedMedian = 2.0000;
 
@@ -72,7 +71,7 @@ public class MedianArrayServiceShould
         var nums1 = new[] {1, 2, 3, 4, 5, 6, 7, 8};
         var nums2 = new[] {1, 2, 3, 4, 5};
 
-        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+        var median = _medianArrayService!.FindMedian(nums1, nums2);
 
         const double expectedMedian = 4.0000;
 
@@ -85,7 +84,7 @@ public class MedianArrayServiceShould
         var nums1 = new[] {1, 2, 3, 4, 5, 6, 7, 8};
         var nums2 = new[] {1, 2, 3, 4, 5};
 
-        var median = _medianArrayService.FindMedianSortedArrays(nums1, nums2);
+        var median = _medianArrayService!.FindMedian(nums1, nums2);
 
         const double expectedMedian = 4.0000;
 
