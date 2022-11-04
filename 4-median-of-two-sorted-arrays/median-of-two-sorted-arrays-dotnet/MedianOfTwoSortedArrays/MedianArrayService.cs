@@ -21,7 +21,7 @@ public class MedianArrayService
             var l1Right = i + 1 < a.Length ? a[i + 1] : int.MaxValue;
             var l2Left = j >= 0 ? b[j] : int.MinValue;
             var l2Right = j + 1 < b.Length ? b[j + 1] : int.MaxValue;
-            
+
             if (l1Left <= l2Right && l2Left <= l1Right)
             {
                 if ((a.Length + b.Length) % 2 == 0)
@@ -31,7 +31,7 @@ public class MedianArrayService
 
                 return Math.Min(l1Right, l2Right);
             }
-            
+
             if (l1Left > l2Right)
                 end--;
             else
