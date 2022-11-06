@@ -1,7 +1,7 @@
 import twoSum from '../src/two-sum'
 
 describe('twoSum', function() {
-  it('returns indexs of numbers needed to sum', function() {
+  it('returns indexes of numbers needed to sum', function() {
     const nums = [2,7,11,15]
     const target = 9
 
