@@ -59,4 +59,12 @@ public class ConvertStringShould
         var result = ConvertString.MyAtoi(s);
         Assert.Equal(-2147483648, result);
     }
+
+    [Fact]
+    public void MyAtoi_Input_Neg2147483647_Return_Neg2147483647()
+    {
+        const string s = "-2147483647";
+        var result = ConvertString.MyAtoi(s);
+        Assert.Equal(-2147483647, result);
+    }
 }
