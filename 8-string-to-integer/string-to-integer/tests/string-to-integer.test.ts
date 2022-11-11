@@ -36,6 +36,4 @@ describe('myAtoi', function (): void {
         const result: number = myAtoi(s);
         expect(result).toEqual(-2147483647);
     })
-
-    it('')
 })
