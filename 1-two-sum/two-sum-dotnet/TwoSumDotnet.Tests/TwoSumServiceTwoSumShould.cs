@@ -16,7 +16,7 @@ namespace TwoSumDotnet.Tests
         public void TwoSum_InputArrAndTarget_ReturnFirstTwoIndexes()
         {
             var nums = new[] { 2, 7, 11, 15 };
-            var target = 9;
+            const int target = 9;
 
             var result = _twoSumService.TwoSum(nums, target);
 
@@ -27,7 +27,7 @@ namespace TwoSumDotnet.Tests
         public void TwoSum_InputArrAndTarget_NotReturnLastTwoIndexes()
         {
             var nums = new[] { 2, 7, 11, 15 };
-            var target = 9;
+            const int target = 9;
 
             var result = _twoSumService.TwoSum(nums, target);
 
@@ -38,7 +38,7 @@ namespace TwoSumDotnet.Tests
         public void TwoSum_InputArrAndTarget_ReturnLastTwoIndexes()
         {
             var nums = new[] { 3, 2, 4 };
-            var target = 6;
+            const int target = 6;
 
             var result = _twoSumService.TwoSum(nums, target);
 
@@ -49,7 +49,7 @@ namespace TwoSumDotnet.Tests
         public void TwoSum_InputArrLengthTwoAndTarget_ReturnOnlyTwoIndexes()
         {
             var nums = new[] { 3, 3 };
-            var target = 6;
+            const int target = 6;
 
             var result = _twoSumService.TwoSum(nums, target);
 
@@ -60,7 +60,7 @@ namespace TwoSumDotnet.Tests
         public void TwoSum_InputRepeatingOnes_Return5And11()
         {
             var nums = new[] { 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1 };
-            var target = 11;
+            const int target = 11;
 
             var result = _twoSumService.TwoSum(nums, target);
 
