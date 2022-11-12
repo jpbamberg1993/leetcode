@@ -1,4 +1,4 @@
-import {ListNode} from "./list-node";
+import { ListNode } from "./list-node";
 
 export function addTwoNumbers(l1: ListNode, l2: ListNode): ListNode {
     const dummyHead = new ListNode(0);
