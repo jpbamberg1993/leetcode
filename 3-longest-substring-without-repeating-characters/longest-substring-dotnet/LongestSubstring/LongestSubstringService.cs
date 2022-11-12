@@ -17,9 +17,11 @@ public static class LongestSubstringService
 
         while (end < s.Length)
         {
-            chars[s[end]] = chars.ContainsKey(s[end]) ? chars[s[end]] + 1 : 1;
+            var r = s[end];
+            
+            chars[r] = chars.GetValueOrDefault(r, 0) + 1;
 
-            while (chars[s[end]] > 1)
+            while (chars[r] > 1)
             {
                 chars[s[start]] -= 1;
                 start++;
