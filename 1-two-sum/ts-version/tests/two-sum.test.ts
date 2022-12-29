@@ -1,4 +1,4 @@
-import twoSum from '../src/two-sum'
+import {twoSum} from '../src/two-sum'
 
 describe('twoSum', function() {
   it('returns indexes of numbers needed to sum', function() {
