@@ -1,19 +1,20 @@
-import { ListNode } from "./list-node";
+import { ListNode } from './list-node'
 
-export function addTwoNumbers(l1: ListNode, l2: ListNode): ListNode {
-    const dummyHead = new ListNode(0);
-    let currentHead = dummyHead;
-    let carry = 0;
+export function addTwoNumbers(listOne: ListNode, listTwo: ListNode): ListNode {
+  let currentHead = new ListNode(0);
+  const dummyHead = currentHead;
+  let carry = 0;
+  while (listOne?.val != null || listTwo?.val != null || carry != 0) {
+    const valOne = listOne?.val ?? 0;
+    const valTwo = listTwo?.val ?? 0;
+    const val = valOne + valTwo + carry;
+    currentHead.next = new ListNode(val % 10);
+    currentHead = currentHead.next;
 
-    while (l1 != null || l2 != null || carry != 0) {
-        const value = (l1?.val || 0) + (l2?.val || 0) + carry;
-        carry = value >= 10 ? 1 : 0;
-        const pop = value % 10;
-        currentHead.next = new ListNode(pop);
-        currentHead = currentHead.next;
-        if (l1 != null) l1 = l1.next;
-        if (l2 != null) l2 = l2.next;
-    }
+    carry = val > 9 ? 1 : 0;
+    listOne = listOne?.next;
+    listTwo = listTwo?.next;
+  }
 
-    return dummyHead.next;
+  return dummyHead.next;
 }
