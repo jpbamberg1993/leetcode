@@ -1,6 +1,12 @@
-import {longestPalindrome} from '../src/longest-palindrome'
+import { longestPalindrome } from '../src/longest-palindrome'
 
 describe('longestPalindrome', function () {
+    it('is passed "cacac" and return "cacac"', function () {
+        const result = longestPalindrome('cacac');
+
+        expect(result).toEqual("cacac")
+    })
+
     it('is passed "babad" and returns "bab"', function () {
         const result = longestPalindrome('babad')
 
@@ -25,7 +31,7 @@ describe('longestPalindrome', function () {
         expect(result).toEqual("aaaaa")
     })
 
-    it('is passed "aacabdkacaa" and returns "aaca"', function () {
+    it('is passed "aacabdkacaa" and returns "aca"', function () {
         const result = longestPalindrome("aacabdkacaa")
 
         expect(result).toEqual("aca")
