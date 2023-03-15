@@ -1,13 +1,13 @@
-export function twoSum(nums: number[], target: number): [number, number] {
-  const valueIndexDict = new Map<number, number>();
-
-  for (let i = 0; i < nums.length; i++) {
-    const remainder: number = target - nums[i];
-
-    if (valueIndexDict.has(remainder)) {
-      return [valueIndexDict.get(remainder), i];
+export function twoSum(nums: number[], target: number): number[] {
+  const result: number[] = []
+  const map = new Map<number, number>()
+  nums.forEach((num, index) => {
+    const complement = target - num
+    if (map.has(complement)) {
+      result.push(map.get(complement) as number)
+      result.push(index)
     }
-
-    valueIndexDict.set(nums[i], i);
-  }
+    map.set(num, index)
+  })
+  return result
 }
