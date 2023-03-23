@@ -25,4 +25,9 @@ describe('isMatch', function() {
       const result = isMatch("aab", "c*a*b")
       expect(result).toBe(true)
   })
+
+  it('is passed "aaa" and "a*a" and returns true', function() {
+      const result = isMatch("aaa", "a*a")
+      expect(result).toBe(true)
+  })
 })
