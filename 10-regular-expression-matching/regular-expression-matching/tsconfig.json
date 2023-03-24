@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
     "esModuleInterop": true
-  }
+  },
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ]
 }
