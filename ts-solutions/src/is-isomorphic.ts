@@ -1,20 +1,16 @@
 export function isIsomorphic(s: string, t: string): boolean {
-	const sTotMap = new Map<string, string>()
-	const tTosMap = new Map<string, string>()
+	return transformString(s) === transformString(t)
+}
 
+function transformString(s: string): string {
+	const charIndexer = new Map<string, number>()
+	let response = ``
 	for (let i = 0; i < s.length; i++) {
-		const sChar = s[i]
-		const tChar = t[i]
-
-		if (!tTosMap.has(tChar) && !sTotMap.has(sChar)) {
-			sTotMap.set(sChar, tChar)
-			tTosMap.set(tChar, sChar)
+		const char = s[i]
+		if (!charIndexer.has(char)) {
+			charIndexer.set(char, i)
 		}
-
-		if (sTotMap.get(sChar) !== tChar || tTosMap.get(tChar) !== sChar) {
-			return false
-		}
+		response += `_${charIndexer.get(char)}`
 	}
-
-	return true
+	return response
 }
