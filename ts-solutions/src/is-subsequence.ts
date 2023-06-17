@@ -1,12 +1,19 @@
 export function isSubsequence(s: string, t: string): boolean {
-	let currentCharIndexForS = 0
-	for (let i = 0; i < t.length; i++) {
-		if (currentCharIndexForS >= s.length) {
+	const leftBound = s.length
+	const rightBound = t.length
+
+	function isSubsequenceRec(sIndex: number, tIndex: number): boolean {
+		if (sIndex === leftBound) {
 			return true
 		}
-		if (t[i] === s[currentCharIndexForS]) {
-			currentCharIndexForS++
+		if (tIndex == rightBound) {
+			return false
 		}
+		if (s[sIndex] === t[tIndex]) {
+			sIndex++
+		}
+		return isSubsequenceRec(sIndex, tIndex + 1)
 	}
-	return currentCharIndexForS >= s.length
+
+	return isSubsequenceRec(0, 0)
 }
