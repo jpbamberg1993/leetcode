@@ -5,25 +5,29 @@ export function mergeTwoLists(
 	list2: ListNode | null
 ): ListNode | null {
 	const dummyHead = new ListNode()
-	let currentHead = dummyHead
-	let l1 = list1
-	let l2 = list2
-	while (l1 || l2) {
-		const [lesserValue, greaterValue] = [l1?.val, l2?.val].sort()
-		if (lesserValue != undefined) {
-			currentHead.next = new ListNode(lesserValue)
+	let currentHead: ListNode | null = dummyHead
+	while (list1 || list2) {
+		if (list1 === null) {
+			currentHead.next = list2
 			currentHead = currentHead.next
+			break
 		}
-		if (greaterValue != undefined) {
-			currentHead.next = new ListNode(greaterValue)
+		if (list2 === null) {
+			currentHead.next = list1
 			currentHead = currentHead.next
+			break
 		}
-
-		if (l1) {
-			l1 = l1.next
+		if (list1 != null && list1.val <= list2.val) {
+			currentHead.next = new ListNode(list1.val)
+			list1 = list1.next
+			currentHead = currentHead.next
+			continue
 		}
-		if (l2) {
-			l2 = l2.next
+		if (list2 != null && list2.val <= list1.val) {
+			currentHead.next = new ListNode(list2.val)
+			list2 = list2.next
+			currentHead = currentHead.next
+			continue
 		}
 	}
 
