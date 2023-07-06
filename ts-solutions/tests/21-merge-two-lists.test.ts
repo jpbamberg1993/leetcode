@@ -1,4 +1,6 @@
-import { mergeTwoLists, ListNode } from '../src/21-merge-two-lists'
+import { ListNode } from '../utils/list-node'
+import { arrayToLinkedList } from '../utils/array-to-linked-list'
+import { mergeTwoLists } from '../src/21-merge-two-lists'
 
 describe(`mergeTwoLists`, function () {
 	it(`is passed list1 = [1,2,4], list2 = [1,3,4] => [1,1,2,3,4,4]`, function () {
@@ -31,13 +33,3 @@ describe(`mergeTwoLists`, function () {
 		expect(result).toEqual(expectedList)
 	})
 })
-
-function arrayToLinkedList(arr: number[]): ListNode | null {
-	const dummyHead = new ListNode()
-	let currentNode = dummyHead
-	for (const n of arr) {
-		currentNode.next = new ListNode(n)
-		currentNode = currentNode.next
-	}
-	return dummyHead.next
-}
