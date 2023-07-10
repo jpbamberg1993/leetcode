@@ -6,12 +6,7 @@ export function mergeTwoLists(
 ): ListNode | null {
 	const head = new ListNode()
 	let tail = head
-	while (list1 || list2) {
-		if (list1 == null || list2 == null) {
-			tail.next = list1 ?? list2
-			break
-		}
-
+	while (list1 != null && list2 != null) {
 		if (list1.val <= list2.val) {
 			tail.next = list1
 			list1 = list1.next
@@ -21,6 +16,10 @@ export function mergeTwoLists(
 		}
 
 		tail = tail.next
+	}
+
+	if (list1 == null || list2 == null) {
+		tail.next = list1 ?? list2
 	}
 
 	return head.next
