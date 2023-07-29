@@ -4,6 +4,10 @@ export function mergeTwoLists(
 	list1: ListNode | null,
 	list2: ListNode | null
 ): ListNode | null {
+	if (!list1 || !list2) {
+		return list1 ?? list2
+	}
+
 	const dummyHead = new ListNode()
 	let resultNode = dummyHead
 	while (list1 && list2) {
