@@ -1,21 +1,19 @@
 export function mergeAlternately(word1: string, word2: string): string {
-	const response = new Array(word1.length + word2.length)
-	let responseIndex = 0
 	const m = word1.length
 	const n = word2.length
-	let i = 0
-	let j = 0
-	while (i < m || j < n) {
+	const response = new Array(m + n)
+	let responseIndex = 0
+
+	for (let i = 0; i < Math.max(m, n); i++) {
 		if (i < m) {
 			response[responseIndex] = word1[i]
 			responseIndex++
-			i++
 		}
-		if (j < n) {
-			response[responseIndex] = word2[j]
+		if (i < n) {
+			response[responseIndex] = word2[i]
 			responseIndex++
-			j++
 		}
 	}
+
 	return response.join('')
 }
