@@ -13,7 +13,7 @@ export function gcdOfStrings(str1: string, str2: string): string {
 		}
 	}
 
-	for (let i = Math.min(len1, len2); i > 1; --i) {
+	for (let i = Math.min(len1, len2); i > 0; --i) {
 		if (isValid(i)) {
 			return str1.substring(0, i)
 		}

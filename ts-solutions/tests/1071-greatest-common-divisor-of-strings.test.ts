@@ -12,4 +12,8 @@ describe('gcdOfStrings', () => {
 	it('str1 = "LEET", str2 = "CODE" => ""', () => {
 		expect(gcdOfStrings('LEET', 'CODE')).toBe('')
 	})
+
+	it('is passed str1 = "AA", str2 = "A" => "A"', () => {
+		expect(gcdOfStrings('AA', 'A')).toBe('A')
+	})
 })
