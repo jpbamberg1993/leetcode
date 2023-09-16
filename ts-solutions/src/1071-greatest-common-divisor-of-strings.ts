@@ -1,30 +1,22 @@
 export function gcdOfStrings(str1: string, str2: string): string {
-	if (str1.length > str2.length) {
-		;[str1, str2] = [str2, str1]
-	}
+	const len1 = str1.length
+	const len2 = str2.length
 
-	let currentIndex = 0
-	let endingIndex = -1
-	while (currentIndex < str1.length) {
-		const substring = str1.substring(0, currentIndex + 1)
-		const matchesStr1 = repeatedMatchesString(substring, str1)
-		const matchesStr2 = repeatedMatchesString(substring, str2)
-		if (matchesStr1 && matchesStr2) {
-			endingIndex = currentIndex
+	function isValid(k: number) {
+		if (len1 % k !== 0 || len2 % k !== 0) {
+			return false
+		} else {
+			const base = str1.substring(0, k)
+			const n1 = len1 / k
+			const n2 = len2 / k
+			return base.repeat(n1) === str1 && base.repeat(n2) === str2
 		}
-		currentIndex++
 	}
-	return str1.substring(0, endingIndex + 1)
-}
 
-function repeatedMatchesString(substring: string, str1: string) {
-	const repeatCount = str1.length % substring.length
-	if (repeatCount !== 0) {
-		return false
+	for (let i = Math.min(len1, len2); i > 1; --i) {
+		if (isValid(i)) {
+			return str1.substring(0, i)
+		}
 	}
-	let substringClone = substring
-	while (substringClone.length < str1.length) {
-		substringClone += substring
-	}
-	return substringClone === str1
+	return ''
 }
