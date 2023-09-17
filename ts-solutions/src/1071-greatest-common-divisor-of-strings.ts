@@ -1,22 +1,16 @@
 export function gcdOfStrings(str1: string, str2: string): string {
-	const len1 = str1.length
-	const len2 = str2.length
-
-	function isValid(k: number) {
-		if (len1 % k !== 0 || len2 % k !== 0) {
-			return false
-		} else {
-			const base = str1.substring(0, k)
-			const n1 = len1 / k
-			const n2 = len2 / k
-			return base.repeat(n1) === str1 && base.repeat(n2) === str2
-		}
+	if (str1 + str2 !== str2 + str1) {
+		return ``
 	}
 
-	for (let i = Math.min(len1, len2); i > 0; --i) {
-		if (isValid(i)) {
-			return str1.substring(0, i)
-		}
+	const gcdLength = gcd(str1.length, str2.length)
+	return str1.substring(0, gcdLength)
+}
+
+function gcd(x: number, y: number) {
+	if (y === 0) {
+		return x
+	} else {
+		return gcd(y, x % y)
 	}
-	return ''
 }
