@@ -23,3 +23,11 @@ func TestKidsWithCandies(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkKidsWithCandies(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, test := range kidsWithCandiesTests {
+			KidsWithCandies(test.candies, test.extraCandies)
+		}
+	}
+}
