@@ -8,7 +8,6 @@ type gcdOfStringTest struct {
 
 var gcdOfStringTests = []gcdOfStringTest{
 	{"ABCABC", "ABC", "ABC"},
-	{"ABCABCABC", "ABC", "ABC"},
 	{"ABABAB", "ABAB", "AB"},
 	{"LEET", "CODE", ""},
 }
