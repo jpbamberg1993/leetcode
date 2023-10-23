@@ -12,12 +12,11 @@ func CanPlaceFlowers(flowerbed []int, n int) bool {
 		emptyLeftPlot := (currentIndex == 0) || (flowerbed[currentIndex-1] == 0)
 		emptyRightPlot := (currentIndex == flowerbedLen-1) || (flowerbed[currentIndex+1] == 0)
 		if emptyLeftPlot && emptyRightPlot {
-			flowerbed[currentIndex] = 1
+			currentIndex += 2
 			count++
 			if count >= n {
 				return true
 			}
-			currentIndex += 2
 		} else {
 			currentIndex += 1
 		}
