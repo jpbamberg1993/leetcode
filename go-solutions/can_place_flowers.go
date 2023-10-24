@@ -6,7 +6,7 @@ func CanPlaceFlowers(flowerbed []int, n int) bool {
 	currentIndex := 0
 	for currentIndex < flowerbedLen {
 		if flowerbed[currentIndex] == 1 {
-			currentIndex++
+			currentIndex += 2
 			continue
 		}
 		emptyLeftPlot := (currentIndex == 0) || (flowerbed[currentIndex-1] == 0)

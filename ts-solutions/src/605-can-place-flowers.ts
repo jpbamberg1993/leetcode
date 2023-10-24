@@ -4,7 +4,7 @@ export function canPlaceFlowers(flowerbed: number[], n: number): boolean {
 	const flowerbedLength = flowerbed.length
 	while (currentIndex < flowerbedLength) {
 		if (flowerbed[currentIndex] === 1) {
-			currentIndex++
+			currentIndex += 2
 			continue
 		}
 		const leftSideEmpty =
