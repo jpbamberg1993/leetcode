@@ -1,15 +1,22 @@
 export function canPlaceFlowers(flowerbed: number[], n: number): boolean {
 	let count = 0
-	for (let i = 0; i < flowerbed.length; i++) {
-		if (flowerbed[i] === 1) {
+	let currentIndex = 0
+	const flowerbedLength = flowerbed.length
+	while (currentIndex < flowerbedLength) {
+		if (flowerbed[currentIndex] === 1) {
+			currentIndex++
 			continue
 		}
-		const leftSideEmpty = i === 0 || flowerbed[i - 1] === 0
-		const rightSideEmpty = i === flowerbed.length - 1 || flowerbed[i + 1] === 0
+		const leftSideEmpty =
+			currentIndex === 0 || flowerbed[currentIndex - 1] === 0
+		const rightSideEmpty =
+			currentIndex === flowerbedLength - 1 || flowerbed[currentIndex + 1] === 0
 		if (leftSideEmpty && rightSideEmpty) {
-			flowerbed[i] = 1
+			currentIndex += 2
 			count++
 			if (count >= n) return true
+		} else {
+			currentIndex += 1
 		}
 	}
 	return count >= n
