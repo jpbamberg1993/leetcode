@@ -15,7 +15,7 @@ var canPlaceFlowersTests = []canPlaceFlowersTest{
 	{[]int{1, 0, 0, 0, 1, 0, 0}, 2, true},
 }
 
-func TestCanPlaceFlowers(t *testing.T) {
+func TestCanPlaceFlowers2tCanPlaceFlowers(t *testing.T) {
 	for _, test := range canPlaceFlowersTests {
 		if output := CanPlaceFlowers(test.flowerbed, test.n); output != test.expected {
 			t.Errorf("Input flowerbed: %v, n: %v => Output %v not equal to expected %v", test.flowerbed, test.n, output, test.expected)
