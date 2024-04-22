@@ -1,5 +1,4 @@
 import { mergeAlternately } from '../src/1768-merge-strings-alternatly'
-
 describe(`mergeAlternately`, () => {
 	it(`is passed 'abc', 'pqr' => 'apbqcr'`, () => {
 		const result = mergeAlternately(`abc`, `pqr`)
