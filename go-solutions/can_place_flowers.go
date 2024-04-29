@@ -1,24 +1,19 @@
 package leetcode
 
 func CanPlaceFlowers(flowerbed []int, n int) bool {
-	flowerbedLen := len(flowerbed)
 	count := 0
-	currentIndex := 0
-	for currentIndex < flowerbedLen {
-		if flowerbed[currentIndex] == 1 {
-			currentIndex += 2
+	for i := 0; i < len(flowerbed); i++ {
+		if flowerbed[i] != 0 {
 			continue
 		}
-		emptyLeftPlot := (currentIndex == 0) || (flowerbed[currentIndex-1] == 0)
-		emptyRightPlot := (currentIndex == flowerbedLen-1) || (flowerbed[currentIndex+1] == 0)
-		if emptyLeftPlot && emptyRightPlot {
-			currentIndex += 2
+		canPlaceLeft := i == 0 || flowerbed[i-1] == 0
+		canPlaceRight := i == len(flowerbed)-1 || flowerbed[i+1] == 0
+		if canPlaceLeft && canPlaceRight {
+			flowerbed[i] = 1
 			count++
 			if count >= n {
 				return true
 			}
-		} else {
-			currentIndex += 1
 		}
 	}
 	return count >= n
