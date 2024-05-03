@@ -1,38 +1,41 @@
-export function reverseVowels(s: string): string {
-	let result = s.split('')
-	let start = 0
-	let end = s.length - 1
-	while (start < end) {
-		while (start < end && !isVowel(s[start])) {
-			start++
+export function reverseVowels(s: string) {
+	let l = 0
+	let r = s.length - 1
+	const chars = s.split(``)
+
+	while (l < r) {
+		while (l < r && !isVowel(chars[l])) {
+			l++
 		}
-		while (end > start && !isVowel(s[end])) {
-			end--
+		while (r >= 0 && !isVowel(chars[r])) {
+			r--
 		}
-		if (start < end) {
-			swapVowels(result, start++, end--)
+		if (l < r) {
+			swapChars(chars, l, r)
+			l++
+			r--
 		}
 	}
-	return result.join('')
+	return chars.join(``)
 }
 
-function isVowel(ch: string): boolean {
+function swapChars(s: string[], i1: number, i2: number) {
+	const temp = s[i1]
+	s[i1] = s[i2]
+	s[i2] = temp
+}
+
+function isVowel(c: string) {
 	return (
-		ch === 'A' ||
-		ch === 'a' ||
-		ch === 'E' ||
-		ch === 'e' ||
-		ch === 'I' ||
-		ch === 'i' ||
-		ch === 'O' ||
-		ch === 'o' ||
-		ch === 'U' ||
-		ch === 'u'
+		c === `a` ||
+		c === `e` ||
+		c === `i` ||
+		c === `o` ||
+		c === `u` ||
+		c === `A` ||
+		c === `E` ||
+		c === `I` ||
+		c === `O` ||
+		c === `U`
 	)
-}
-
-function swapVowels(s: string[], i: number, j: number) {
-	const temp = s[i]
-	s[i] = s[j]
-	s[j] = temp
 }

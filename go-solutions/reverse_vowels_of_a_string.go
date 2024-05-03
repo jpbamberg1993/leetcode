@@ -1,25 +1,32 @@
 package leetcode
 
 func ReverseVowels(s string) string {
-	start := 0
-	end := len(s) - 1
-	sChars := []rune(s)
-	for start < end {
-		for start < end && !isVowel(sChars[start]) {
-			start++
+	runes := []rune(s)
+	l := 0
+	r := len(s) - 1
+	for l < r {
+		for l < len(runes) && !isVowel(runes[l]) {
+			l++
 		}
-		for end > start && !isVowel(sChars[end]) {
-			end--
+		for r >= 0 && !isVowel(runes[r]) {
+			r--
 		}
-		if end > start {
-			sChars[start], sChars[end] = sChars[end], sChars[start]
-			start++
-			end--
+		if l < r {
+			swapChars(&runes, l, r)
+			l++
+			r--
 		}
 	}
-	return string(sChars)
+	return string(runes)
 }
 
-func isVowel(ch rune) bool {
-	return ch == 'A' || ch == 'a' || ch == 'E' || ch == 'e' || ch == 'I' || ch == 'i' || ch == 'O' || ch == 'o' || ch == 'U' || ch == 'u'
+func isVowel(r rune) bool {
+	return r == 'A' || r == 'a' || r == 'E' || r == 'e' || r == 'I' || r == 'i' || r == 'O' || r == 'o' || r == 'U' || r == 'u'
+}
+
+func swapChars(runes *[]rune, l, r int) {
+	runesVal := *runes
+	temp := runesVal[l]
+	runesVal[l] = runesVal[r]
+	runesVal[r] = temp
 }
