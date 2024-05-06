@@ -1,14 +1,9 @@
-export function reverseWord(s: string): string {
-	const result: string[] = []
-	let word = ``
-	for (let i = 0; i < s.length; i++) {
-		if (s.charAt(i) === ` `) {
-			word.length > 0 && result.unshift(word)
-			word = ``
-		} else {
-			word += s.charAt(i)
-		}
+export function reverseWord(s: string) {
+	const chars = s.split(` `)
+	const res = []
+	for (let i = chars.length - 1; i >= 0; i--) {
+		if (chars[i] === ``) continue
+		res.push(chars[i])
 	}
-	word.length > 0 && result.unshift(word)
-	return result.join(` `)
+	return res.join(` `).trimEnd()
 }

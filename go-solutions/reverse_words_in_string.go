@@ -1,16 +1,12 @@
 package leetcode
 
-import (
-	"strings"
-)
+import "strings"
 
 func ReverseWordsInString(s string) string {
 	words := strings.Fields(s)
-	start, end := 0, len(words)-1
-	for start < end {
-		words[start], words[end] = words[end], words[start]
-		start++
-		end--
+	var result strings.Builder
+	for i := len(words) - 1; i >= 0; i-- {
+		result.WriteString(strings.TrimSpace(words[i]) + " ")
 	}
-	return strings.TrimSpace(strings.Join(words, " "))
+	return strings.TrimRight(result.String(), " ")
 }
