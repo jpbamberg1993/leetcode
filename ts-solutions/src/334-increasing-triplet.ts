@@ -1,5 +1,4 @@
 export function increasingTriplet(nums: number[]): boolean {
-	if (nums.length < 3) return false
 	let first = Number.MAX_SAFE_INTEGER
 	let second = Number.MAX_SAFE_INTEGER
 	for (const num of nums) {

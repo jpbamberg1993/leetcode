@@ -1,5 +1,4 @@
 import { productExceptSelf } from '../src/238-product-except-self'
-import { json } from 'node:stream/consumers'
 
 type ProductExceptSelfTest = [number[], number[]]
 
