@@ -8,7 +8,8 @@ func MoveZeroes(nums []int) {
 			index++
 		}
 	}
-	for i := index; i < len(nums); i++ {
-		nums[i] = 0
+	for index < len(nums) {
+		nums[index] = 0
+		index++
 	}
 }
