@@ -1,15 +1,13 @@
 export function isSubsequence(s: string, t: string): boolean {
-	const sLength = s.length
-
-	let leftIndex = 0
-	for (let i = 0; i < t.length; i++) {
-		if (leftIndex === sLength) {
-			return true
+	const leftBound = s.length,
+		rightBound = t.length
+	let left = 0,
+		right = 0
+	while (left < leftBound && right < rightBound) {
+		if (s[left] === t[right]) {
+			left++
 		}
-		if (s[leftIndex] === t[i]) {
-			leftIndex++
-		}
+		right++
 	}
-
-	return leftIndex === sLength
+	return left === leftBound
 }
