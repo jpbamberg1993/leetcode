@@ -17,7 +17,7 @@ var maxOperationsTests = []maxOperationsTest{
 func TestMaxOperations(t *testing.T) {
 	for _, test := range maxOperationsTests {
 		if got := MaxOperations(test.nums, test.k); got != test.want {
-			t.Errorf("got %d want %d given, nums = %#v, k = %d", got, test.want, test.nums, test.k)
+			t.Errorf("got %d want %d given: nums = %#v, k = %d", got, test.want, test.nums, test.k)
 		}
 	}
 }
