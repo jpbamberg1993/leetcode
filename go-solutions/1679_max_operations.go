@@ -1,17 +1,20 @@
 package leetcode
 
+import "sort"
+
 func MaxOperations(nums []int, k int) int {
-	valueIndexMap := make(map[int]int)
-	count := 0
-	for i := 0; i < len(nums); i++ {
-		current := nums[i]
-		compliment := k - current
-		complimentValue, complimentExists := valueIndexMap[compliment]
-		if complimentExists && complimentValue > 0 {
-			valueIndexMap[compliment]--
-			count++
+	sort.Ints(nums)
+	left, right, count := 0, len(nums)-1, 0
+	for left < right {
+		sum := nums[left] + nums[right]
+		if sum < k {
+			left++
+		} else if sum > k {
+			right--
 		} else {
-			valueIndexMap[current]++
+			count++
+			left++
+			right--
 		}
 	}
 	return count
