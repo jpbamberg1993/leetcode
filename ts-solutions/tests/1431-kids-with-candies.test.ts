@@ -7,6 +7,7 @@ const kidsWithCandiesTests: KidsWithCandiesTest[] = [
 	[[4, 2, 1, 1, 2], 1, [true, false, false, false, false]],
 	[[12, 1, 12], 10, [true, false, true]],
 ]
+
 describe(`kidsWithCandies`, () => {
 	it.each(kidsWithCandiesTests)(
 		`candies = %s, extraCandies = %s => %s`,
