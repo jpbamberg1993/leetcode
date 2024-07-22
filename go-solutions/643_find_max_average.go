@@ -1,14 +1,14 @@
 package leetcode
 
 func FindMaxAverage(nums []int, k int) float64 {
-	sum := make([]int, len(nums))
-	sum[0] = nums[0]
-	for i := 1; i < len(nums); i++ {
-		sum[i] = sum[i-1] + nums[i]
+	sum := 0
+	for i := 0; i < k; i++ {
+		sum += nums[i]
 	}
-	res := float64(sum[k-1]) / float64(k)
+	res := sum
 	for i := k; i < len(nums); i++ {
-		res = max(res, (float64(sum[i])-float64(sum[i-k]))/float64(k))
+		sum += nums[i] - nums[i-k]
+		res = max(res, sum)
 	}
-	return res
+	return float64(res) / float64(k)
 }
