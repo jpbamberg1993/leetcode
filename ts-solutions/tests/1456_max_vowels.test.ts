@@ -8,8 +8,8 @@ type MaxVowelsTest = {
 
 const tests: MaxVowelsTest[] = [
 	{ s: `abciiidef`, k: 3, want: 3 },
-	// { s: `aeiou`, k: 2, want: 2 },
-	// { s: `leetcode`, k: 3, want: 2 },
+	{ s: `aeiou`, k: 2, want: 2 },
+	{ s: `leetcode`, k: 3, want: 2 },
 ]
 
 describe(`maxVowels`, () => {
