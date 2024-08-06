@@ -1,11 +1,14 @@
-export function pivotIndex(nums: number[]): number {
-	const sum = nums.reduce((acc, num) => (acc += num), 0)
-	let left = 0
+export const pivotIndex = (nums: number[]) => {
+	let leftSum = 0
+	let sum = 0
+	for (const num of nums) {
+		sum += num
+	}
 	for (let i = 0; i < nums.length; i++) {
-		if (left === sum - left - nums[i]) {
+		if (leftSum === sum - leftSum - nums[i]) {
 			return i
 		}
-		left += nums[i]
+		leftSum += nums[i]
 	}
 	return -1
 }
