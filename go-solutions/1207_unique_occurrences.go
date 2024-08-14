@@ -1,16 +1,17 @@
 package leetcode
 
+import "sort"
+
 func UniqueOccurrences(arr []int) bool {
-	occurrences := make(map[int]int)
-	for _, v := range arr {
-		occurrences[v]++
+	const k = 1000
+	freq := make([]int, k*2+1)
+	for _, n := range arr {
+		freq[n+k]++
 	}
-	keyMap := make(map[int]struct{})
-	for key := range occurrences {
-		if _, ok := keyMap[occurrences[key]]; ok {
+	sort.Ints(freq)
+	for i := 0; i < k*2; i++ {
+		if freq[i] != 0 && freq[i] == freq[i+1] {
 			return false
-		} else {
-			keyMap[occurrences[key]] = struct{}{}
 		}
 	}
 	return true
