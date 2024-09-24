@@ -1,38 +1,54 @@
 package leetcode
 
-import (
-	"strconv"
-	"strings"
-)
+type TrieNode struct {
+	count    int
+	children map[int]*TrieNode
+}
+
+type Trie struct {
+	root *TrieNode
+}
+
+func NewTrie() *Trie {
+	return &Trie{root: &TrieNode{children: make(map[int]*TrieNode)}}
+}
+
+func (t *Trie) SetNodes(nums []int) {
+	myTrie := t.root
+	for _, num := range nums {
+		if _, exists := myTrie.children[num]; !exists {
+			myTrie.children[num] = &TrieNode{children: make(map[int]*TrieNode)}
+		}
+		myTrie = myTrie.children[num]
+	}
+	myTrie.count += 1
+}
+
+func (t *Trie) Search(nums []int) int {
+	myTrie := t.root
+	for _, num := range nums {
+		value, exists := myTrie.children[num]
+		if exists {
+			myTrie = value
+		} else {
+			return 0
+		}
+	}
+	return myTrie.count
+}
 
 func EqualPairs(grid [][]int) int {
-	counterMap := make(map[string]int)
-	for i := 0; i < len(grid); i++ {
-		rowKey := intsToString(grid[i])
-		counterMap[rowKey]++
+	trie := NewTrie()
+	for _, row := range grid {
+		trie.SetNodes(row)
 	}
-
-	counter := 0
+	count := 0
 	for i := 0; i < len(grid); i++ {
-		columnArr := make([]int, len(grid))
+		column := make([]int, len(grid))
 		for j := 0; j < len(grid); j++ {
-			columnArr[j] = grid[j][i]
+			column[j] = grid[j][i]
 		}
-		counterKey := intsToString(columnArr)
-		counter += counterMap[counterKey]
+		count += trie.Search(column)
 	}
-
-	return counter
-}
-
-func intsToString(arr []int) string {
-	return strings.Join(hashIntArray(arr), ",")
-}
-
-func hashIntArray(arr []int) []string {
-	strSlice := make([]string, len(arr))
-	for i := 0; i < len(arr); i++ {
-		strSlice[i] = strconv.Itoa(arr[i])
-	}
-	return strSlice
+	return count
 }
