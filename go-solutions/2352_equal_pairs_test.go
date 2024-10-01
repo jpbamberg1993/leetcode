@@ -8,9 +8,9 @@ type equalPairsTest struct {
 }
 
 var equalPairsTests = []equalPairsTest{
-	//{[][]int{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}, 1},
+	{[][]int{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}, 1},
 	{[][]int{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}}, 3},
-	//{[][]int{{11, 1}, {1, 11}}, 2},
+	{[][]int{{11, 1}, {1, 11}}, 2},
 }
 
 func TestEqualPairs(t *testing.T) {
