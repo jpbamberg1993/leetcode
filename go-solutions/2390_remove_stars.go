@@ -1,9 +1,8 @@
 package leetcode
 
 func RemoveStars(s string) string {
-	runes := []rune(s)
 	stack := Stack{}
-	for _, char := range runes {
+	for _, char := range s {
 		if char == '*' {
 			if stack.IsEmpty() {
 				continue
