@@ -1,35 +1,15 @@
 package leetcode
 
 func RemoveStars(s string) string {
-	stack := Stack{}
-	for _, char := range s {
-		if char == '*' {
-			if stack.IsEmpty() {
-				continue
-			}
-			stack.Pop()
+	ch := make([]rune, len(s))
+	j := 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '*' {
+			j--
 		} else {
-			stack.Push(char)
+			ch[j] = rune(s[i])
+			j++
 		}
 	}
-	return string(stack)
-}
-
-type Stack []rune
-
-func (s *Stack) IsEmpty() bool {
-	return len(*s) == 0
-}
-
-func (s *Stack) Push(r rune) {
-	*s = append(*s, r)
-}
-
-func (s *Stack) Pop() (rune, bool) {
-	if s.IsEmpty() {
-		return rune(0), false
-	}
-	char := (*s)[len(*s)-1]
-	*s = (*s)[:len(*s)-1]
-	return char, true
+	return string(ch[:j])
 }
