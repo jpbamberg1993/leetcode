@@ -1,35 +1,36 @@
 package leetcode
 
 func DecodeString(s string) string {
-	var st []int32
-	for _, c := range s {
-		if c == ']' {
+	var stack []int32
+	for _, ch := range s {
+		if ch == ']' {
 			var decodedString []int32
 
-			for st[len(st)-1] != '[' {
-				decodedString = append(decodedString, st[len(st)-1])
-				st = st[:len(st)-1]
+			for len(stack) > 0 && stack[len(stack)-1] != '[' {
+				decodedString = append(decodedString, stack[len(stack)-1])
+				stack = stack[:len(stack)-1]
 			}
 
-			st = st[:len(st)-1]
+			stack = stack[:len(stack)-1]
 
-			base := 1
-			var n int
-			for len(st) > 0 && st[len(st)-1] >= '0' && st[len(st)-1] <= '9' {
-				n = n + int(st[len(st)-1]-'0')*base
-				st = st[:len(st)-1]
+			var k int32
+			var base int32
+			base = 1
+			for len(stack) > 0 && stack[len(stack)-1] <= '9' && stack[len(stack)-1] >= '0' {
+				k = k + ((stack[len(stack)-1] - '0') * base)
 				base *= 10
+				stack = stack[:len(stack)-1]
 			}
 
-			for n > 0 {
+			for k > 0 {
 				for i := len(decodedString) - 1; i >= 0; i-- {
-					st = append(st, decodedString[i])
+					stack = append(stack, decodedString[i])
 				}
-				n--
+				k--
 			}
 		} else {
-			st = append(st, c)
+			stack = append(stack, ch)
 		}
 	}
-	return string(st)
+	return string(stack[:])
 }
