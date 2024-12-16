@@ -1,32 +1,35 @@
 package leetcode
 
 func DecodeString(s string) string {
-	st := []item{{0, []byte{}}}
-	num := 0
-
+	var st []int32
 	for _, c := range s {
-		switch {
-		case c > '0' && c <= '9':
-			num = num*10 + int(c-'0')
-		case c == '0':
-			num *= 10
-		case c == '[':
-			st = append(st, item{num, []byte{}})
-			num = 0
-		case c == ']':
-			tmp := st[len(st)-1]
-			st = st[:len(st)-1]
-			for i := 0; i < tmp.num; i++ {
-				st[len(st)-1].bytes = append(st[len(st)-1].bytes, tmp.bytes...)
+		if c == ']' {
+			var decodedString []int32
+
+			for st[len(st)-1] != '[' {
+				decodedString = append(decodedString, st[len(st)-1])
+				st = st[:len(st)-1]
 			}
-		default:
-			st[len(st)-1].bytes = append(st[len(st)-1].bytes, byte(c))
+
+			st = st[:len(st)-1]
+
+			base := 1
+			var n int
+			for len(st) > 0 && st[len(st)-1] >= '0' && st[len(st)-1] <= '9' {
+				n = n + int(st[len(st)-1]-'0')*base
+				st = st[:len(st)-1]
+				base *= 10
+			}
+
+			for n > 0 {
+				for i := len(decodedString) - 1; i >= 0; i-- {
+					st = append(st, decodedString[i])
+				}
+				n--
+			}
+		} else {
+			st = append(st, c)
 		}
 	}
-	return string(st[len(st)-1].bytes)
-}
-
-type item struct {
-	num   int
-	bytes []byte
+	return string(st)
 }
