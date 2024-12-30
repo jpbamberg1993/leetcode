@@ -21,3 +21,9 @@ func TestDecodeString(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkDecodeString(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		DecodeString(decodeStringTests[0].s)
+	}
+}
