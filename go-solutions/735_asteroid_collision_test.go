@@ -14,6 +14,7 @@ var asteroidCollisionTests = []asteroidCollisionTest{
 	{[]int{5, 10, -5}, []int{5, 10}},
 	{[]int{8, -8}, []int{}},
 	{[]int{10, 2, -5}, []int{10}},
+	{[]int{-2, -1, 1, 2}, []int{-2, -1, 1, 2}},
 }
 
 func TestAsteroidCollision(t *testing.T) {
