@@ -1,17 +1,15 @@
-export const asteroidCollision = (asteroids: number[]) => {
-	let result: number[] = []
+export function asteroidCollision(asteroids: number[]) {
+	const result = new Array<number>()
 	for (let i = 0; i < asteroids.length; i++) {
 		const asteroid = asteroids[i]
-		const rLength = result.length
-		const lastResult = result[rLength - 1]
-
-		if (rLength === 0 || lastResult < 0 || asteroid > 0) {
+		const lastAsteroid = result[result.length - 1]
+		if (result.length === 0 || lastAsteroid < 0 || asteroid > 0) {
 			result.push(asteroid)
 		} else {
-			if (-asteroid > lastResult) {
-				result = result.slice(0, -1)
+			if (-asteroid > lastAsteroid) {
+				result.pop()
 				i--
-			} else if (-asteroid === lastResult) {
+			} else if (-asteroid === lastAsteroid) {
 				result.pop()
 			}
 		}
