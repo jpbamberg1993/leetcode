@@ -1,15 +1,15 @@
 package leetcode
 
 func RemoveStars(s string) string {
-	ch := make([]rune, len(s))
-	j := 0
+	chars := make([]uint8, len(s))
+	var j int
 	for i := 0; i < len(s); i++ {
 		if s[i] == '*' {
 			j--
 		} else {
-			ch[j] = rune(s[i])
+			chars[j] = s[i]
 			j++
 		}
 	}
-	return string(ch[:j])
+	return string(chars[:j])
 }
