@@ -16,7 +16,7 @@ var equalPairsTests = []equalPairsTest{
 func TestEqualPairs(t *testing.T) {
 	for _, tc := range equalPairsTests {
 		if got := EqualPairs(tc.grid); got != tc.want {
-			t.Errorf("EqualPairs(%v) = %d, want %d", tc.grid, got, tc.want)
+			t.Errorf("EqualPairs(%v) got %d, want %d", tc.grid, got, tc.want)
 		}
 	}
 }
