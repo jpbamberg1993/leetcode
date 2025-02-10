@@ -5,7 +5,7 @@ type EqualPairsTest = {
 	want: number
 }
 
-const equalPairsTests: EqualPairsTest[] = [
+export const equalPairsTests: EqualPairsTest[] = [
 	{
 		grid: [
 			[3, 2, 1],
@@ -25,9 +25,11 @@ const equalPairsTests: EqualPairsTest[] = [
 	},
 ]
 
-describe(`equalPairs`, () => {
-	it.each(equalPairsTests)(`equalPairs`, ({ grid, want }) => {
-		const got = equalPairs(grid)
-		expect(got).toBe(want)
+if (typeof describe !== `undefined`) {
+	describe(`equalPairs`, () => {
+		it.each(equalPairsTests)(`equalPairs`, ({ grid, want }) => {
+			const got = equalPairs(grid)
+			expect(got).toBe(want)
+		})
 	})
-})
+}
