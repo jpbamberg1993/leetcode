@@ -20,3 +20,11 @@ func TestEqualPairs(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkEqualPairs(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, tc := range equalPairsTests {
+			EqualPairs(tc.grid)
+		}
+	}
+}
