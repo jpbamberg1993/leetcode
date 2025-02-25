@@ -28,3 +28,11 @@ func TestCloseStrings(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkCloseStrings(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, c := range closeStringsTests {
+			CloseStrings(c.word1, c.word2)
+		}
+	}
+}

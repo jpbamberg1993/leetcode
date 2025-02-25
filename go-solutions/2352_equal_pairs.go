@@ -1,6 +1,5 @@
 package leetcode
 
-// todo: re write using strings for key's and counts for values
 type Trie struct {
 	children map[int]*Trie
 	count    int

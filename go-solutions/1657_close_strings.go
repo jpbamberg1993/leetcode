@@ -1,31 +1,57 @@
 package leetcode
 
-import (
-	"reflect"
-	"sort"
-)
+import "sort"
 
 func CloseStrings(word1 string, word2 string) bool {
 	if len(word1) != len(word2) {
 		return false
 	}
-	word1Map := [26]int{}
-	word2Map := [26]int{}
-	word1Bit := 0
-	word2Bit := 0
-	for i := 0; i < len(word1); i++ {
-		char1ASC := word1[i] - 'a'
-		word1Map[char1ASC]++
-		word1Bit = word1Bit | (1 << (char1ASC))
 
-		char2ASC := word2[i] - 'a'
-		word2Map[char2ASC]++
-		word2Bit = word2Bit | (1 << (char2ASC))
+	char1Set := make(map[int32]int)
+	for _, c := range word1 {
+		char1Set[c]++
 	}
-	if word1Bit != word2Bit {
+
+	char2Set := make(map[int32]int)
+	for _, c := range word2 {
+		char2Set[c]++
+	}
+
+	if len(char1Set) != len(char2Set) {
 		return false
 	}
-	sort.Ints(word1Map[:])
-	sort.Ints(word2Map[:])
-	return reflect.DeepEqual(word1Map, word2Map)
+
+	for _, c := range word2 {
+		if _, ok := char1Set[c]; !ok {
+			return false
+		}
+	}
+
+	// now we need to check frequency
+	char1Freq := make([]int, 0, len(char1Set))
+	char2Freq := make([]int, 0, len(char2Set))
+
+	for _, v := range char1Set {
+		char1Freq = append(char1Freq, v)
+	}
+	for _, v := range char2Set {
+		char2Freq = append(char2Freq, v)
+	}
+
+	sort.Ints(char1Freq)
+	sort.Ints(char2Freq)
+
+	return compareArrays(char1Freq, char2Freq)
+}
+
+func compareArrays(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
 }
