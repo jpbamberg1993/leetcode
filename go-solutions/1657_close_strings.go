@@ -1,59 +1,33 @@
 package leetcode
 
-import "sort"
+import (
+	"slices"
+	"sort"
+)
 
 func CloseStrings(word1 string, word2 string) bool {
 	if len(word1) != len(word2) {
 		return false
 	}
 
-	char1Set := make(map[int32]int)
-	for _, v := range word1 {
-		char1Set[v]++
-	}
-	char2Set := make(map[int32]int)
-	for _, v := range word2 {
-		char2Set[v]++
-	}
-
-	if !mapsAreEqual(char1Set, char2Set) {
-		return false
+	alphabetLength := 26
+	char1Set := make([]int, alphabetLength)
+	char2Set := make([]int, alphabetLength)
+	for i := 0; i < len(word1); i++ {
+		char1Set[word1[i]-'a'] += 1
+		char2Set[word2[i]-'a'] += 1
 	}
 
-	char1Freq := make([]int, 0, len(char1Set))
-	char2Freq := make([]int, 0, len(char2Set))
-	for _, v := range char1Set {
-		char1Freq = append(char1Freq, v)
-	}
-	for _, v := range char2Set {
-		char2Freq = append(char2Freq, v)
-	}
-
-	return compareArrays(char1Freq, char2Freq)
-}
-
-func mapsAreEqual(set map[int32]int, set2 map[int32]int) bool {
-	if len(set) != len(set2) {
-		return false
-	}
-	for key := range set {
-		if _, exists := set2[key]; !exists {
+	for i := 0; i < alphabetLength; i++ {
+		if char1Set[i] > 0 && char2Set[i] <= 0 {
+			return false
+		}
+		if char2Set[i] > 0 && char1Set[i] <= 0 {
 			return false
 		}
 	}
-	return true
-}
 
-func compareArrays(a, b []int) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	sort.Ints(a)
-	sort.Ints(b)
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
+	sort.Ints(char1Set)
+	sort.Ints(char2Set)
+	return slices.Equal(char1Set, char2Set)
 }
