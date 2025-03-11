@@ -1,13 +1,13 @@
 package leetcode
 
 func UniqueOccurrences(arr []int) bool {
-	myMap := make(map[int]int)
+	charToCountMap := make(map[int]int)
 	for _, v := range arr {
-		myMap[v]++
+		charToCountMap[v]++
 	}
-	mySet := make(map[int]struct{})
-	for _, v := range myMap {
-		mySet[v] = struct{}{}
+	countMap := make(map[int]struct{})
+	for _, v := range charToCountMap {
+		countMap[v] = struct{}{}
 	}
-	return len(mySet) == len(myMap)
+	return len(countMap) == len(charToCountMap)
 }

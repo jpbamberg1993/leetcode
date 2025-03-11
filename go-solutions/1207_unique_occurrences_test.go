@@ -26,3 +26,11 @@ func TestUniqueOccurrence(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkUniqueOccurrences(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, test := range uniqueOccurrencesTests {
+			UniqueOccurrences(test.arr)
+		}
+	}
+}
