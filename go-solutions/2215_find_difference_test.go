@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"sort"
 	"testing"
 )
 
@@ -24,6 +25,14 @@ func TestFindDifference(t *testing.T) {
 	}
 }
 
+func BenchmarkFindDifference(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, tc := range findDifferenceTestCases {
+			FindDifference(tc.nums1, tc.nums2)
+		}
+	}
+}
+
 func compareSliceSlice(a, b [][]int) bool {
 	if len(a) != len(b) {
 		return false
@@ -32,6 +41,8 @@ func compareSliceSlice(a, b [][]int) bool {
 		if len(a[i]) != len(b[i]) {
 			return false
 		}
+		sort.Ints(a[i])
+		sort.Ints(b[i])
 		for j := range a[i] {
 			if a[i][j] != b[i][j] {
 				return false
