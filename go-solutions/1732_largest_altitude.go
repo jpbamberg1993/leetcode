@@ -1,11 +1,11 @@
 package leetcode
 
 func LargestAltitude(gain []int) int {
-	currentAltitude := 0
-	highestPoint := currentAltitude
-	for _, g := range gain {
-		currentAltitude += g
-		highestPoint = max(currentAltitude, highestPoint)
+	highestPoint := 0
+	currentPoint := 0
+	for _, v := range gain {
+		currentPoint += v
+		highestPoint = max(highestPoint, currentPoint)
 	}
 	return highestPoint
 }
