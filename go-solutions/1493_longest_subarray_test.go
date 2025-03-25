@@ -9,6 +9,7 @@ type longestSubarrayTest struct {
 
 var tests = []longestSubarrayTest{
 	{[]int{1, 1, 0, 1}, 3},
+	{[]int{0, 1, 0, 1}, 2},
 	{[]int{0, 1, 1, 1, 0, 1, 1, 0, 1}, 5},
 	{[]int{1, 1, 1}, 2},
 }
