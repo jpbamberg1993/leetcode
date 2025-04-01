@@ -8,7 +8,7 @@ func LongestSubarray(nums []int) int {
 		if nums[i] == 0 {
 			zeroCount++
 		}
-		for zeroCount > 1 {
+		if zeroCount > 1 {
 			if nums[left] == 0 {
 				zeroCount--
 			}

@@ -16,7 +16,7 @@ var longestOnesTests = []longestOnesTest{
 func TestLongestOnes(t *testing.T) {
 	for _, test := range longestOnesTests {
 		if got := LongestOnes(test.nums, test.k); got != test.want {
-			t.Errorf("got %d want %d given: nums = %v, k = %d", test.want, got, test.nums, test.k)
+			t.Errorf("got %d want %d given: nums = %v, k = %d", got, test.want, test.nums, test.k)
 		}
 	}
 }
