@@ -12,9 +12,9 @@ func MaxOperations(nums []int, k int) int {
 		} else if sum > k {
 			right--
 		} else {
-			count++
 			left++
 			right--
+			count++
 		}
 	}
 	return count

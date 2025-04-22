@@ -21,3 +21,11 @@ func TestMaxOperations(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkMaxOperations(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, test := range maxOperationsTests {
+			MaxOperations(test.nums, test.k)
+		}
+	}
+}
