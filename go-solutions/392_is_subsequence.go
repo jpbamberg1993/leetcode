@@ -1,41 +1,16 @@
 package leetcode
 
-type Base struct {
-	hm map[rune][]int
-}
-
-func NewBase(t string) *Base {
-	hm := make(map[rune][]int)
-	runes := []rune(t)
-	for i, r := range runes {
-		if value, ok := hm[r]; ok {
-			hm[r] = append(value, i)
-		} else {
-			hm[r] = []int{i}
-		}
+func IsSubsequence(s, t string) bool {
+	if len(s) > len(t) {
+		return true
 	}
-	return &Base{hm}
-}
-
-func (b *Base) IsSubsequence(s string) bool {
-	sRunes := []rune(s)
-	for i, r := range sRunes {
-		if rightValue, exists := b.hm[r]; exists {
-			if !hasValueGreaterThan(rightValue, i) {
-				return false
-			}
-		} else {
-			return false
+	left := 0
+	right := 0
+	for left < len(s) && right < len(t) {
+		if s[left] == t[right] {
+			left++
 		}
+		right++
 	}
-	return true
-}
-
-func hasValueGreaterThan(nums []int, limit int) bool {
-	for _, num := range nums {
-		if num >= limit {
-			return true
-		}
-	}
-	return false
+	return left == len(s)
 }
