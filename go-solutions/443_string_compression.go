@@ -7,15 +7,15 @@ func Compress(chars []byte) int {
 	i := 0
 	for i < len(chars) {
 		groupLength := 0
-		for groupLength+i < len(chars) && chars[groupLength+i] == chars[i] {
+		for i+groupLength < len(chars) && chars[i+groupLength] == chars[i] {
 			groupLength++
 		}
 		chars[res] = chars[i]
 		res++
 		if groupLength > 1 {
-			countStr := strconv.Itoa(groupLength)
-			for j := 0; j < len(countStr); j++ {
-				chars[res] = countStr[j]
+			groupChars := strconv.Itoa(groupLength)
+			for _, v := range groupChars {
+				chars[res] = byte(v)
 				res++
 			}
 		}
