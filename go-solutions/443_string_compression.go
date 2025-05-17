@@ -3,23 +3,22 @@ package leetcode
 import "strconv"
 
 func Compress(chars []byte) int {
-	res := 0
-	i := 0
-	for i < len(chars) {
-		groupLength := 0
-		for i+groupLength < len(chars) && chars[i+groupLength] == chars[i] {
-			groupLength++
+	walker, runner := 0, 0
+	for runner < len(chars) {
+		charLength := 0
+		for runner+charLength < len(chars) && chars[runner] == chars[runner+charLength] {
+			charLength++
 		}
-		chars[res] = chars[i]
-		res++
-		if groupLength > 1 {
-			groupChars := strconv.Itoa(groupLength)
-			for _, v := range groupChars {
-				chars[res] = byte(v)
-				res++
+		chars[walker] = chars[runner]
+		walker++
+		if charLength > 1 {
+			charLengthAsc := strconv.Itoa(charLength)
+			for i := 0; i < len(charLengthAsc); i++ {
+				chars[walker] = charLengthAsc[i]
+				walker++
 			}
 		}
-		i += groupLength
+		runner += charLength
 	}
-	return res
+	return walker
 }
