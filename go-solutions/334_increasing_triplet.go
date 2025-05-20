@@ -6,8 +6,8 @@ func IncreasingTriplet(nums []int) bool {
 	if len(nums) < 3 {
 		return false
 	}
-	first := math.MaxInt32
-	second := math.MaxInt32
+
+	first, second := math.MaxInt, math.MaxInt
 	for _, num := range nums {
 		if num <= first {
 			first = num
