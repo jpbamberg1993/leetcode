@@ -20,3 +20,11 @@ func TestReverseWordsInString(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkReverseWordsInString(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, test := range reverseWordsInStringTests {
+			ReverseWordsInString(test.s)
+		}
+	}
+}
