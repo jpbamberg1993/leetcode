@@ -1,32 +1,38 @@
 package leetcode
 
 func ReverseVowels(s string) string {
-	runes := []rune(s)
-	l := 0
-	r := len(s) - 1
-	for l < r {
-		for l < len(runes) && !isVowel(runes[l]) {
-			l++
+	characters := []byte(s)
+	left := 0
+	right := len(characters) - 1
+	for left < right {
+		for left < len(characters) && !isVowel(characters[left]) {
+			left++
 		}
-		for r >= 0 && !isVowel(runes[r]) {
-			r--
+		for right >= 0 && !isVowel(characters[right]) {
+			right--
 		}
-		if l < r {
-			swapChars(&runes, l, r)
-			l++
-			r--
+		if left < right {
+			swapChars(characters, left, right)
+			left++
+			right--
 		}
 	}
-	return string(runes)
+	return string(characters)
 }
 
-func isVowel(r rune) bool {
-	return r == 'A' || r == 'a' || r == 'E' || r == 'e' || r == 'I' || r == 'i' || r == 'O' || r == 'o' || r == 'U' || r == 'u'
+func swapChars(characters []byte, left, right int) {
+	temp := characters[left]
+	characters[left] = characters[right]
+	characters[right] = temp
 }
 
-func swapChars(runes *[]rune, l, r int) {
-	runesVal := *runes
-	temp := runesVal[l]
-	runesVal[l] = runesVal[r]
-	runesVal[r] = temp
+var tmpVowels []byte = []byte{'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'}
+
+func isVowel(ch byte) bool {
+	for _, vowel := range tmpVowels {
+		if ch == vowel {
+			return true
+		}
+	}
+	return false
 }

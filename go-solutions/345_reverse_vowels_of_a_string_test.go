@@ -10,12 +10,13 @@ type reverseVowelsTest struct {
 var reverseVowelsTests = []reverseVowelsTest{
 	{"hello", "holle"},
 	{"leetcode", "leotcede"},
+	{"IceCreAm", "AceCreIm"},
 }
 
 func TestReverseVowels(t *testing.T) {
 	for _, test := range reverseVowelsTests {
 		if output := ReverseVowels(test.s); output != test.expected {
-			t.Errorf("Input s: %v => Output %v not equal to expected %v", test.s, output, test.expected)
+			t.Errorf("Input s: %v => Output %q not equal to expected %q", test.s, output, test.expected)
 		}
 	}
 }
