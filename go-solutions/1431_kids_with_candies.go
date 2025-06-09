@@ -2,14 +2,16 @@ package leetcode
 
 func KidsWithCandies(candies []int, extraCandies int) []bool {
 	result := make([]bool, len(candies))
-	m := -1
-	for _, candy := range candies {
-		if candy > m {
-			m = candy
+	largestCount := 0
+	for _, c := range candies {
+		if c > largestCount {
+			largestCount = c
 		}
 	}
-	for i := 0; i < len(candies); i++ {
-		result[i] = candies[i]+extraCandies >= m
+	for i, c := range candies {
+		if c+extraCandies >= largestCount {
+			result[i] = true
+		}
 	}
 	return result
 }

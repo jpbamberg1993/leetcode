@@ -19,7 +19,7 @@ var kidsWithCandiesTests = []kidsWithCandiesTest{
 func TestKidsWithCandies(t *testing.T) {
 	for _, test := range kidsWithCandiesTests {
 		if output := KidsWithCandies(test.candies, test.extraCandies); !utils.BoolSliceEqual(output, test.expected) {
-			t.Errorf("Output %v not equal to expected %v", output, test.expected)
+			t.Errorf("Passed candies: %#v, extraCandies: %#v => %v not equal to expected %v", test.candies, test.extraCandies, output, test.expected)
 		}
 	}
 }
