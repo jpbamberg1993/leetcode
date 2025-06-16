@@ -1,14 +1,14 @@
 package leetcode
 
-func GcdOfString(str1 string, str2 string) string {
+func GcdOfStrings(str1, str2 string) string {
 	if str1+str2 != str2+str1 {
 		return ""
 	}
-	gcdLen := gcd(len(str1), len(str2))
-	return str1[:gcdLen]
+	gcdLength := gcd(len(str1), len(str2))
+	return str1[:gcdLength]
 }
 
-func gcd(x int, y int) int {
+func gcd(x, y int) int {
 	if y == 0 {
 		return x
 	} else {

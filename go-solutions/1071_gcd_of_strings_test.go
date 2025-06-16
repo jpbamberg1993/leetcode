@@ -15,7 +15,7 @@ var gcdOfStringTests = []gcdOfStringTest{
 
 func TestGcdOfString(t *testing.T) {
 	for _, test := range gcdOfStringTests {
-		if output := GcdOfString(test.arg1, test.arg2); output != test.expected {
+		if output := GcdOfStrings(test.arg1, test.arg2); output != test.expected {
 			t.Errorf("Output %q not equal to expected %q", output, test.expected)
 		}
 	}
@@ -24,7 +24,7 @@ func TestGcdOfString(t *testing.T) {
 func BenchmarkGcdOfString(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for _, test := range gcdOfStringTests {
-			GcdOfString(test.arg1, test.arg2)
+			GcdOfStrings(test.arg1, test.arg2)
 		}
 	}
 }
