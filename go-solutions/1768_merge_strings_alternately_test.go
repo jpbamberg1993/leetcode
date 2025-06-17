@@ -21,3 +21,11 @@ func TestMergeStringsAlternately(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkMergeAlternately(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, test := range mergeStringsAlternatelyTests {
+			MergeAlternately(test.word1, test.word2)
+		}
+	}
+}

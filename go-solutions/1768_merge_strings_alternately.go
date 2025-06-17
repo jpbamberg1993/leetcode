@@ -2,17 +2,16 @@ package leetcode
 
 import "strings"
 
-func MergeAlternately(word1 string, word2 string) string {
-	m := len(word1)
-	n := len(word2)
-	s := strings.Builder{}
-	for i := 0; i < max(m, n); i++ {
-		if i < len(word1) {
-			s.WriteByte(word1[i])
+func MergeAlternately(word1, word2 string) string {
+	m, n := len(word1), len(word2)
+	result := strings.Builder{}
+	for i := 0; i < max(len(word1), len(word2)); i++ {
+		if i < m {
+			result.WriteByte(word1[i])
 		}
-		if i < len(word2) {
-			s.WriteByte(word2[i])
+		if i < n {
+			result.WriteByte(word2[i])
 		}
 	}
-	return s.String()
+	return result.String()
 }
