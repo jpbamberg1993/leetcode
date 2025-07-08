@@ -1,35 +1,29 @@
 package leetcode
 
 func ReverseVowels(s string) string {
-	characters := []byte(s)
+	sArr := []byte(s)
 	left := 0
-	right := len(characters) - 1
+	right := len(sArr) - 1
 	for left < right {
-		for left < len(characters) && !isVowel(characters[left]) {
+		for left < len(sArr) && !isVowel(sArr[left]) {
 			left++
 		}
-		for right >= 0 && !isVowel(characters[right]) {
+		for right >= 0 && !isVowel(sArr[right]) {
 			right--
 		}
 		if left < right {
-			swapChars(characters, left, right)
+			tmp := sArr[left]
+			sArr[left] = sArr[right]
+			sArr[right] = tmp
 			left++
 			right--
 		}
 	}
-	return string(characters)
+	return string(sArr)
 }
-
-func swapChars(characters []byte, left, right int) {
-	temp := characters[left]
-	characters[left] = characters[right]
-	characters[right] = temp
-}
-
-var tmpVowels []byte = []byte{'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'}
 
 func isVowel(ch byte) bool {
-	for _, vowel := range tmpVowels {
+	for _, vowel := range vowels {
 		if ch == vowel {
 			return true
 		}

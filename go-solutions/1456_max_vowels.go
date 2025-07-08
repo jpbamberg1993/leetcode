@@ -4,8 +4,6 @@ import (
 	"slices"
 )
 
-var vowels = []uint8{'a', 'e', 'i', 'o', 'u'}
-
 func MaxVowels(s string, k int) int {
 	currentMax := 0
 	for i := 0; i < k; i++ {
