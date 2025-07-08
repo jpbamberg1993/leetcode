@@ -13,6 +13,7 @@ var canPlaceFlowersTests = []canPlaceFlowersTest{
 	{[]int{1, 0, 0, 0, 1}, 2, false},
 	{[]int{1, 0, 0, 0, 0, 1}, 2, false},
 	{[]int{1, 0, 0, 0, 1, 0, 0}, 2, true},
+	{[]int{1, 0, 1, 0, 1, 0, 1}, 0, true},
 }
 
 func TestCanPlaceFlowers2tCanPlaceFlowers(t *testing.T) {
