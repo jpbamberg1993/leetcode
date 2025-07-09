@@ -4,14 +4,14 @@ import "strings"
 
 func ReverseWordsInString(s string) string {
 	words := strings.Fields(s)
-	result := strings.Builder{}
-	word := ""
-	for i := len(words) - 1; i >= 0; i-- {
-		word = words[i]
-		if word == " " {
-			continue
-		}
-		result.WriteString(word + " ")
+	left := 0
+	right := len(words) - 1
+	for left < right {
+		tmp := words[left]
+		words[left] = words[right]
+		words[right] = tmp
+		left++
+		right--
 	}
-	return strings.TrimRight(result.String(), " ")
+	return strings.Join(words, " ")
 }
