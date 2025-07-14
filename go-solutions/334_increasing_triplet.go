@@ -3,11 +3,8 @@ package leetcode
 import "math"
 
 func IncreasingTriplet(nums []int) bool {
-	if len(nums) < 3 {
-		return false
-	}
-
-	first, second := math.MaxInt, math.MaxInt
+	first := math.MaxInt
+	second := math.MaxInt
 	for _, num := range nums {
 		if num <= first {
 			first = num
