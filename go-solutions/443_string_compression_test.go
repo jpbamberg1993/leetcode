@@ -1,6 +1,9 @@
 package leetcode
 
-import "testing"
+import (
+	"slices"
+	"testing"
+)
 
 type StringCompressionTest struct {
 	chars    []byte
@@ -17,8 +20,10 @@ var stringCompressionTests = []StringCompressionTest{
 
 func TestStringCompression(t *testing.T) {
 	for _, test := range stringCompressionTests {
+		// since the original slice will be modified, we want to clone this slice
+		originalChars := slices.Clone(test.chars)
 		if output := Compress(test.chars); output != test.expected {
-			t.Errorf("Compress(%v) got %v want %v", test.chars, output, test.expected)
+			t.Errorf("Compress(%v) => %d, want %v, modified chars: %v", originalChars, output, test.expected, test.chars)
 		}
 	}
 }

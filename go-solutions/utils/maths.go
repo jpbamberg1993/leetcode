@@ -13,3 +13,7 @@ func Min(a int, b int) int {
 	}
 	return b
 }
+
+func IsDigit(b byte) bool {
+	return b >= '0' && b <= '9'
+}
