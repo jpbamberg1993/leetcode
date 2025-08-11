@@ -10,9 +10,9 @@ type IsSubsequenceTest struct {
 
 var isSubsequenceTests = []IsSubsequenceTest{
 	{t: "ahbgdc", s: "abc", expected: true},
-	//{t: "ahbgdc", s: "axc", expected: false},
-	//{t: "ahbgdc", s: "", expected: true},
-	//{t: "ahbgdc", s: "bb", expected: false},
+	{t: "ahbgdc", s: "axc", expected: false},
+	{t: "ahbgdc", s: "", expected: true},
+	{t: "ahbgdc", s: "bb", expected: false},
 }
 
 func TestIsSubsequence(t *testing.T) {
