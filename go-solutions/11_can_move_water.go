@@ -1,16 +1,15 @@
 package leetcode
 
-import "go-solutions/utils"
-
 func MaxArea(height []int) int {
-	left, right, maxArea := 0, len(height)-1, 0
+	maxArea := 0
+	left, right := 0, len(height)-1
 	for left < right {
-		area := (right - left) * utils.Min(height[left], height[right])
+		area := (right - left) * min(height[left], height[right])
 		maxArea = max(maxArea, area)
-		if height[left] < height[right] {
-			left++
-		} else {
+		if height[left] > height[right] {
 			right--
+		} else {
+			left++
 		}
 	}
 	return maxArea
