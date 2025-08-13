@@ -2,23 +2,23 @@ package leetcode
 
 import "go-solutions/utils"
 
-func FindDifference(nums1, nums2 []int) [][]int {
-	return [][]int{getElementsOnlyInFirstList(nums1, nums2), getElementsOnlyInFirstList(nums2, nums1)}
+func FindDifference(nums1 []int, nums2 []int) [][]int {
+	diff1 := findDifference(nums1, nums2)
+	diff2 := findDifference(nums2, nums1)
+	return [][]int{diff1, diff2}
 }
 
-func getElementsOnlyInFirstList(nums1, nums2 []int) []int {
-	onlyInNums1 := make(map[int]struct{}, len(nums1))
-
-	nums2Set := make(map[int]struct{})
-	for _, n := range nums2 {
-		nums2Set[n] = struct{}{}
+func findDifference(nums1 []int, nums2 []int) []int {
+	nums2Map := make(map[int]int)
+	for _, v := range nums2 {
+		nums2Map[v] = 1
 	}
-
-	for _, n := range nums1 {
-		if _, ok := nums2Set[n]; !ok {
-			onlyInNums1[n] = struct{}{}
+	res := make(map[int]struct{})
+	for _, v := range nums1 {
+		tmp := nums2Map[v]
+		if tmp == 0 {
+			res[v] = struct{}{}
 		}
 	}
-
-	return utils.KeysToSlice(onlyInNums1)
+	return utils.KeysToSlice(res)
 }
