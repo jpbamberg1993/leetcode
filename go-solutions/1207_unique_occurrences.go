@@ -5,9 +5,9 @@ func UniqueOccurrences(arr []int) bool {
 	for _, v := range arr {
 		countMap[v]++
 	}
-	countStack := make(map[int]struct{})
+	uniqueMap := make(map[int]any)
 	for _, v := range countMap {
-		countStack[v] = struct{}{}
+		uniqueMap[v] = struct{}{}
 	}
-	return len(countStack) == len(countMap)
+	return len(uniqueMap) == len(countMap)
 }
