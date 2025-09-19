@@ -5,29 +5,23 @@ import (
 	"sort"
 )
 
-func CloseStrings(word1 string, word2 string) bool {
+func CloseStrings(word1, word2 string) bool {
 	if len(word1) != len(word2) {
 		return false
 	}
-
-	alphabetLength := 26
-	char1Set := make([]int, alphabetLength)
-	char2Set := make([]int, alphabetLength)
+	alphabetCount := 26
+	countMap1 := make([]int, alphabetCount)
+	countMap2 := make([]int, alphabetCount)
 	for i := 0; i < len(word1); i++ {
-		char1Set[word1[i]-'a'] += 1
-		char2Set[word2[i]-'a'] += 1
+		countMap1[word1[i]-'a']++
+		countMap2[word2[i]-'a']++
 	}
-
-	for i := 0; i < alphabetLength; i++ {
-		if char1Set[i] > 0 && char2Set[i] <= 0 {
-			return false
-		}
-		if char2Set[i] > 0 && char1Set[i] <= 0 {
+	for i := 0; i < alphabetCount; i++ {
+		if (countMap1[i] > 0 && countMap2[i] == 0) || (countMap1[i] == 0 && countMap2[i] > 0) {
 			return false
 		}
 	}
-
-	sort.Ints(char1Set)
-	sort.Ints(char2Set)
-	return slices.Equal(char1Set, char2Set)
+	sort.Ints(countMap1)
+	sort.Ints(countMap2)
+	return slices.Equal(countMap1, countMap2)
 }
