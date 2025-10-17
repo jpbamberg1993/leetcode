@@ -25,3 +25,11 @@ func TestAsteroidCollision(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkAsteroidCollision(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, in := range asteroidCollisionTests {
+			_ = AsteroidCollision(in.asteroids)
+		}
+	}
+}

@@ -4,14 +4,18 @@ func AsteroidCollision(asteroids []int) []int {
 	var result []int
 	for i := 0; i < len(asteroids); i++ {
 		asteroid := asteroids[i]
-		if len(result) == 0 || asteroid > 0 || result[len(result)-1] < 0 {
+		resultLen := len(result)
+		if resultLen == 0 || result[resultLen-1] < 0 || asteroid > 0 {
 			result = append(result, asteroid)
 		} else {
-			if -asteroid > result[len(result)-1] {
-				result = result[:len(result)-1]
+			last := result[resultLen-1]
+			if -asteroid > last {
+				result = result[:resultLen-1]
 				i--
-			} else if -asteroid == result[len(result)-1] {
-				result = result[:len(result)-1]
+			} else if -asteroid == last {
+				result = result[:resultLen-1]
+			} else {
+				continue
 			}
 		}
 	}
