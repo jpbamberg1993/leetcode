@@ -1,38 +1,36 @@
 package leetcode
 
-import "strings"
-
-var index int
-
 func DecodeString(s string) string {
-	index = 0
-	return decodeString(s)
-}
+	var st []int32
 
-func decodeString(s string) string {
-	result := strings.Builder{}
-	for index < len(s) && s[index] != ']' {
-		if !isDigit(s) {
-			result.WriteByte(s[index])
-			index++
+	for _, v := range s {
+		if v == ']' {
+			// slice of characters in between [ and ]
+			var subSlice []int32
+			for st[len(st)-1] != '[' {
+				subSlice = append(subSlice, st[len(st)-1])
+				st = st[:len(st)-1]
+			}
+			st = st[:len(st)-1]
+
+			// the number of times subSlice is repeated
+			base := 1
+			k := 0
+			for len(st) > 0 && st[len(st)-1] >= '0' && st[len(st)-1] <= '9' {
+				k = k + int(st[len(st)-1]-'0')*base
+				base *= 10
+				st = st[:len(st)-1]
+			}
+
+			for k > 0 {
+				for i := len(subSlice) - 1; i >= 0; i-- {
+					st = append(st, subSlice[i])
+				}
+				k--
+			}
 		} else {
-			n := 0
-			for isDigit(s) {
-				n = n*10 + int(s[index]-'0')
-				index++
-			}
-			index++
-			decodedString := decodeString(s)
-			index++
-			for n > 0 {
-				result.WriteString(decodedString)
-				n--
-			}
+			st = append(st, v)
 		}
 	}
-	return result.String()
-}
-
-func isDigit(s string) bool {
-	return s[index] >= '0' && s[index] <= '9'
+	return string(st[:])
 }
