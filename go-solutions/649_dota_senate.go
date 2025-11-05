@@ -1,51 +1,59 @@
 package leetcode
 
-import (
-	"container/list"
-	"strings"
-)
-
-const (
-	radiant = "Radiant"
-	dire    = "Dire"
-)
-
 func predictPartyVictory(senate string) string {
-	senators := list.New()
-	for i := len(senate) - 1; i >= 0; i-- {
-		senators.PushFront(senate[i])
-	}
+	dCount := 0
+	rCount := 0
 
-	for i := 0; i < senators.Len(); i++ {
-		votingSenator := senate[i]
-		for s := senators.Front(); s != nil; s = s.Next() {
-			oppParty := 'R'
-			if votingSenator == 'R' {
-				oppParty = 'D'
-			}
-			if s.Value == uint8(oppParty) {
-				senators.Remove(s)
-				break
-			}
+	for _, v := range senate {
+		if v == 'D' {
+			dCount++
+		}
+		if v == 'R' {
+			rCount++
 		}
 	}
 
-	rAnswer := strings.Repeat("R", senators.Len())
-	dAnswer := strings.Repeat("D", senators.Len())
-	senatorsStr := listToString(senators)
-	if senatorsStr == rAnswer {
-		return radiant
-	}
-	if senatorsStr == dAnswer {
-		return dire
-	}
-	return ""
-}
+	ban := func(toBan int32, startAt int) bool {
+		looped := false
+		pointer := startAt
 
-func listToString(l *list.List) string {
-	b := strings.Builder{}
-	for i := l.Front(); i != nil; i = i.Next() {
-		b.WriteByte(i.Value.(uint8))
+		for {
+			if pointer == 0 {
+				looped = true
+			}
+			if int32(senate[pointer]) == toBan {
+				senate = senate[:pointer] + senate[pointer+1:]
+				break
+			}
+			pointer = (pointer + 1) % len(senate)
+		}
+		return looped
 	}
-	return b.String()
+
+	turn := 0
+	for dCount > 0 && rCount > 0 {
+		oppParty := 'R'
+		if senate[turn] == 'R' {
+			oppParty = 'D'
+		}
+		looped := ban(oppParty, (turn+1)%len(senate))
+		if oppParty == 'R' {
+			rCount--
+		} else {
+			dCount--
+		}
+		if looped {
+			turn--
+		}
+		turn = (turn + 1) % len(senate)
+	}
+
+	if dCount > 0 {
+		return "Dire"
+	}
+	if rCount > 0 {
+		return "Radiant"
+	}
+
+	return ""
 }

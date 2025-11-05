@@ -10,8 +10,8 @@ type dotaSenateTest struct {
 }
 
 var dotaSenateTests = []dotaSenateTest{
-	{"RD", radiant},
-	{"RDD", dire},
+	{"RD", "Radiant"},
+	{"RDD", "Dire"},
 }
 
 func Test_DotaSenate(t *testing.T) {
