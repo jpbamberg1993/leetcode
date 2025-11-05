@@ -1,9 +1,9 @@
 package leetcode
 
 func predictPartyVictory(senate string) string {
+
 	dCount := 0
 	rCount := 0
-
 	for _, v := range senate {
 		if v == 'D' {
 			dCount++
@@ -13,7 +13,7 @@ func predictPartyVictory(senate string) string {
 		}
 	}
 
-	ban := func(toBan int32, startAt int) bool {
+	ban := func(toBan byte, startAt int) bool {
 		looped := false
 		pointer := startAt
 
@@ -21,7 +21,7 @@ func predictPartyVictory(senate string) string {
 			if pointer == 0 {
 				looped = true
 			}
-			if int32(senate[pointer]) == toBan {
+			if senate[pointer] == toBan {
 				senate = senate[:pointer] + senate[pointer+1:]
 				break
 			}
@@ -31,29 +31,27 @@ func predictPartyVictory(senate string) string {
 	}
 
 	turn := 0
+
 	for dCount > 0 && rCount > 0 {
-		oppParty := 'R'
 		if senate[turn] == 'R' {
-			oppParty = 'D'
-		}
-		looped := ban(oppParty, (turn+1)%len(senate))
-		if oppParty == 'R' {
-			rCount--
-		} else {
+			bannedSenatorBefore := ban('D', (turn+1)%len(senate))
 			dCount--
-		}
-		if looped {
-			turn--
+			if bannedSenatorBefore {
+				turn--
+			}
+		} else {
+			bannedSenatorBefore := ban('R', (turn+1)%len(senate))
+			rCount--
+			if bannedSenatorBefore {
+				turn--
+			}
 		}
 		turn = (turn + 1) % len(senate)
 	}
 
-	if dCount > 0 {
+	if dCount == 0 {
+		return "Radiant"
+	} else {
 		return "Dire"
 	}
-	if rCount > 0 {
-		return "Radiant"
-	}
-
-	return ""
 }
