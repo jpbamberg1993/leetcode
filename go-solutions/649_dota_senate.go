@@ -1,34 +1,38 @@
 package leetcode
 
+import "container/list"
+
 func predictPartyVictory(senate string) string {
-	var rQueue []int
-	var dQueue []int
 
-	for i, s := range senate {
-		if s == 'R' {
-			rQueue = append(rQueue, i)
+	n := len(senate)
+
+	rQueue := list.New()
+	dQueue := list.New()
+
+	for i := 0; i < n; i++ {
+		if senate[i] == 'R' {
+			rQueue.PushBack(i)
 		} else {
-			dQueue = append(dQueue, i)
+			dQueue.PushBack(i)
 		}
 	}
 
-	for len(rQueue) > 0 && len(dQueue) > 0 {
-		rFirst := rQueue[0]
-		dFirst := dQueue[0]
-		if rFirst < dFirst {
-			dQueue = dQueue[1:]
-			rQueue = rQueue[1:]
-			rQueue = append(rQueue, rFirst+len(senate))
+	for rQueue.Len() > 0 && dQueue.Len() > 0 {
+		rFront := rQueue.Front()
+		rQueue.Remove(rFront)
+		dFront := dQueue.Front()
+		dQueue.Remove(dFront)
+
+		if rFront.Value.(int) < dFront.Value.(int) {
+			rQueue.PushBack(rFront.Value.(int) + n)
 		} else {
-			dQueue = dQueue[1:]
-			rQueue = rQueue[1:]
-			dQueue = append(dQueue, dFirst+len(senate))
+			dQueue.PushBack(dFront.Value.(int) + n)
 		}
 	}
 
-	if len(rQueue) == 0 {
-		return "Dire"
-	} else {
+	if rQueue.Len() > 0 {
 		return "Radiant"
+	} else {
+		return "Dire"
 	}
 }
