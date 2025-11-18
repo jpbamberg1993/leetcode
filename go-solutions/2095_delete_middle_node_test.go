@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"go-solutions/utils"
 	"reflect"
 	"testing"
 )
@@ -19,10 +20,10 @@ var deleteMiddleTests = []deleteMiddleTest{
 
 func Test_DeleteMiddle(t *testing.T) {
 	for _, test := range deleteMiddleTests {
-		result := deleteMiddle(toList(test.head))
-		eql := reflect.DeepEqual(result, toList(test.expect))
-		if !eql {
-			t.Errorf("Input head: %v => %v not equal to %v", test.head, toSliceInt(result), test.expect)
+		result, isCycle := utils.ToSliceInt(deleteMiddle(utils.ToList(test.head)))
+		eql := reflect.DeepEqual(result, utils.ToList(test.expect))
+		if !eql || isCycle {
+			t.Errorf("Input head: %v => %v not equal to %v and is cycle %v", test.head, result, test.expect, isCycle)
 		}
 	}
 }

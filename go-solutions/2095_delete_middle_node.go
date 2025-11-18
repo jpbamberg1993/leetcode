@@ -1,11 +1,8 @@
 package leetcode
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import "go-solutions/utils"
 
-func deleteMiddle(head *ListNode) *ListNode {
+func deleteMiddle(head *utils.ListNode) *utils.ListNode {
 	if head.Next == nil {
 		return nil
 	}
@@ -22,24 +19,4 @@ func deleteMiddle(head *ListNode) *ListNode {
 		}
 	}
 	return head
-}
-
-func toSliceInt(node *ListNode) []int {
-	var response []int
-	curr := node
-	for curr != nil {
-		response = append(response, curr.Val)
-		curr = node.Next
-	}
-	return response
-}
-
-func toList(vals []int) *ListNode {
-	dummy := &ListNode{}
-	curr := dummy
-	for _, val := range vals {
-		curr.Next = &ListNode{Val: val}
-		curr = curr.Next
-	}
-	return dummy.Next
 }
