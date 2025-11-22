@@ -1,22 +1,23 @@
 package leetcode
 
-import "go-solutions/utils"
+import (
+	"go-solutions/utils"
+)
 
 func pairSum(head *utils.ListNode) int {
-	middle := getMiddleNode(head)
-	reversed := reverseList(middle)
-	greatestSum := 0
-	for reversed != nil {
-		greatestSum = max(head.Val+reversed.Val, greatestSum)
+	middle := getMiddle(head)
+	reverse := reverseList(middle)
+	maxSum := 0
+	for reverse != nil {
+		maxSum = max(maxSum, reverse.Val+head.Val)
 		head = head.Next
-		reversed = reversed.Next
+		reverse = reverse.Next
 	}
-	return greatestSum
+	return maxSum
 }
 
-func getMiddleNode(head *utils.ListNode) *utils.ListNode {
-	slow := head
-	fast := head
+func getMiddle(head *utils.ListNode) *utils.ListNode {
+	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
