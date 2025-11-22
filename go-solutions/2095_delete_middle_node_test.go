@@ -20,10 +20,10 @@ var deleteMiddleTests = []deleteMiddleTest{
 
 func Test_DeleteMiddle(t *testing.T) {
 	for _, test := range deleteMiddleTests {
-		result, isCycle := utils.ToSliceInt(deleteMiddle(utils.ToList(test.head)))
-		eql := reflect.DeepEqual(result, utils.ToList(test.expect))
-		if !eql || isCycle {
-			t.Errorf("Input head: %v => %v not equal to %v and is cycle %v", test.head, result, test.expect, isCycle)
+		result := deleteMiddle(utils.ToList(test.head))
+		if equal := reflect.DeepEqual(result, utils.ToList(test.expect)); !equal {
+			resultInts, isCycle := utils.ToSliceInt(result)
+			t.Errorf("Input head: %v => %v not equal to %v and isCycle: %v", test.head, resultInts, test.expect, isCycle)
 		}
 	}
 }

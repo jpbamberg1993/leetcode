@@ -3,12 +3,11 @@ package leetcode
 import "go-solutions/utils"
 
 func deleteMiddle(head *utils.ListNode) *utils.ListNode {
-	if head.Next == nil {
+	if head == nil || head.Next == nil {
 		return nil
 	}
 
-	slow := head
-	fast := head
+	slow, fast := head, head
 	for {
 		tmp := slow
 		slow = slow.Next
