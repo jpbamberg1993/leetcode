@@ -6,25 +6,19 @@ import (
 )
 
 func leafSimilar(root1, root2 *utils.TreeNode) bool {
-	leaves1 := getLeaves(root1)
-	leaves2 := getLeaves(root2)
+	var leaves1 []int
+	var leaves2 []int
+	getLeaves(root1, &leaves1)
+	getLeaves(root2, &leaves2)
 	return reflect.DeepEqual(leaves1, leaves2)
 }
 
-func getLeaves(head *utils.TreeNode) []int {
-	var leaves []int
-	var dps func(node *utils.TreeNode)
-	dps = func(node *utils.TreeNode) {
-		if node == nil {
-			return
-		}
+func getLeaves(node *utils.TreeNode, leaves *[]int) {
+	if node != nil {
 		if node.Left == nil && node.Right == nil {
-			leaves = append(leaves, node.Val)
-			return
+			*leaves = append(*leaves, node.Val)
 		}
-		dps(node.Left)
-		dps(node.Right)
+		getLeaves(node.Left, leaves)
+		getLeaves(node.Right, leaves)
 	}
-	dps(head)
-	return leaves
 }
