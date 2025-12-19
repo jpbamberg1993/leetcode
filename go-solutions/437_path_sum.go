@@ -1,40 +1,32 @@
 package leetcode
 
-import (
-	"go-solutions/utils"
-)
+import "go-solutions/utils"
 
 var count int
-var k int
 var h map[int]int
+var k int
 
-func pathSum(root *utils.TreeNode, sum int) int {
+func pathSum(root *utils.TreeNode, target int) int {
 	count = 0
-	k = sum
-	h = map[int]int{}
-	preorder(root, 0)
+	h = make(map[int]int)
+	k = target
+	search(root, 0)
 	return count
 }
 
-func preorder(node *utils.TreeNode, currSum int) {
+func search(node *utils.TreeNode, currentSum int) {
 	if node == nil {
 		return
 	}
-
-	currSum += node.Val
-
-	if currSum == k {
+	currentSum += node.Val
+	if currentSum == k {
 		count++
 	}
-
-	if _, ok := h[currSum-k]; ok {
-		count += h[currSum-k]
+	if _, ok := h[currentSum-k]; ok {
+		count += h[currentSum-k]
 	}
-
-	h[currSum] += 1
-
-	preorder(node.Left, currSum)
-	preorder(node.Right, currSum)
-
-	h[currSum] -= 1
+	h[currentSum] += 1
+	search(node.Left, currentSum)
+	search(node.Right, currentSum)
+	h[currentSum] -= 1
 }
