@@ -8,14 +8,14 @@ func MaxOperations(nums []int, k int) int {
 	count := 0
 	for _, num := range nums {
 		remainder := k - num
-		current, _ := numsMap[num]
-		compliment, _ := numsMap[remainder]
-		if current > 0 && compliment > 0 {
-			if num == remainder && compliment < 2 {
+		currentCount, _ := numsMap[num]
+		complimentCount, _ := numsMap[remainder]
+		if currentCount > 0 && complimentCount > 0 {
+			if num == remainder && complimentCount < 2 {
 				continue
 			}
 			numsMap[num]--
-			numsMap[compliment]--
+			numsMap[complimentCount]--
 			count++
 		}
 	}

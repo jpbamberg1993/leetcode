@@ -9,7 +9,7 @@ func CanPlaceFlowers(flowerbed []int, n int) bool {
 		canPlaceLeft := i == 0 || flowerbed[i-1] == 0
 		canPlaceRight := i == len(flowerbed)-1 || flowerbed[i+1] == 0
 		if canPlaceLeft && canPlaceRight {
-			flowerbed[i] = 1
+			i += 1
 			n--
 			if n == 0 {
 				return true
