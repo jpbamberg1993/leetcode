@@ -11,7 +11,7 @@ func GcdOfStrings(str1, str2 string) string {
 func gcd(x, y int) int {
 	if y == 0 {
 		return x
-	} else {
-		return gcd(y, x%y)
 	}
+
+	return gcd(y, x%y)
 }
