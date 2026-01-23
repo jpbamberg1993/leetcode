@@ -1,16 +1,14 @@
 package leetcode
 
-func KidsWithCandies(candies []int, extraCandies int) []bool {
-	maxCandy := -1
+func KidsWithCandies(candies []int, extra int) []bool {
+	maxCandies := -1
 	for _, candy := range candies {
-		if candy > maxCandy {
-			maxCandy = candy
-		}
+		maxCandies = max(maxCandies, candy)
 	}
 
 	result := make([]bool, len(candies))
 	for i, candy := range candies {
-		result[i] = candy+extraCandies >= maxCandy
+		result[i] = candy+extra >= maxCandies
 	}
 	return result
 }
