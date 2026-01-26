@@ -3,15 +3,12 @@ package leetcode
 import "strings"
 
 func ReverseWordsInString(s string) string {
-	words := strings.Fields(s)
-	left := 0
-	right := len(words) - 1
+	sSlice := strings.Fields(s)
+	left, right := 0, len(sSlice)-1
 	for left < right {
-		tmp := words[left]
-		words[left] = words[right]
-		words[right] = tmp
+		sSlice[left], sSlice[right] = sSlice[right], sSlice[left]
 		left++
 		right--
 	}
-	return strings.Join(words, " ")
+	return strings.Join(sSlice, " ")
 }
