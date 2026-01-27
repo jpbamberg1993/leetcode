@@ -1,17 +1,20 @@
 package leetcode
 
 func ProductExceptSelf(nums []int) []int {
-	answer := make([]int, len(nums))
-	answer[0] = 1
-	for i := 1; i < len(nums); i++ {
-		answer[i] = nums[i-1] * answer[i-1]
+	n := len(nums)
+	left := make([]int, n)
+	left[0] = 1
+	for i := 1; i < n; i++ {
+		left[i] = left[i-1] * nums[i-1]
 	}
-
-	r := 1
-	for i := len(nums) - 1; i >= 0; i-- {
-		answer[i] *= r
-		r *= nums[i]
+	right := make([]int, n)
+	right[n-1] = 1
+	for i := n - 2; i >= 0; i-- {
+		right[i] = right[i+1] * nums[i+1]
 	}
-
+	answer := make([]int, n)
+	for i := 0; i < n; i++ {
+		answer[i] = left[i] * right[i]
+	}
 	return answer
 }
