@@ -4,22 +4,24 @@ import "strconv"
 
 func Compress(chars []byte) int {
 	i, res := 0, 0
-
-	for i < len(chars) {
-		groupLength := 0
-		for i+groupLength < len(chars) && chars[i] == chars[i+groupLength] {
-			groupLength++
+	n := len(chars)
+	for i < n {
+		groupLen := 1
+		for i+groupLen < n && chars[i] == chars[i+groupLen] {
+			groupLen++
 		}
+
 		chars[res] = chars[i]
 		res++
-		if groupLength > 1 {
-			groupLengthChars := strconv.Itoa(groupLength)
-			for i := 0; i < len(groupLengthChars); i++ {
-				chars[res] = groupLengthChars[i]
+
+		if groupLen > 1 {
+			groupLenAscii := strconv.Itoa(groupLen)
+			for i := 0; i < len(groupLenAscii); i++ {
+				chars[res] = groupLenAscii[i]
 				res++
 			}
 		}
-		i += groupLength
+		i += groupLen
 	}
 	return res
 }
