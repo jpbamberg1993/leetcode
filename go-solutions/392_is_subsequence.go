@@ -1,17 +1,14 @@
 package leetcode
 
 func IsSubsequence(s, t string) bool {
-	if len(s) == 0 {
-		return true
-	}
-	left := 0
-	for i := 0; i < len(t); i++ {
-		if s[left] == t[i] {
-			left++
-			if left == len(s) {
-				return true
-			}
+	sIndex, tIndex := 0, 0
+
+	for sIndex < len(s) && tIndex < len(t) {
+		if t[tIndex] == s[sIndex] {
+			sIndex++
 		}
+		tIndex++
 	}
-	return left == len(s)
+
+	return sIndex >= len(s)
 }
