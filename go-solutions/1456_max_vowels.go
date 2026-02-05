@@ -1,25 +1,23 @@
 package leetcode
 
-import (
-	"slices"
-)
+import "go-solutions/utils"
 
 func MaxVowels(s string, k int) int {
-	currentMax := 0
+	maxVowel := 0
 	for i := 0; i < k; i++ {
-		if slices.Contains(vowels, s[i]) {
-			currentMax++
+		if utils.Vowels[s[i]] {
+			maxVowel++
 		}
 	}
-	result := currentMax
-	for i := k; i < len(s); i++ {
-		if slices.Contains(vowels, s[i]) {
-			currentMax++
+	runningVowel := maxVowel
+	for r := k; r < len(s); r++ {
+		if utils.Vowels[s[r-k]] {
+			runningVowel--
 		}
-		if slices.Contains(vowels, s[i-k]) {
-			currentMax--
+		if utils.Vowels[s[r]] {
+			runningVowel++
 		}
-		result = max(result, currentMax)
+		maxVowel = max(maxVowel, runningVowel)
 	}
-	return result
+	return maxVowel
 }
