@@ -1,16 +1,15 @@
 package leetcode
 
 func LongestOnes(nums []int, k int) int {
-	left := 0
-	right := 0
-	for right = 0; right < len(nums); right++ {
-		if nums[right] == 0 {
+	l, r := 0, 0
+	for r = 0; r < len(nums); r++ {
+		if nums[r] == 0 {
 			k--
 		}
 		if k < 0 {
-			k += 1 - nums[left]
-			left++
+			k += 1 - nums[l]
+			l++
 		}
 	}
-	return right - left
+	return r - l
 }
