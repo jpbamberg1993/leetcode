@@ -1,20 +1,20 @@
 package leetcode
 
 func LongestSubarray(nums []int) int {
-	result := 0
-	left := 0
+	l := 0
 	zeroCount := 0
-	for i := 0; i < len(nums); i++ {
-		if nums[i] == 0 {
+	result := 0
+	for r := 0; r < len(nums); r++ {
+		if nums[r] == 0 {
 			zeroCount++
 		}
-		if zeroCount > 1 {
-			if nums[left] == 0 {
+		for zeroCount > 1 {
+			if nums[l] == 0 {
 				zeroCount--
 			}
-			left++
+			l++
 		}
-		result = max(i-left, result)
+		result = max(result, r-l)
 	}
 	return result
 }
