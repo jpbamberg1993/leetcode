@@ -1,16 +1,21 @@
 package leetcode
 
 func PivotIndex(nums []int) int {
-	leftSum := 0
-	rightSum := 0
-	for i := 0; i < len(nums); i++ {
-		rightSum += nums[i]
+	n := len(nums)
+	if n == 0 {
+		return -1
 	}
-	for i := 0; i < len(nums); i++ {
-		if leftSum == rightSum-nums[i]-leftSum {
+	left := make([]int, len(nums))
+	left[0] = 0
+	for i := 1; i < n; i++ {
+		left[i] = left[i-1] + nums[i-1]
+	}
+	rSum := 0
+	for i := n - 1; i >= 0; i-- {
+		if left[i] == rSum {
 			return i
 		}
-		leftSum += nums[i]
+		rSum += nums[i]
 	}
 	return -1
 }
