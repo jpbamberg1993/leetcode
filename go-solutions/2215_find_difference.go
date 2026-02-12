@@ -10,15 +10,14 @@ func FindDifference(nums1, nums2 []int) [][]int {
 }
 
 func findDifference(first, second []int) []int {
-	secondHas := make(map[int]bool)
-	for _, v := range second {
-		secondHas[v] = true
-	}
-	result := make(map[int]bool)
+	firstSet := make(map[int]bool, len(first))
 	for _, v := range first {
-		if _, ok := secondHas[v]; !ok {
-			result[v] = true
+		firstSet[v] = true
+	}
+	for _, v := range second {
+		if firstSet[v] {
+			delete(firstSet, v)
 		}
 	}
-	return utils.KeysToSlice(result)
+	return utils.KeysToSlice(firstSet)
 }
