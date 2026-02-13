@@ -1,27 +1,30 @@
 package leetcode
 
 import (
+	"reflect"
 	"slices"
-	"sort"
 )
 
 func CloseStrings(word1, word2 string) bool {
-	if len(word1) != len(word2) {
+	word1Len := len(word1)
+	word2Len := len(word2)
+	if word1Len != word2Len {
 		return false
 	}
-	alphabetCount := 26
-	countMap1 := make([]int, alphabetCount)
-	countMap2 := make([]int, alphabetCount)
-	for i := 0; i < len(word1); i++ {
-		countMap1[word1[i]-'a']++
-		countMap2[word2[i]-'a']++
+	word1Map, word2Map := make([]uint8, 26), make([]uint8, 26)
+	for i := 0; i < word1Len; i++ {
+		word1Map[word1[i]-'a']++
+		word2Map[word2[i]-'a']++
 	}
-	for i := 0; i < alphabetCount; i++ {
-		if (countMap1[i] > 0 && countMap2[i] == 0) || (countMap1[i] == 0 && countMap2[i] > 0) {
+	for i := 0; i < 26; i++ {
+		if word1Map[i] > 0 && word2Map[i] == 0 {
+			return false
+		}
+		if word2Map[i] > 0 && word1Map[i] == 0 {
 			return false
 		}
 	}
-	sort.Ints(countMap1)
-	sort.Ints(countMap2)
-	return slices.Equal(countMap1, countMap2)
+	slices.Sort(word1Map)
+	slices.Sort(word2Map)
+	return reflect.DeepEqual(word1Map, word2Map)
 }
