@@ -1,51 +1,50 @@
 package leetcode
 
 func EqualPairs(grid [][]int) int {
-	trie := NewTrie()
+	t := NewTrie()
 	for _, row := range grid {
-		trie.Save(row)
+		t.Insert(row)
 	}
-	count := 0
+	totalPairs := 0
 	for i := 0; i < len(grid); i++ {
-		column := make([]int, len(grid))
-		for j := 0; j < len(grid); j++ {
+		column := make([]int, len(grid[i]))
+		for j := 0; j < len(grid[i]); j++ {
 			column[j] = grid[j][i]
 		}
-		count += trie.Search(column)
+		totalPairs += t.SearchCount(column)
 	}
-	return count
+	return totalPairs
 }
 
 type Trie struct {
-	next  map[int]*Trie
-	count int
+	count    int
+	children map[int]*Trie
 }
 
 func NewTrie() *Trie {
 	return &Trie{
-		next: make(map[int]*Trie),
-		count: 0,
+		count:    0,
+		children: make(map[int]*Trie),
 	}
 }
 
-func (t *Trie) Save(values []int) {
+func (t *Trie) Insert(nums []int) {
 	currentTrie := t
-	for i := 0; i < len(values); i++ {
-		if _, ok := currentTrie.next[values[i]]; !ok {
-			currentTrie.next[values[i]] = NewTrie()
+	for _, v := range nums {
+		_, ok := currentTrie.children[v]
+		if !ok {
+			currentTrie.children[v] = NewTrie()
 		}
-		currentTrie = currentTrie.next[values[i]]
-		if i == len(values)-1 {
-			currentTrie.count += 1
-		}
+		currentTrie = currentTrie.children[v]
 	}
+	currentTrie.count++
 }
 
-func (t *Trie) Search(values []int) int {
+func (t *Trie) SearchCount(nums []int) int {
 	currentTrie := t
-	for _, v := range values {
-		if trie, ok := currentTrie.next[v]; ok {
-			currentTrie = trie
+	for _, num := range nums {
+		if v, ok := currentTrie.children[num]; ok {
+			currentTrie = v
 		} else {
 			return 0
 		}
