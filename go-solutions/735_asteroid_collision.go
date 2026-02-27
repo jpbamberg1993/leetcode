@@ -1,23 +1,22 @@
 package leetcode
 
+import "go-solutions/utils"
+
 func AsteroidCollision(asteroids []int) []int {
-	var result []int
+	stk := utils.Stack{}
 	for i := 0; i < len(asteroids); i++ {
 		asteroid := asteroids[i]
-		resultLen := len(result)
-		if resultLen == 0 || result[resultLen-1] < 0 || asteroid > 0 {
-			result = append(result, asteroid)
+		stkLen := len(stk)
+		if stkLen == 0 || asteroid >= 0 || stk[stkLen-1] < 0 {
+			stk.Push(asteroid)
 		} else {
-			last := result[resultLen-1]
-			if -asteroid > last {
-				result = result[:resultLen-1]
+			if stk[len(stk)-1] < -asteroid {
+				stk = stk[:len(stk)-1]
 				i--
-			} else if -asteroid == last {
-				result = result[:resultLen-1]
-			} else {
-				continue
+			} else if -asteroid == stk[len(stk)-1] {
+				stk = stk[:len(stk)-1]
 			}
 		}
 	}
-	return result
+	return stk
 }
