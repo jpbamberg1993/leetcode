@@ -1,19 +1,17 @@
 package leetcode
 
-import "container/list"
-
-type RecentCounter struct {
-	queue *list.List
+type RecentCalls struct {
+	queue []int
 }
 
-func Constructor() *RecentCounter {
-	return &RecentCounter{queue: list.New()}
+func Constructor() *RecentCalls {
+	return &RecentCalls{queue: []int{}}
 }
 
-func (rc *RecentCounter) Ping(t int) int {
-	rc.queue.PushFront(t)
-	for rc.queue.Back().Value.(int) < t-3000 {
-		rc.queue.Remove(rc.queue.Back())
+func (rc *RecentCalls) Ping(t int) (count int) {
+	rc.queue = append(rc.queue, t)
+	for len(rc.queue) > 0 && rc.queue[0] < t-3000 {
+		rc.queue = rc.queue[1:]
 	}
-	return rc.queue.Len()
+	return len(rc.queue)
 }

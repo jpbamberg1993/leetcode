@@ -18,3 +18,12 @@ func TestRecentCounter(t *testing.T) {
 		t.Errorf("expected %v got %v", expect, result)
 	}
 }
+
+func BenchmarkRecentCounter(b *testing.B) {
+	for b.Loop() {
+		rc := Constructor()
+		for t := 0; t < 10000; t += 3 {
+			rc.Ping(t)
+		}
+	}
+}
