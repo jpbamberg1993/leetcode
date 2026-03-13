@@ -1,38 +1,35 @@
 package leetcode
 
-import "container/list"
-
-func predictPartyVictory(senate string) string {
-
+func predictPartyVictory(senate string) (party string) {
 	n := len(senate)
 
-	rQueue := list.New()
-	dQueue := list.New()
-
-	for i := 0; i < n; i++ {
-		if senate[i] == 'R' {
-			rQueue.PushBack(i)
+	var rQueue []int
+	var dQueue []int
+	for i := 0; i < len(senate); i++ {
+		party := senate[i]
+		if party == 'D' {
+			dQueue = append(dQueue, i)
+		}
+		if party == 'R' {
+			rQueue = append(rQueue, i)
+		}
+	}
+	for len(rQueue) != 0 && len(dQueue) != 0 {
+		if rQueue[0] < dQueue[0] {
+			dQueue = dQueue[1:]
+			tmp := rQueue[0] + n - 1
+			rQueue = rQueue[1:]
+			rQueue = append(rQueue, tmp)
 		} else {
-			dQueue.PushBack(i)
+			rQueue = rQueue[1:]
+			tmp := dQueue[0] + n - 1
+			dQueue = dQueue[1:]
+			dQueue = append(dQueue, tmp)
 		}
 	}
 
-	for rQueue.Len() > 0 && dQueue.Len() > 0 {
-		rFront := rQueue.Front()
-		rQueue.Remove(rFront)
-		dFront := dQueue.Front()
-		dQueue.Remove(dFront)
-
-		if rFront.Value.(int) < dFront.Value.(int) {
-			rQueue.PushBack(rFront.Value.(int) + n)
-		} else {
-			dQueue.PushBack(dFront.Value.(int) + n)
-		}
-	}
-
-	if rQueue.Len() > 0 {
-		return "Radiant"
-	} else {
+	if len(rQueue) == 0 {
 		return "Dire"
 	}
+	return "Radiant"
 }
