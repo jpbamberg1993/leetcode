@@ -17,5 +17,6 @@ func deleteMiddle(head *utils.ListNode) *utils.ListNode {
 			break
 		}
 	}
+
 	return head
 }
