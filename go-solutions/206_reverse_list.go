@@ -3,13 +3,13 @@ package leetcode
 import "go-solutions/utils"
 
 func reverseList(head *utils.ListNode) *utils.ListNode {
-	var prev *utils.ListNode
-	curr := head
-	for curr != nil {
-		next := curr.Next
-		curr.Next = prev
-		prev = curr
-		curr = next
+	var prevNode *utils.ListNode
+	currentNode := head
+	for currentNode != nil {
+		tmp := currentNode.Next
+		currentNode.Next = prevNode
+		prevNode = currentNode
+		currentNode = tmp
 	}
-	return prev
+	return prevNode
 }
