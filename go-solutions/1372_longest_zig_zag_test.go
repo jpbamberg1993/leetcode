@@ -12,6 +12,7 @@ type longestZigZagTest struct {
 
 var longestZigZagTests = []longestZigZagTest{
 	{input: []any{1, nil, 1, 1, 1, nil, nil, 1, 1, nil, 1, nil, nil, nil, 1}, expect: 3},
+	{input: []any{1, 1, 1, nil, 1, nil, nil, 1, 1, nil, 1}, expect: 4},
 	{input: []any{1}, expect: 0},
 }
 

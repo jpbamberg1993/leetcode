@@ -2,24 +2,24 @@ package leetcode
 
 import "go-solutions/utils"
 
-var maxPathLen int
+var maxLength int
 
-func longestZigZag(root *utils.TreeNode) int {
-	maxPathLen = 0
-	dfs(root, true, 0)
-	return maxPathLen
+func longestZigZag(input *utils.TreeNode) int {
+	maxLength = 0
+	dps(input, true, 0)
+	return maxLength
 }
 
-func dfs(node *utils.TreeNode, goLeft bool, pathLen int) {
+func dps(node *utils.TreeNode, goingLeft bool, runningLen int) {
 	if node == nil {
 		return
 	}
-	maxPathLen = max(maxPathLen, pathLen)
-	if goLeft {
-		dfs(node.Left, false, pathLen+1)
-		dfs(node.Right, true, 1)
+	maxLength = max(maxLength, runningLen)
+	if goingLeft {
+		dps(node.Left, false, runningLen+1)
+		dps(node.Right, true, 1)
 	} else {
-		dfs(node.Left, false, 1)
-		dfs(node.Right, true, pathLen+1)
+		dps(node.Right, true, runningLen+1)
+		dps(node.Left, false, 1)
 	}
 }
