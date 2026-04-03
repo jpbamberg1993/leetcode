@@ -57,3 +57,16 @@ func BuildTree(vals []any) *TreeNode {
 
 	return root
 }
+
+func DPS(node *TreeNode, v any) *TreeNode {
+	if node == nil {
+		return nil
+	}
+	if node.Val == v {
+		return node
+	}
+	if left := DPS(node.Left, v); left != nil {
+		return left
+	}
+	return DPS(node.Right, v)
+}
