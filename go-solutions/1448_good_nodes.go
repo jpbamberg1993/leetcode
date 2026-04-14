@@ -1,24 +1,22 @@
 package leetcode
 
-import (
-	"go-solutions/utils"
-	"math"
-)
+import "go-solutions/utils"
+
+var nodeCount int
 
 func goodNodes(root *utils.TreeNode) int {
-	var count int
-	var dps func(node *utils.TreeNode, currentPathMax int)
-	dps = func(node *utils.TreeNode, currentPathMax int) {
-		if node == nil {
-			return
-		}
-		if node.Val >= currentPathMax {
-			count++
-		}
-		currentPathMax = max(currentPathMax, node.Val)
-		dps(node.Left, currentPathMax)
-		dps(node.Right, currentPathMax)
+	nodeCount = 0
+	findNodes(root, -1)
+	return nodeCount
+}
+
+func findNodes(node *utils.TreeNode, runningMax int) {
+	if node == nil {
+		return
 	}
-	dps(root, math.MinInt)
-	return count
+	if node.Val >= runningMax {
+		nodeCount++
+	}
+	findNodes(node.Left, max(node.Val, runningMax))
+	findNodes(node.Right, max(node.Val, runningMax))
 }
