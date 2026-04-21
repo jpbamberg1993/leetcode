@@ -2,21 +2,20 @@ package leetcode
 
 import "go-solutions/utils"
 
-var nodeCount int
-
 func goodNodes(root *utils.TreeNode) int {
-	nodeCount = 0
-	findNodes(root, -1)
-	return nodeCount
-}
-
-func findNodes(node *utils.TreeNode, runningMax int) {
-	if node == nil {
-		return
+	var count int
+	var countNodes func(node *utils.TreeNode, maxNode int)
+	countNodes = func(node *utils.TreeNode, maxNode int) {
+		if node == nil {
+			return
+		}
+		if node.Val >= maxNode {
+			count++
+		}
+		maxNode = max(node.Val, maxNode)
+		countNodes(node.Left, maxNode)
+		countNodes(node.Right, maxNode)
 	}
-	if node.Val >= runningMax {
-		nodeCount++
-	}
-	findNodes(node.Left, max(node.Val, runningMax))
-	findNodes(node.Right, max(node.Val, runningMax))
+	countNodes(root, -1)
+	return count
 }
