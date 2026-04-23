@@ -2,31 +2,33 @@ package leetcode
 
 import "go-solutions/utils"
 
-var count int
-var h map[int]int
-var k int
+var (
+	count int
+	k     int
+	h     map[int]int
+)
 
 func pathSum(root *utils.TreeNode, target int) int {
 	count = 0
-	h = make(map[int]int)
 	k = target
-	search(root, 0)
+	h = make(map[int]int)
+	dpsPathSum(root, 0)
 	return count
 }
 
-func search(node *utils.TreeNode, currentSum int) {
+func dpsPathSum(node *utils.TreeNode, runningSum int) {
 	if node == nil {
 		return
 	}
-	currentSum += node.Val
-	if currentSum == k {
+	runningSum += node.Val
+	if runningSum == k {
 		count++
 	}
-	if _, ok := h[currentSum-k]; ok {
-		count += h[currentSum-k]
+	if _, ok := h[runningSum-k]; ok {
+		count += h[runningSum-k]
 	}
-	h[currentSum] += 1
-	search(node.Left, currentSum)
-	search(node.Right, currentSum)
-	h[currentSum] -= 1
+	h[runningSum] += 1
+	dpsPathSum(node.Left, runningSum)
+	dpsPathSum(node.Right, runningSum)
+	h[runningSum] -= 1
 }
