@@ -14,6 +14,7 @@ type pathSumTest struct {
 var pathSumTests = []pathSumTest{
 	{root: []any{10, 5, -3, 3, 2, nil, 11, 3, -2, nil, 1}, targetSum: 8, expect: 3},
 	{root: []any{5, 4, 8, 11, nil, 13, 4, 7, 2, nil, nil, 5, 1}, targetSum: 22, expect: 3},
+	{root: []any{1, -2, -3}, targetSum: -1, expect: 1},
 }
 
 func TestPathSum(t *testing.T) {
