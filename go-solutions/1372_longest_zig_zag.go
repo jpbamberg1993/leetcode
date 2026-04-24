@@ -1,25 +1,27 @@
 package leetcode
 
-import "go-solutions/utils"
+import (
+	"go-solutions/utils"
+)
 
-var maxPathLen int
+var maxZigZagLen int
 
-func longestZigZag(node *utils.TreeNode) int {
-	maxPathLen = 0
-	dps(node, true, 0)
-	return maxPathLen
+func longestZigZag(root *utils.TreeNode) int {
+	maxZigZagLen = 0
+	searchZigZag(root, 0, true)
+	return maxZigZagLen
 }
 
-func dps(node *utils.TreeNode, goLeft bool, pathLen int) {
+func searchZigZag(node *utils.TreeNode, runningCount int, goLeft bool) {
 	if node == nil {
 		return
 	}
-	maxPathLen = max(pathLen, maxPathLen)
+	maxZigZagLen = max(runningCount, maxZigZagLen)
 	if goLeft {
-		dps(node.Left, false, pathLen+1)
-		dps(node.Right, true, 1)
+		searchZigZag(node.Left, runningCount+1, false)
+		searchZigZag(node.Right, 1, true)
 	} else {
-		dps(node.Right, true, pathLen+1)
-		dps(node.Left, false, 1)
+		searchZigZag(node.Left, 1, false)
+		searchZigZag(node.Right, runningCount+1, true)
 	}
 }
