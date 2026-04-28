@@ -2,33 +2,33 @@ package leetcode
 
 import "go-solutions/utils"
 
-var ans *utils.TreeNode
+var lca *utils.TreeNode
 
 func lowestCommonAncestor(root, p, q *utils.TreeNode) *utils.TreeNode {
-	ans = nil
+	lca = nil
 	scanTree(root, p, q)
-	return ans
+	return lca
 }
 
-func scanTree(node *utils.TreeNode, p *utils.TreeNode, q *utils.TreeNode) bool {
+func scanTree(node, p, q *utils.TreeNode) bool {
 	if node == nil {
 		return false
 	}
-	leftFound := scanTree(node.Left, p, q)
-	rightFound := scanTree(node.Right, p, q)
+	leftExist := scanTree(node.Left, p, q)
+	rightExist := scanTree(node.Right, p, q)
 	mid := node == p || node == q
 	count := 0
-	if leftFound {
+	if leftExist {
 		count++
 	}
-	if rightFound {
+	if rightExist {
 		count++
 	}
 	if mid {
 		count++
 	}
 	if count >= 2 {
-		ans = node
+		lca = node
 	}
 	return count >= 1
 }
