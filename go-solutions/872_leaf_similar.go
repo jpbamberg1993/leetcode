@@ -1,22 +1,25 @@
 package leetcode
 
-import "go-solutions/utils"
+import (
+	"go-solutions/utils"
+	"reflect"
+)
 
 func leafSimilar(root1, root2 *utils.TreeNode) bool {
-	leaves1 := getLeaves(root1, []int{})
-	leaves2 := getLeaves(root2, []int{})
-	return utils.SliceEqual(leaves1, leaves2)
+	oneLeaves := make([]int, 0)
+	getLeaves(root1, &oneLeaves)
+	twoLeaves := make([]int, 0)
+	getLeaves(root2, &twoLeaves)
+	return reflect.DeepEqual(oneLeaves, twoLeaves)
 }
 
-func getLeaves(node *utils.TreeNode, leaves []int) []int {
+func getLeaves(node *utils.TreeNode, leaves *[]int) {
 	if node == nil {
-		return leaves
+		return
 	}
 	if node.Left == nil && node.Right == nil {
-		leaves = append(leaves, node.Val)
-		return leaves
+		*leaves = append(*leaves, node.Val)
 	}
-	leaves = getLeaves(node.Left, leaves)
-	leaves = getLeaves(node.Right, leaves)
-	return leaves
+	getLeaves(node.Left, leaves)
+	getLeaves(node.Right, leaves)
 }

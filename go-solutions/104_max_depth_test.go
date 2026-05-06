@@ -15,12 +15,12 @@ func TestMaxDepth(t *testing.T) {
 		}
 	})
 
-	//t.Run("example2", func(t *testing.T) {
-	//	values := []any{1, nil, 2}
-	//	tree := utils.BuildTree(values)
-	//	expect := 2
-	//	if result := maxDepth(tree); result != expect {
-	//		t.Errorf("received %d but expected %d", result, expect)
-	//	}
-	//})
+	t.Run("example2", func(t *testing.T) {
+		values := []any{1, nil, 2}
+		tree := utils.BuildTree(values)
+		expect := 2
+		if result := maxDepth(tree); result != expect {
+			t.Errorf("received %d but expected %d", result, expect)
+		}
+	})
 }

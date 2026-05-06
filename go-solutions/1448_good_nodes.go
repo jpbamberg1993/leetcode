@@ -12,10 +12,10 @@ func goodNodes(root *utils.TreeNode) int {
 		if node.Val >= maxNode {
 			count++
 		}
-		maxNode = max(node.Val, maxNode)
+		maxNode = max(maxNode, node.Val)
 		countNodes(node.Left, maxNode)
 		countNodes(node.Right, maxNode)
 	}
-	countNodes(root, -1)
+	countNodes(root, root.Val)
 	return count
 }
