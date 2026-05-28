@@ -58,6 +58,24 @@ func BuildTree(vals []any) *TreeNode {
 	return root
 }
 
+func TreeToSliceInt(node *TreeNode) []int {
+	var items []int
+	var getNodeVals func(n *TreeNode)
+	getNodeVals = func(n *TreeNode) {
+		if n == nil {
+			return
+		}
+		items = append(items, n.Val)
+		if n.Left != nil {
+			getNodeVals(n.Left)
+		}
+		if n.Right != nil {
+			getNodeVals(n.Right)
+		}
+	}
+	return items
+}
+
 func DPS(node *TreeNode, v any) *TreeNode {
 	if node == nil {
 		return nil
