@@ -58,22 +58,40 @@ func BuildTree(vals []any) *TreeNode {
 	return root
 }
 
-func TreeToSliceInt(node *TreeNode) []int {
-	var items []int
-	var getNodeVals func(n *TreeNode)
-	getNodeVals = func(n *TreeNode) {
-		if n == nil {
-			return
-		}
-		items = append(items, n.Val)
-		if n.Left != nil {
-			getNodeVals(n.Left)
-		}
-		if n.Right != nil {
-			getNodeVals(n.Right)
-		}
+func TreeToSliceInt(node *TreeNode) []any {
+	if node == nil {
+		return []any{}
 	}
+
+	var items []any
+	queue := []*TreeNode{node}
+
+	for len(queue) > 0 {
+		n := queue[0]
+		queue = queue[1:]
+
+		if n == nil {
+			items = append(items, nil)
+			continue
+		}
+
+		items = append(items, n.Val)
+		queue = append(queue, n.Left, n.Right)
+	}
+
+	// trim trailing nil's
+	for len(items) > 0 && items[len(items)-1] == nil {
+		items = items[:len(items)-1]
+	}
+
 	return items
+}
+
+func SameTree(a, b *TreeNode) bool {
+	if a == nil || b == nil {
+		return a == b
+	}
+	return a.Val == b.Val && SameTree(a.Left, b.Left) && SameTree(a.Right, b.Right)
 }
 
 func DPS(node *TreeNode, v any) *TreeNode {
