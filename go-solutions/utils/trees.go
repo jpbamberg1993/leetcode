@@ -58,6 +58,30 @@ func BuildTree(vals []any) *TreeNode {
 	return root
 }
 
+func BuildBST(values []any) *TreeNode {
+	var root *TreeNode
+	for _, v := range values {
+		n, ok := v.(int)
+		if !ok {
+			continue
+		}
+		root = insertBST(root, n)
+	}
+	return root
+}
+
+func insertBST(node *TreeNode, v any) *TreeNode {
+	if node == nil {
+		return &TreeNode{Val: v.(int)}
+	}
+	if v.(int) < node.Val {
+		node.Left = insertBST(node.Left, v)
+	} else {
+		node.Right = insertBST(node.Right, v)
+	}
+	return node
+}
+
 func TreeToSliceInt(node *TreeNode) []any {
 	if node == nil {
 		return []any{}

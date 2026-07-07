@@ -6,11 +6,9 @@ func rightSideView(root *utils.TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
-
 	var result []int
 	var firstLevel []*utils.TreeNode
-	var secondLevel []*utils.TreeNode
-	secondLevel = append(secondLevel, root)
+	secondLevel := []*utils.TreeNode{root}
 	for len(secondLevel) > 0 {
 		firstLevel = secondLevel
 		secondLevel = nil

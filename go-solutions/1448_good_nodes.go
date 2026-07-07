@@ -1,21 +1,24 @@
 package leetcode
 
-import "go-solutions/utils"
+import (
+	"go-solutions/utils"
+	"math"
+)
 
 func goodNodes(root *utils.TreeNode) int {
-	var count int
-	var countNodes func(node *utils.TreeNode, maxNode int)
-	countNodes = func(node *utils.TreeNode, maxNode int) {
+	count := 0
+	var countNodes func(node *utils.TreeNode, maxVal int)
+	countNodes = func(node *utils.TreeNode, maxVal int) {
 		if node == nil {
 			return
 		}
-		if node.Val >= maxNode {
+		if node.Val >= maxVal {
 			count++
 		}
-		maxNode = max(maxNode, node.Val)
-		countNodes(node.Left, maxNode)
-		countNodes(node.Right, maxNode)
+		maxVal = max(maxVal, node.Val)
+		countNodes(node.Left, maxVal)
+		countNodes(node.Right, maxVal)
 	}
-	countNodes(root, root.Val)
+	countNodes(root, math.MinInt)
 	return count
 }

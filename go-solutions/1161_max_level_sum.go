@@ -6,30 +6,30 @@ import (
 )
 
 func maxLevelSum(root *utils.TreeNode) int {
+	answer := 1
+	level := 1
 	maxSum := math.MinInt
-	ans, level := 0, 0
-
-	var q []*utils.TreeNode
-	q = append(q, root)
-	for len(q) > 0 {
+	var firstLevel []*utils.TreeNode
+	var secondLevel []*utils.TreeNode
+	secondLevel = append(secondLevel, root)
+	for len(secondLevel) > 0 {
+		firstLevel = secondLevel
+		secondLevel = nil
+		levelSum := 0
+		for i := 0; i < len(firstLevel); i++ {
+			levelSum += firstLevel[i].Val
+			if firstLevel[i].Left != nil {
+				secondLevel = append(secondLevel, firstLevel[i].Left)
+			}
+			if firstLevel[i].Right != nil {
+				secondLevel = append(secondLevel, firstLevel[i].Right)
+			}
+		}
+		if levelSum > maxSum {
+			answer = level
+			maxSum = levelSum
+		}
 		level++
-		sumAtLevel := 0
-		levelSize := len(q)
-		for i := 0; i < levelSize; i++ {
-			node := q[0]
-			q = q[1:]
-			sumAtLevel += node.Val
-			if node.Left != nil {
-				q = append(q, node.Left)
-			}
-			if node.Right != nil {
-				q = append(q, node.Right)
-			}
-		}
-		if sumAtLevel > maxSum {
-			ans = level
-			maxSum = sumAtLevel
-		}
 	}
-	return ans
+	return answer
 }

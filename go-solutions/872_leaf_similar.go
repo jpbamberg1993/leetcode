@@ -6,11 +6,11 @@ import (
 )
 
 func leafSimilar(root1, root2 *utils.TreeNode) bool {
-	oneLeaves := make([]int, 0)
-	getLeaves(root1, &oneLeaves)
-	twoLeaves := make([]int, 0)
-	getLeaves(root2, &twoLeaves)
-	return reflect.DeepEqual(oneLeaves, twoLeaves)
+	leavesOne := make([]int, 0)
+	getLeaves(root1, &leavesOne)
+	leavesTwo := make([]int, 0)
+	getLeaves(root2, &leavesTwo)
+	return reflect.DeepEqual(leavesOne, leavesTwo)
 }
 
 func getLeaves(node *utils.TreeNode, leaves *[]int) {
