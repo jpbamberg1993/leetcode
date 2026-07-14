@@ -1,8 +1,6 @@
 package leetcode
 
-import (
-	"go-solutions/utils"
-)
+import "go-solutions/utils"
 
 func deleteNode(root *utils.TreeNode, key int) *utils.TreeNode {
 	if root == nil {
@@ -14,13 +12,13 @@ func deleteNode(root *utils.TreeNode, key int) *utils.TreeNode {
 		root.Right = deleteNode(root.Right, key)
 	} else {
 		if root.Right != nil {
-			tmp := getSuffix(root)
-			root.Val = tmp.Val
-			root.Right = deleteNode(root.Right, tmp.Val)
+			suffix := getSuffix(root)
+			root.Val = suffix.Val
+			root.Right = deleteNode(root.Right, suffix.Val)
 		} else if root.Left != nil {
-			tmp := getPrefix(root)
-			root.Val = tmp.Val
-			root.Left = deleteNode(root.Left, tmp.Val)
+			prefix := getPrefix(root)
+			root.Val = prefix.Val
+			root.Left = deleteNode(root.Left, prefix.Val)
 		} else {
 			return nil
 		}
@@ -30,16 +28,16 @@ func deleteNode(root *utils.TreeNode, key int) *utils.TreeNode {
 
 func getSuffix(node *utils.TreeNode) *utils.TreeNode {
 	suffix := node.Right
-	for suffix.Left != nil {
-		suffix = suffix.Left
+	for suffix.Right != nil {
+		suffix = suffix.Right
 	}
 	return suffix
 }
 
 func getPrefix(node *utils.TreeNode) *utils.TreeNode {
 	prefix := node.Left
-	for prefix.Right != nil {
-		prefix = prefix.Right
+	for prefix.Left != nil {
+		prefix = prefix.Left
 	}
 	return prefix
 }
