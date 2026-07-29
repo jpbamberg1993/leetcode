@@ -1,26 +1,22 @@
 package leetcode
 
-func findCircleNumber(isConnected [][]int) int {
+func findCircleNumber(isConnected [][]int) (provinces int) {
 	n := len(isConnected)
-	isVisited := make([]bool, n)
-	provinces := 0
-
+	isSeen := make([]bool, n)
 	var dps func(city int)
 	dps = func(city int) {
-		isVisited[city] = true
 		for neighbor, connected := range isConnected[city] {
-			if connected == 1 && !isVisited[neighbor] {
+			if connected == 1 && !isSeen[neighbor] {
+				isSeen[neighbor] = true
 				dps(neighbor)
 			}
 		}
 	}
-
 	for i := 0; i < n; i++ {
-		if !isVisited[i] {
-			provinces++
+		if !isSeen[i] {
 			dps(i)
+			provinces++
 		}
 	}
-
-	return provinces
+	return
 }
