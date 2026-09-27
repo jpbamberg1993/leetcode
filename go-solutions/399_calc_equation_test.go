@@ -23,6 +23,12 @@ var calcEquationTests = []calcEquationTest{
 		queries:   [][]string{{"x2", "x4"}, {"x1", "x5"}, {"x1", "x3"}, {"x5", "x5"}, {"x5", "x1"}, {"x3", "x4"}, {"x4", "x3"}, {"x6", "x6"}, {"x0", "x0"}},
 		expect:    []float64{1.13333, 16.80000, 1.50000, 1.00000, 0.05952, 2.26667, 0.44118, -1.00000, -1.00000},
 	},
+	{
+		equations: [][]string{{"a", "b"}, {"c", "d"}},
+		values:    []float64{1.0, 1.0},
+		queries:   [][]string{{"a", "c"}, {"b", "d"}, {"b", "a"}, {"d", "c"}},
+		expect:    []float64{-1, -1, 1, 1},
+	},
 }
 
 // LeetCode accepts answers within 1e-5 of the expected value.
@@ -40,7 +46,8 @@ func approxEqual(got, want []float64) bool {
 
 func TestCalcEquations(t *testing.T) {
 	for _, test := range calcEquationTests {
-		if result := calcEquation(test.equations, test.values, test.queries); !approxEqual(result, test.expect) {
+		result := calcEquation(test.equations, test.values, test.queries)
+		if !approxEqual(result, test.expect) {
 			t.Errorf("calcEquations: %v, %v, %v => %v but expected %v", test.equations, test.values, test.queries, result, test.expect)
 		}
 	}
