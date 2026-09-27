@@ -1,63 +1,58 @@
 package leetcode
 
-func calcEquation(equations [][]string, values []float64, queries [][]string) (solutions []float64) {
+func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
+	// step 1) buildup graph
 	graph := make(map[string]map[string]float64)
 
-	// build up the graph
-	for i, equation := range equations {
-		dividend := equation[0]
-		divisor := equation[1]
+	for i, e := range equations {
+		divider, divisor := e[0], e[1]
 		quotient := values[i]
 
-		if _, exists := graph[dividend]; !exists {
-			graph[dividend] = make(map[string]float64)
+		if _, exists := graph[divider]; !exists {
+			graph[divider] = make(map[string]float64)
 		}
 		if _, exists := graph[divisor]; !exists {
 			graph[divisor] = make(map[string]float64)
 		}
 
-		graph[dividend][divisor] = quotient
-		graph[divisor][divisor] = 1 / quotient
+		graph[divider][divisor] = quotient
+		graph[divisor][divider] = 1 / quotient
 	}
 
-	// search the graph
-	results := make([]float64, len(equations))
+	// step 2) search graph
+	answer := make([]float64, len(queries))
 	for i, query := range queries {
 		dividend, divisor := query[0], query[1]
 		_, hasDividend := graph[dividend]
 		_, hasDivisor := graph[divisor]
+
 		if !hasDividend || !hasDivisor {
-			results[i] = -1
-		} else if dividend == divisor {
-			results[i] = 1
+			answer[i] = -1.0
 		} else {
 			visited := make(map[string]bool)
-			results[i] = backtraceEvaluate(graph, dividend, divisor, 1, visited)
+			answer[i] = searchGraph(graph, dividend, divisor, 1, visited)
 		}
 	}
 
-	return results
+	return answer
 }
 
-func backtraceEvaluate(graph map[string]map[string]float64, currentNode, targetNode string, accProduct float64, visited map[string]bool) float64 {
+func searchGraph(graph map[string]map[string]float64, currentNode, targetNode string, accProduct float64, visited map[string]bool) float64 {
 	visited[currentNode] = true
 	answer := -1.0
-
 	neighbors := graph[currentNode]
-	if weight, ok := neighbors[targetNode]; ok {
-		answer = accProduct * weight
+	if weight, exists := neighbors[targetNode]; exists {
+		answer = weight * accProduct
 	} else {
 		for k, v := range neighbors {
 			if visited[k] {
 				continue
 			}
-			answer = backtraceEvaluate(graph, k, targetNode, accProduct*v, visited)
-			if answer != -1.0 {
-				break
+			answer = searchGraph(graph, k, targetNode, accProduct*v, visited)
+			if answer != -1 {
+				return answer
 			}
 		}
 	}
-
-	visited[currentNode] = false
 	return answer
 }

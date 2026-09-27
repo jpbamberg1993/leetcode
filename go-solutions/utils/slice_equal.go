@@ -17,7 +17,7 @@ func SliceEqual[T comparable](a, b []T) bool {
 		return false
 	}
 
-	for i := 0; i < len(a); i++ {
+	for i := range a {
 		if a[i] != b[i] {
 			return false
 		}
