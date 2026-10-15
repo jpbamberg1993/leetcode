@@ -1,11 +1,10 @@
 package leetcode
 
 func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
-	graph := make(map[string]map[string]float64)
-
-	// step1: build up graph
-	for i, v := range equations {
-		dividend, divisor, quotient := v[0], v[1], values[i]
+	// step 1: build graph
+	graph := make(map[string]map[string]float64, len(equations)*2)
+	for i, e := range equations {
+		dividend, divisor, quotient := e[0], e[1], values[i]
 		if _, exists := graph[dividend]; !exists {
 			graph[dividend] = make(map[string]float64)
 		}
@@ -16,13 +15,13 @@ func calcEquation(equations [][]string, values []float64, queries [][]string) []
 		graph[divisor][dividend] = 1 / quotient
 	}
 
-	// step2: search graph
+	// step 2: search graph
 	answer := make([]float64, len(queries))
-	for i, v := range queries {
-		dividend, divisor := v[0], v[1]
-		_, hasDivider := graph[dividend]
+	for i, q := range queries {
+		dividend, divisor := q[0], q[1]
+		_, hasDividend := graph[dividend]
 		_, hasDivisor := graph[divisor]
-		if !hasDivider || !hasDivisor {
+		if !hasDividend || !hasDivisor {
 			answer[i] = -1.0
 		} else {
 			visited := make(map[string]bool)
@@ -32,23 +31,24 @@ func calcEquation(equations [][]string, values []float64, queries [][]string) []
 	return answer
 }
 
-func searchGraph(graph map[string]map[string]float64, visited map[string]bool, currNode, targetNode string, product float64) float64 {
-	visited[currNode] = true
+func searchGraph(graph map[string]map[string]float64, visited map[string]bool, current, target string, product float64) float64 {
+	visited[current] = true
 	answer := -1.0
-	neighbors := graph[currNode]
-	if weight, exists := neighbors[targetNode]; exists {
-		answer = weight * product
-	} else {
-		for k, v := range neighbors {
-			if visited[k] {
+	neighbors := graph[current]
+	for n, v := range neighbors {
+		if n == target {
+			answer = v * product
+			break
+		} else {
+			if visited[n] {
 				continue
 			}
-			answer = searchGraph(graph, visited, k, targetNode, product*v)
+			answer = searchGraph(graph, visited, n, target, product*v)
 			if answer != -1 {
 				break
 			}
 		}
 	}
-	visited[currNode] = false
+	visited[current] = false
 	return answer
 }
