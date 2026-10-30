@@ -33,31 +33,27 @@ export function calcEquation(
 function searchGraph(
 	graph: Map<string, Map<string, number>>,
 	visited: Set<string>,
-	currNode: string,
+	currentNode: string,
 	targetNode: string,
-	product: number
-): number {
-	visited.add(currNode)
-	const neighbors = graph.get(currNode) ?? new Map<string, number>()
-	let answer = -1.0
+	accProduct: number
+) {
+	visited.add(currentNode)
+	const neighbors = graph.get(currentNode) ?? new Map<string, number>()
 	const weight = neighbors.get(targetNode)
+	let answer = -1.0
 	if (weight !== undefined) {
-		answer = weight * product
+		answer = weight * accProduct
 	} else {
 		for (const [neighbor, edgeWeight] of neighbors) {
-			if (visited.has(neighbor)) {
-				continue
-			}
+			if (visited.has(neighbor)) continue
 			answer = searchGraph(
 				graph,
 				visited,
 				neighbor,
 				targetNode,
-				product * edgeWeight
+				accProduct * edgeWeight
 			)
-			if (answer !== -1.0) {
-				return answer
-			}
+			if (answer !== -1.0) break
 		}
 	}
 	return answer
