@@ -7,21 +7,15 @@ export function minReorder(n: number, connections: number[][]): number {
 		graph[b].push({ to: a, isOriginal: false })
 	}
 
-	let reversedCount = 0
+	let count = 0
 	const dps = function (parent: number, node: number) {
-		if (parent === node) {
-			return
-		}
 		const neighbors = graph[node]
 		for (const { to, isOriginal } of neighbors) {
 			if (to === parent) continue
-			if (isOriginal) {
-				reversedCount++
-			}
+			if (isOriginal) count++
 			dps(node, to)
 		}
 	}
 	dps(-1, 0)
-
-	return reversedCount
+	return count
 }
