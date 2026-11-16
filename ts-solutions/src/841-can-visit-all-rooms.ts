@@ -1,16 +1,20 @@
 export function canVisitAllRooms(rooms: number[][]): boolean {
 	const n = rooms.length
 	const visited = new Array<boolean>(n).fill(false)
+	visited[0] = true
+	let visitedCount = 1
+	const stack = [0]
 
-	const dps = (room: number) => {
-		visited[room] = true
+	while (stack.length) {
+		const room = stack.pop()
+		if (room === undefined) break
 		for (const key of rooms[room]) {
 			if (visited[key]) continue
-			dps(key)
+			visited[key] = true
+			if (++visitedCount === n) return true
+			stack.push(key)
 		}
 	}
 
-	dps(0)
-
-	return visited.every((v) => v)
+	return visitedCount >= n
 }
