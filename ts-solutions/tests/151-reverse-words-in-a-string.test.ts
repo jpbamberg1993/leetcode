@@ -1,15 +1,33 @@
 import { reverseWord } from '../src/151-reverse-words-in-a-string'
 
-type ReverseWordTest = [string, string]
+type ReverseWordTest = {
+	name: string
+	s: string
+	want: string
+}
 
 const reverseWordTests: ReverseWordTest[] = [
-	[`the sky is blue`, `blue is sky the`],
-	[`  hello world  `, `world hello`],
-	[`a good   example`, `example good a`],
+	{
+		name: `single spaces between words`,
+		s: `the sky is blue`,
+		want: `blue is sky the`,
+	},
+	{
+		name: `leading and trailing spaces are dropped`,
+		s: `  hello world  `,
+		want: `world hello`,
+	},
+	{
+		name: `repeated spaces collapse to one`,
+		s: `a good   example`,
+		want: `example good a`,
+	},
+	{ name: `single word`, s: `hello`, want: `hello` },
+	{ name: `single word surrounded by spaces`, s: `  hi  `, want: `hi` },
 ]
 
 describe(`reverseWord`, () => {
-	it.each(reverseWordTests)(`s = %s => %s`, (arg1, expected) => {
-		expect(reverseWord(arg1)).toEqual(expected)
+	it.each(reverseWordTests)(`$name => "$want"`, ({ s, want }) => {
+		expect(reverseWord(s)).toBe(want)
 	})
 })

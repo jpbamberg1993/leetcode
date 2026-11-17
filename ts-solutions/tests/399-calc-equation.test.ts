@@ -1,6 +1,7 @@
 import { calcEquation } from '../src/399-calc-equation'
 
 type CalcEquationTest = {
+	name: string
 	equations: string[][]
 	values: number[]
 	queries: string[][]
@@ -9,11 +10,12 @@ type CalcEquationTest = {
 
 const calcEquationTests: CalcEquationTest[] = [
 	{
+		name: `chain a/b, b/c: forward, inverse, unknown and self queries`,
 		equations: [
 			[`a`, `b`],
 			[`b`, `c`],
 		],
-		values: [2.0, 3.0],
+		values: [2, 3],
 		queries: [
 			[`a`, `c`],
 			[`b`, `a`],
@@ -21,24 +23,26 @@ const calcEquationTests: CalcEquationTest[] = [
 			[`a`, `a`],
 			[`x`, `x`],
 		],
-		want: [6.0, 0.5, -1.0, 1.0, -1.0],
+		want: [2 * 3, 1 / 2, -1, 1, -1],
 	},
 	{
+		name: `multi-letter variable names`,
 		equations: [
 			[`a`, `b`],
 			[`b`, `c`],
 			[`bc`, `cd`],
 		],
-		values: [1.5, 2.5, 5.0],
+		values: [1.5, 2.5, 5],
 		queries: [
 			[`a`, `c`],
 			[`c`, `b`],
 			[`bc`, `cd`],
 			[`cd`, `bc`],
 		],
-		want: [3.75, 0.4, 5.0, 0.2],
+		want: [1.5 * 2.5, 1 / 2.5, 5, 1 / 5],
 	},
 	{
+		name: `single equation`,
 		equations: [[`a`, `b`]],
 		values: [0.5],
 		queries: [
@@ -47,16 +51,17 @@ const calcEquationTests: CalcEquationTest[] = [
 			[`a`, `c`],
 			[`x`, `y`],
 		],
-		want: [0.5, 2.0, -1.0, -1.0],
+		want: [0.5, 1 / 0.5, -1, -1],
 	},
 	{
+		name: `long chain x1/x2 … x4/x5`,
 		equations: [
 			[`x1`, `x2`],
 			[`x2`, `x3`],
 			[`x3`, `x4`],
 			[`x4`, `x5`],
 		],
-		values: [3.0, 4.0, 5.0, 6.0],
+		values: [3, 4, 5, 6],
 		queries: [
 			[`x1`, `x5`],
 			[`x5`, `x2`],
@@ -65,16 +70,17 @@ const calcEquationTests: CalcEquationTest[] = [
 			[`x2`, `x9`],
 			[`x9`, `x9`],
 		],
-		want: [360.0, 0.00833, 20.0, 1.0, -1.0, -1.0],
+		want: [3 * 4 * 5 * 6, 1 / (4 * 5 * 6), 4 * 5, 1, -1, -1],
 	},
 	{
+		name: `branching graph: paths go up to x1 and back down`,
 		equations: [
 			[`x1`, `x2`],
 			[`x2`, `x3`],
 			[`x1`, `x4`],
 			[`x2`, `x5`],
 		],
-		values: [3.0, 0.5, 3.4, 5.6],
+		values: [3, 0.5, 3.4, 5.6],
 		queries: [
 			[`x2`, `x4`],
 			[`x1`, `x5`],
@@ -86,14 +92,25 @@ const calcEquationTests: CalcEquationTest[] = [
 			[`x6`, `x6`],
 			[`x0`, `x0`],
 		],
-		want: [1.13333, 16.8, 1.5, 1.0, 0.05952, 2.26667, 0.44118, -1.0, -1.0],
+		want: [
+			3.4 / 3,
+			3 * 5.6,
+			3 * 0.5,
+			1,
+			1 / (3 * 5.6),
+			3.4 / (3 * 0.5),
+			(3 * 0.5) / 3.4,
+			-1,
+			-1,
+		],
 	},
 	{
+		name: `two disconnected groups`,
 		equations: [
 			[`a`, `b`],
 			[`c`, `d`],
 		],
-		values: [1.0, 1.0],
+		values: [1, 1],
 		queries: [
 			[`a`, `c`],
 			[`b`, `d`],
@@ -106,7 +123,7 @@ const calcEquationTests: CalcEquationTest[] = [
 
 describe(`calcEquation`, () => {
 	it.each(calcEquationTests)(
-		`calcEquation($equations, $values, $queries) => $want`,
+		`$name`,
 		({ equations, values, queries, want }) => {
 			const got = calcEquation(equations, values, queries)
 			expect(got).toHaveLength(want.length)

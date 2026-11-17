@@ -1,19 +1,43 @@
 import { isIsomorphic } from '../src/is-isomorphic'
 
-describe(`isIsomorphic`, function () {
-	test(`Input s = "egg", t = "add" --> true`, function () {
-		expect(isIsomorphic(`egg`, `add`)).toEqual(true)
-	})
+type IsIsomorphicTest = {
+	name: string
+	s: string
+	t: string
+	want: boolean
+}
 
-	test(`Input s = "foo", t = "bar" --> false`, function () {
-		expect(isIsomorphic(`foo`, `bar`)).toEqual(false)
-	})
+const isIsomorphicTests: IsIsomorphicTest[] = [
+	{ name: `repeated letters map consistently`, s: `egg`, t: `add`, want: true },
+	{
+		name: `several letters with repeats`,
+		s: `paper`,
+		t: `title`,
+		want: true,
+	},
+	{ name: `single letters`, s: `a`, t: `z`, want: true },
+	{
+		name: `one letter cannot map to two letters`,
+		s: `foo`,
+		t: `bar`,
+		want: false,
+	},
+	{
+		name: `two letters cannot map to the same letter`,
+		s: `badc`,
+		t: `baba`,
+		want: false,
+	},
+	{
+		name: `letter repeats in s but not in t`,
+		s: `abca`,
+		t: `zyxw`,
+		want: false,
+	},
+]
 
-	test(`Input s = "paper", t = "title" --> true`, function () {
-		expect(isIsomorphic(`paper`, `title`)).toEqual(true)
-	})
-
-	test(`Input s = "badc", t = "baba" --> false`, function () {
-		expect(isIsomorphic(`badc`, `baba`)).toEqual(false)
+describe(`isIsomorphic`, () => {
+	it.each(isIsomorphicTests)(`$name => $want`, ({ s, t, want }) => {
+		expect(isIsomorphic(s, t)).toBe(want)
 	})
 })

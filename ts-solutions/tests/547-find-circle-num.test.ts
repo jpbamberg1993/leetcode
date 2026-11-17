@@ -3,18 +3,18 @@ import { findCircleNum } from '../src/547-find-circle-num'
 const showGrid = (grid: number[][]) =>
 	grid.map((row) => `  ` + row.join(` `)).join(`\n`)
 
-const expectProvinces = (isConnected: number[][], want: number) => {
-	const got = findCircleNum(isConnected)
-	try {
-		expect(got).toBe(want)
-	} catch (err) {
-		if (err instanceof Error)
-			err.message += `\n\nisConnected:\n${showGrid(isConnected)}`
-		throw err
+describe(`findCircleNum ($approach)`, () => {
+	const expectProvinces = (isConnected: number[][], want: number) => {
+		const got = findCircleNum(isConnected)
+		try {
+			expect(got).toBe(want)
+		} catch (err) {
+			if (err instanceof Error)
+				err.message += `\n\nisConnected:\n${showGrid(isConnected)}`
+			throw err
+		}
 	}
-}
 
-describe(`findCircleNum`, () => {
 	it(`two cities connected, one on its own => 2`, () => {
 		expectProvinces(
 			[
@@ -63,6 +63,18 @@ describe(`findCircleNum`, () => {
 		)
 	})
 
+	it(`chain 0-3-1-2 visited out of index order => 1`, () => {
+		expectProvinces(
+			[
+				[1, 0, 0, 1],
+				[0, 1, 1, 1],
+				[0, 1, 1, 0],
+				[1, 1, 0, 1],
+			],
+			1
+		)
+	})
+
 	it(`non-adjacent groups 0-2 and 1-3 => 2`, () => {
 		expectProvinces(
 			[
@@ -72,6 +84,19 @@ describe(`findCircleNum`, () => {
 				[0, 1, 0, 1],
 			],
 			2
+		)
+	})
+
+	it(`triangle 0-3-4 linked to pair 1-2 through 1-3 => 1`, () => {
+		expectProvinces(
+			[
+				[1, 0, 0, 1, 1],
+				[0, 1, 1, 1, 0],
+				[0, 1, 1, 0, 0],
+				[1, 1, 0, 1, 1],
+				[1, 0, 0, 1, 1],
+			],
+			1
 		)
 	})
 })

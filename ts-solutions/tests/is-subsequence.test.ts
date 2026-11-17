@@ -1,11 +1,34 @@
 import { isSubsequence } from '../src/is-subsequence'
 
-describe(`isSubsequence`, function () {
-	it(`Input s = "abc", t = "ahbgdc" --> true`, function () {
-		expect(isSubsequence(`abc`, `ahbgdc`)).toEqual(true)
-	})
+type IsSubsequenceTest = {
+	name: string
+	s: string
+	t: string
+	want: boolean
+}
 
-	it(`Input s = "axc", t = "ahbgdc" --> false`, function () {
-		expect(isSubsequence(`axc`, `ahbgdc`)).toEqual(false)
+const isSubsequenceTests: IsSubsequenceTest[] = [
+	{
+		name: `letters appear in order with gaps`,
+		s: `abc`,
+		t: `ahbgdc`,
+		want: true,
+	},
+	{ name: `s equals t`, s: `abc`, t: `abc`, want: true },
+	{ name: `empty s is always a subsequence`, s: ``, t: `ahbgdc`, want: true },
+	{ name: `a letter is missing from t`, s: `axc`, t: `ahbgdc`, want: false },
+	{ name: `letters present but out of order`, s: `acb`, t: `abc`, want: false },
+	{
+		name: `repeated letter must appear twice in t`,
+		s: `aa`,
+		t: `abc`,
+		want: false,
+	},
+	{ name: `empty t contains nothing`, s: `a`, t: ``, want: false },
+]
+
+describe(`isSubsequence`, () => {
+	it.each(isSubsequenceTests)(`$name => $want`, ({ s, t, want }) => {
+		expect(isSubsequence(s, t)).toBe(want)
 	})
 })
